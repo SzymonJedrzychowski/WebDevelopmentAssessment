@@ -7,7 +7,8 @@
  * 
  * @author Szymon Jedrzychowski
  */
-class Papers{
+class Papers
+{
     private $data;
 
     /**
@@ -19,29 +20,36 @@ class Papers{
      * 
      * @throws BadRequest
      */
-    public function __construct(){
-        $db = new Database("db\\chiplay.sqlite");
+    public function __construct()
+    {
+        try {
+            $db = new Database("db\\chiplay.sqlite");
 
-        $sql = "SELECT paper_id, title, award, abstract, track.name, track.short_name FROM paper JOIN track ON paper.track_id=track.track_id";
-        $params = array();
+            $sql = "SELECT paper.paper_id, title, award, abstract, track.name, track.short_name FROM paper JOIN track ON paper.track_id=track.track_id";
+            $params = array();
 
-        try{
             foreach ($_GET as $key => $value) {
-                if (!in_array($key, array('track') )) {
+                if (!in_array($key, array('track', 'author_id'))) {
                     throw new BadRequest("Invalid parameter " . $key);
                 }
             }
-        }catch(BadRequest $e){
-            $this->data = ["message" => $e->badRequestMessage()];
-            return;
-        }
-                
-        if (filter_has_var(INPUT_GET, 'track')) {
-            $sql .= " WHERE track.short_name = :track";
-            $params = array(":track" => $_GET['track']);
-        }
 
-        $this->data = $db->executeSQL($sql, $params);
+            if (filter_has_var(INPUT_GET, 'track') and filter_has_var(INPUT_GET, 'author_id')) {
+                throw new BadRequest("Parameters track and author_id cannot be used together.");
+            }
+
+            if (filter_has_var(INPUT_GET, 'track')) {
+                $sql .= " WHERE track.short_name = :track";
+                $params = array(":track" => $_GET['track']);
+            } elseif (filter_has_var(INPUT_GET, 'author_id')) {
+                $sql .= " JOIN paper_has_author ON paper_has_author.paper_id = paper.paper_id WHERE paper_has_author.authorId = :author_id";
+                $params = array(":author_id" => $_GET['author_id']);
+            }
+
+            $this->data = $db->executeSQL($sql, $params);
+        } catch (BadRequest $e) {
+            $this->data = ["message" => $e->badRequestMessage()];
+        }
     }
 
     /**
@@ -53,6 +61,9 @@ class Papers{
      */
     public function getData()
     {
+        if (sizeof($this->data) == 0) {
+            http_response_code(204);
+        }
         return json_encode($this->data);
     }
 }

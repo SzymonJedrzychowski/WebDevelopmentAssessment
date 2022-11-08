@@ -7,8 +7,9 @@
  * 
  * @author John Rooksby
  */
-class BadRequest extends Exception{
-    
+class BadRequest extends Exception
+{
+
     /**
      * badRequestMessage method
      * 
@@ -16,7 +17,8 @@ class BadRequest extends Exception{
      * 
      * @return string error message
      */
-    public function badRequestMessage(){
+    public function badRequestMessage()
+    {
         http_response_code(400);
         $output["message"] = $this->message;
         return $output;

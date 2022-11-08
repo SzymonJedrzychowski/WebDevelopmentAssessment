@@ -1,16 +1,10 @@
 <?php
-include 'config/autoloader.php';
-include 'config/exceptionhandler.php';
-include 'config/errorhandler.php';
-
-spl_autoload_register("autoloader");
-set_exception_handler('exceptionHandler');
-set_error_handler('errorHandler');
+include 'config/config.php';
 
 header("Content-Type: application/json; charset=UTF-8");
 header("Access-Control-Allow-Origin: *");
 
-if (!in_array($_SERVER['REQUEST_METHOD'], ['GET'])){
+if (!in_array($_SERVER['REQUEST_METHOD'], ['GET'])) {
     http_response_code(405);
     $output['error'] = $_SERVER['REQUEST_METHOD'] . " method not allowed";
     die(json_encode($output));
@@ -20,11 +14,13 @@ $url = $_SERVER["REQUEST_URI"];
 $url = parse_url($url);
 $path = $url['path'];
 
-switch ($path){
+switch ($path) {
+    case '/assessment/api/papers/':
     case '/assessment/api/papers':
         $papers = new Papers();
         echo $papers->getData();
         break;
+    case '/assessment/api/authors/':
     case '/assessment/api/authors':
         $author = new Authors();
         echo $author->getData();
