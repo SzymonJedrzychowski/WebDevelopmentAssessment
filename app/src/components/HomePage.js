@@ -3,7 +3,7 @@
  * 
  * This is the main landing page for the application
  * 
- * @author first last
+ * @author Szymon Jedrzychowski
  */
 function HomePage() {
     return (
