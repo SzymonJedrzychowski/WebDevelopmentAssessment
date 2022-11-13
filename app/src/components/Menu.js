@@ -21,12 +21,24 @@ function Menu() {
                     <Nav className="me-auto">
                         <LinkContainer to="/papers"><Nav.Link>Papers</Nav.Link></LinkContainer>
                         <NavDropdown title="Categories" id="basic-nav-dropdown">
-                            <NavDropdown.Item href="/assessment/app/papers/interactivity">interactivity</NavDropdown.Item>
-                            <NavDropdown.Item href="/assessment/app/papers/fullpapers">fullpapers</NavDropdown.Item>
-                            <NavDropdown.Item href="/assessment/app/papers/wip">wip</NavDropdown.Item>
-                            <NavDropdown.Item href="/assessment/app/papers/competition">competition</NavDropdown.Item>
-                            <NavDropdown.Item href="/assessment/app/papers/doctoral">doctoral</NavDropdown.Item>
-                            <NavDropdown.Item href="/assessment/app/papers/rapid">rapid</NavDropdown.Item>
+                            <LinkContainer to="/papers/interactivity">
+                                <NavDropdown.Item>interactivity</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/papers/fullpapers">
+                                <NavDropdown.Item>fullpapers</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/papers/wip">
+                                <NavDropdown.Item>wip</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/papers/competition">
+                                <NavDropdown.Item>competition</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/papers/doctoral">
+                                <NavDropdown.Item>doctoral</NavDropdown.Item>
+                            </LinkContainer>
+                            <LinkContainer to="/papers/rapid">
+                                <NavDropdown.Item>rapid</NavDropdown.Item>
+                            </LinkContainer>
                         </NavDropdown>
                     </Nav>
                 </Navbar.Collapse>

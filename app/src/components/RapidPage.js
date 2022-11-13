@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * PapersPage
+ * RapidPage
  * 
  * function that creates page for general papers and all categories
  * 
  * @author Szymon Jedrzychowski
  */
-function PapersPage() {
+function RapidPage() {
     const [papers, setPapers] = useState([]);
 
     useEffect( () => {
-        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
+        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers?track=rapid")
         .then( 
             (response) => response.json() 
         )
@@ -32,11 +32,11 @@ function PapersPage() {
 
     return (
         <div>
-            <h1>papers</h1>
-            <p>Welcome to the papers!</p>
+            <h1>rapid</h1>
+            <p>Welcome to the rapid!</p>
             {listOfPapers}
         </div>
     );
 }
 
-export default PapersPage;
+export default RapidPage;

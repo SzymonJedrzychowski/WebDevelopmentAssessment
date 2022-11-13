@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from 'react';
 
 /**
- * PapersPage
+ * CompetitionPage
  * 
  * function that creates page for general papers and all categories
  * 
  * @author Szymon Jedrzychowski
  */
-function PapersPage() {
+function CompetitionPage() {
     const [papers, setPapers] = useState([]);
 
     useEffect( () => {
-        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
+        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers?track=competition")
         .then( 
             (response) => response.json() 
         )
@@ -32,11 +32,11 @@ function PapersPage() {
 
     return (
         <div>
-            <h1>papers</h1>
-            <p>Welcome to the papers!</p>
+            <h1>competition</h1>
+            <p>Welcome to the competition!</p>
             {listOfPapers}
         </div>
     );
 }
 
-export default PapersPage;
+export default CompetitionPage;
