@@ -13,45 +13,4 @@
             <p>Get</p>
         </div>
     </section>
-    <section>
-        <h2>Endpoints</h2>
-        <div style="border: 1px black solid">
-            <h3>/api</h3>
-            <p>Description: Returns student data</p>
-            <p>Example: <a href="http://unn-w20020581.newnumyspace.co.uk/year3/week5/api">http://unn-w20020581.newnumyspace.co.uk/year3/week5/api</a></p>
-            <h4>Responses:</h4>
-            <p>200 - Successful return</p>
-            <p>405 - Incorrect method</p>
-        </div>
-        <div style="border: 1px black solid">
-            <h3>/actors</h3>
-            <p>Description: Returns data of actors</p>
-            <p>Example: <a href="http://unn-w20020581.newnumyspace.co.uk/year3/week5/actors">http://unn-w20020581.newnumyspace.co.uk/year3/week5/actors</a></p>
-            <h4>Parameters:</h4>
-            <div>
-                <p>(optional) film_id: int - id of movie<p>
-                <p>Description: Returns data of actors that played in movie with given id.</p>
-                <p>Example: <a href="http://unn-w20020581.newnumyspace.co.uk/year3/week5/actors?film_id=1">http://unn-w20020581.newnumyspace.co.uk/year3/week5/actors?film_id=1</a></p>
-            </div>
-            <h4>Responses:</h4>
-            <p>200 - Successful return</p>
-            <p>400 - Partially successful return - at least one of paramethers was incorrect</p>
-            <p>405 - Incorrect method</p>
-        </div>
-        <div style="border: 1px black solid">
-            <h3>/films</h3>
-            <p>Description: Returns data of film</p>
-            <p>Example: <a href="http://unn-w20020581.newnumyspace.co.uk/year3/week5/films">http://unn-w20020581.newnumyspace.co.uk/year3/week5/films</a></p>
-            <h4>Parameters:</h4>
-            <div>
-                <p>(optional) language: string - name of language<p>
-                <p>Description: Returns movies with given language.</p>
-                <p>Example: <a href="http://unn-w20020581.newnumyspace.co.uk/year3/week5/films?language=french">http://unn-w20020581.newnumyspace.co.uk/year3/week5/films?language=french</a></p>
-            </div>
-            <h4>Responses:</h4>
-            <p>200 - Successful return</p>
-            <p>400 - Partially successful return - at least one of paramethers was incorrect</p>
-            <p>405 - Incorrect method</p>
-        </div>
-    </section>
 </body>

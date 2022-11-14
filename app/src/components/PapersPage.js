@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
 /**
  * PapersPage
@@ -11,9 +12,21 @@ function PapersPage() {
     const [papers, setPapers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [limit, setLimit] = useState(10);
+    var { track } = useParams();
+
+    var fetchLink = "http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers";
+    if (track === undefined) {
+        track = "papers";
+    } else if (["interactivity", "fullpapers", "wip", "competition", "doctoral", "rapid"].includes(track)) {
+        if (track === "interactivity") {
+            fetchLink += "?track=Interactivity";
+        } else {
+            fetchLink += "?track=" + track;
+        }
+    }
 
     useEffect(() => {
-        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
+        fetch(fetchLink)
             .then(
                 (response) => response.json()
             )
@@ -26,7 +39,7 @@ function PapersPage() {
             .catch((err) => {
                 console.log(err.message);
             });
-    }, []);
+    }, [fetchLink]);
 
     const listOfPapers = <ul>
         {papers.slice(0, limit).map(
@@ -40,8 +53,8 @@ function PapersPage() {
 
     return (
         <div>
-            <h1>papers</h1>
-            <p>Welcome to the papers!</p>
+            <h1>{track}</h1>
+            <p>Welcome to the {track}!</p>
             {loading && <p>Loading...</p>}
             {listOfPapers}
             {!loading && <button onClick={showMore}>Show More</button>}
