@@ -30,7 +30,7 @@ function InteractivityPage() {
 
     const listOfPapers = <ul>
         {papers.slice(0, limit).map(
-            (value, key) => <li key={key}>{value.title}</li>
+            (value, key) => <li key={key}><h4>{value.title}</h4><div>{value.abstract}</div></li>
         )}
     </ul>
 
