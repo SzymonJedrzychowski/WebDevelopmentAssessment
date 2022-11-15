@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 
 /**
@@ -37,13 +36,17 @@ function PapersPage() {
                 (json) => {
                     setLoading(false);
                     setPapers(json);
-                    setTerm("");
                 }
             )
             .catch((err) => {
                 console.log(err.message);
             });
     }, [fetchLink]);
+
+    useEffect(() => {
+        setTerm("");
+        document.getElementById("search").value = "";
+    }, [fetchLink])
 
     const showMore = () => setLimit(limit + 10);
     const search = (value) => value.title.includes(searchTerm);
@@ -64,11 +67,11 @@ function PapersPage() {
             <Form onSubmit={updateSearchTerm} className="d-flex">
                 <Form.Control
                     id="search"
+                    onChange={updateSearchTerm}
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"
                 />
-                <Button variant="outline-success" type="submit">Search</Button>
             </Form>
             <h1>{track}</h1>
             <p>Welcome to the {track}!</p>
