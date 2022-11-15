@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 
 /**
  * PapersPage
@@ -12,6 +14,7 @@ function PapersPage() {
     const [papers, setPapers] = useState([]);
     const [loading, setLoading] = useState(true);
     const [limit, setLimit] = useState(10);
+    const [searchTerm, setTerm] = useState("");
     var { track } = useParams();
 
     var fetchLink = "http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers";
@@ -34,6 +37,7 @@ function PapersPage() {
                 (json) => {
                     setLoading(false);
                     setPapers(json);
+                    setTerm("");
                 }
             )
             .catch((err) => {
@@ -41,18 +45,31 @@ function PapersPage() {
             });
     }, [fetchLink]);
 
+    const showMore = () => setLimit(limit + 10);
+    const search = (value) => value.title.includes(searchTerm);
+    const updateSearchTerm = function(event){
+        setTerm(document.getElementById("search").value);
+        event.preventDefault();
+    }
+    let papersToShow = papers.filter(search);
+
     const listOfPapers = <ul>
-        {papers.slice(0, limit).map(
+        {papersToShow.slice(0, limit).map(
             (value, key) => <li key={key}><h4>{value.title}</h4><div>{value.abstract}</div></li>
         )}
     </ul>
 
-    const showMore = () => {
-        setLimit(limit + 10);
-    }
-
     return (
         <div>
+            <Form onSubmit={updateSearchTerm} className="d-flex">
+                <Form.Control
+                    id="search"
+                    placeholder="Search"
+                    className="me-2"
+                    aria-label="Search"
+                />
+                <Button variant="outline-success" type="submit">Search</Button>
+            </Form>
             <h1>{track}</h1>
             <p>Welcome to the {track}!</p>
             {loading && <p>Loading...</p>}
