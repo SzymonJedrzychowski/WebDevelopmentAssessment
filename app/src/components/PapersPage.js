@@ -46,6 +46,7 @@ function PapersPage() {
 
     useEffect(() => {
         setTerm("");
+        setLoading(true);
         document.getElementById("search").value = "";
     }, [fetchLink])
 

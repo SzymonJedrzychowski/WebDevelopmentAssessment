@@ -29,16 +29,21 @@ class Authors
             $params = array();
 
             foreach ($_GET as $key => $value) {
-                if (!in_array($key, array('paper_id', 'affiliation'))) {
+                if (!in_array($key, array('paper_id', 'affiliation', 'author_id'))) {
                     throw new BadRequest("Invalid parameter " . $key);
                 }
             }
 
             if (filter_has_var(INPUT_GET, 'affiliation') and !filter_has_var(INPUT_GET, 'paper_id')) {
                 throw new BadRequest("Parameter affiliation cannot be used without parameter paper_id.");
+            } elseif (filter_has_var(INPUT_GET, 'author_id') and (filter_has_var(INPUT_GET, 'affiliation') or filter_has_var(INPUT_GET, 'paper_id'))){
+                throw new BadRequest("Parameter author_id cannot be used with parameters affiliation or paper_id");
             }
 
-            if (filter_has_var(INPUT_GET, 'paper_id') and filter_has_var(INPUT_GET, 'affiliation')) {
+            if(filter_has_var(INPUT_GET, 'author_id')){
+                $sql .= " WHERE author_id = :author_id";
+                $params = array(":author_id" => $_GET['author_id']);
+            } elseif (filter_has_var(INPUT_GET, 'paper_id') and filter_has_var(INPUT_GET, 'affiliation')) {
                 $sql = "SELECT DISTINCT author_id, first_name, middle_initial, last_name, affiliation.country, affiliation.state, affiliation.city, affiliation.institution, affiliation.department
                 FROM author
                 JOIN paper_has_author ON paper_has_author.authorId = author.author_id

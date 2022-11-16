@@ -20,7 +20,7 @@ function Menu() {
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
                         <LinkContainer to="/papers"><Nav.Link>Papers</Nav.Link></LinkContainer>
-                        <NavDropdown title="Categories" id="basic-nav-dropdown">
+                        <NavDropdown title="Papers categories" id="basic-nav-dropdown">
                             <LinkContainer to="/papers/interactivity">
                                 <NavDropdown.Item>interactivity</NavDropdown.Item>
                             </LinkContainer>
@@ -40,6 +40,7 @@ function Menu() {
                                 <NavDropdown.Item>rapid</NavDropdown.Item>
                             </LinkContainer>
                         </NavDropdown>
+                        <LinkContainer to="/authors"><Nav.Link>Authors</Nav.Link></LinkContainer>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

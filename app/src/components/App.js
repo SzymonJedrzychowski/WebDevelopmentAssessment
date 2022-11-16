@@ -4,6 +4,8 @@ import Header from './Header';
 import Footer from './Footer';
 import PapersPage from './PapersPage'
 import Menu from './Menu';
+import AuthorsPage from './AuthorsPage';
+import AuthorPage from './AuthorPage';
 
 /**
  * App
@@ -20,6 +22,8 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/papers" element={<PapersPage />} />
         <Route path="/papers/:track" element={<PapersPage />} />
+        <Route path="/authors/" element={<AuthorsPage />} />
+        <Route path="/authors/:author_id" element={<AuthorPage />} />
         <Route path="*" element={<p>Not found</p>} />
       </Routes>
       <Footer />
