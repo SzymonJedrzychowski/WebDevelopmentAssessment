@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import PapersAuthors from './PapersAuthors';
 
 /**
  * PapersPage
@@ -49,7 +50,7 @@ function PapersPage() {
     }, [fetchLink])
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => value.title.includes(searchTerm);
+    const search = (value) => value.title.includes(searchTerm) || value.abstract.includes(searchTerm);
     const updateSearchTerm = function(event){
         setTerm(document.getElementById("search").value);
         event.preventDefault();
@@ -58,7 +59,7 @@ function PapersPage() {
 
     const listOfPapers = <ul>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={key}><h4>{value.title}</h4><div>{value.abstract}</div></li>
+            (value, key) => <li key={key}><h4>{value.title}</h4><div><p>{value.abstract}</p><PapersAuthors paper_id={value.paper_id}/></div></li>
         )}
     </ul>
 
