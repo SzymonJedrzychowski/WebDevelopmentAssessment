@@ -6,6 +6,7 @@ import PapersPage from './PapersPage'
 import Menu from './Menu';
 import AuthorsPage from './AuthorsPage';
 import AuthorPage from './AuthorPage';
+import PapersNavigation from './PapersNavigation';
 
 /**
  * App
@@ -20,8 +21,10 @@ function App() {
       <Menu />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/papers" element={<PapersPage />} />
-        <Route path="/papers/:track" element={<PapersPage />} />
+        <Route path="/papers" element={<PapersNavigation />}>
+          <Route index element={<PapersPage />} />
+          <Route path=":track" element={<PapersPage />} />
+        </Route>
         <Route path="/authors/" element={<AuthorsPage />} />
         <Route path="/authors/:author_id" element={<AuthorPage />} />
         <Route path="*" element={<p>Not found</p>} />
