@@ -11,6 +11,7 @@ function AuthorPage() {
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(10);
     const [searchTerm, setTerm] = useState("");
+    const [paperSearch, setPaperSearch] = useState("all");
     var { author_id } = useParams();
 
     useEffect(() => {
@@ -52,16 +53,21 @@ function AuthorPage() {
         document.getElementById("search").value = "";
     }, [author_id])
 
-    if(error){
+    if (error) {
         return <div>
             Result couldn't be found.
         </div>
     }
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => value.title.includes(searchTerm) || value.abstract.includes(searchTerm);
+    const search = (value) => ((value.title.includes(searchTerm) || value.abstract.includes(searchTerm)) && (paperSearch === "all" || paperSearch === value.award));
     const updateSearchTerm = function (event) {
         setTerm(document.getElementById("search").value);
+        if (document.getElementById("awardValue").value === "false") {
+            setPaperSearch(null);
+        } else {
+            setPaperSearch(document.getElementById("awardValue").value);
+        }
         event.preventDefault();
     }
     let papersToShow = papers.filter(search);
@@ -83,6 +89,11 @@ function AuthorPage() {
                     className="me-2"
                     aria-label="Search"
                 />
+                <Form.Select id="awardValue" aria-label="Default select example" onChange={updateSearchTerm}>
+                    <option value="all">All papers</option>
+                    <option value="true">Only rewarded papers</option>
+                    <option value="false">Only non-rewarded papers</option>
+                </Form.Select>
             </Form>
             {(papersLoading && authorLoading) && <p>Loading...</p>}
             {listOfPapers}

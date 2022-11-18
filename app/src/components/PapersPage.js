@@ -15,6 +15,7 @@ function PapersPage() {
     const [loading, setLoading] = useState(true);
     const [limit, setLimit] = useState(10);
     const [searchTerm, setTerm] = useState("");
+    const [paperSearch, setPaperSearch] = useState("all");
     var { track } = useParams();
 
     var fetchLink = "http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers";
@@ -51,16 +52,21 @@ function PapersPage() {
     }, [fetchLink])
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => value.title.includes(searchTerm) || value.abstract.includes(searchTerm);
-    const updateSearchTerm = function(event){
+    const search = (value) => ((value.title.includes(searchTerm) || value.abstract.includes(searchTerm)) && (paperSearch === "all" || paperSearch === value.award));
+    const updateSearchTerm = function (event) {
         setTerm(document.getElementById("search").value);
+        if (document.getElementById("awardValue").value === "false") {
+            setPaperSearch(null);
+        } else {
+            setPaperSearch(document.getElementById("awardValue").value);
+        }
         event.preventDefault();
     }
     let papersToShow = papers.filter(search);
 
     const listOfPapers = <ul>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={key}><h4>{value.title}</h4><div><p>{value.abstract}</p><PapersAuthors paper_id={value.paper_id}/></div></li>
+            (value, key) => <li key={key}><h4>{value.title}</h4><div><p>{value.abstract}</p><PapersAuthors paper_id={value.paper_id} /></div></li>
         )}
     </ul>
 
@@ -74,6 +80,11 @@ function PapersPage() {
                     className="me-2"
                     aria-label="Search"
                 />
+                <Form.Select id="awardValue" aria-label="Default select example" onChange={updateSearchTerm}>
+                    <option value="all">All papers</option>
+                    <option value="true">Only rewarded papers</option>
+                    <option value="false">Only non-rewarded papers</option>
+                </Form.Select>
             </Form>
             <h1>{track}</h1>
             <p>Welcome to the {track}!</p>
