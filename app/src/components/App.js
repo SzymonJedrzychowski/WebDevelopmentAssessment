@@ -6,7 +6,6 @@ import PapersPage from './PapersPage'
 import Menu from './Menu';
 import AuthorsPage from './AuthorsPage';
 import AuthorPage from './AuthorPage';
-import PapersNavigation from './PapersNavigation';
 
 /**
  * App
@@ -21,7 +20,7 @@ function App() {
       <Menu />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/papers" element={<PapersNavigation />}>
+        <Route path="/papers">
           <Route index element={<PapersPage />} />
           <Route path=":track" element={<PapersPage />} />
         </Route>
