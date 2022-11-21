@@ -46,13 +46,13 @@ function PapersPage() {
     }, [fetchLink]);
 
     useEffect(() => {
-        setTerm("");
         setLoading(true);
         document.getElementById("search").value = "";
+        document.getElementById("awardValue").value = "all"
     }, [fetchLink])
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => ((value.title.includes(searchTerm) || value.abstract.includes(searchTerm)) && (paperSearch === "all" || paperSearch === value.award));
+    const search = (value) => ((value.title.toLowerCase().includes(searchTerm.toLowerCase()) || value.abstract.toLowerCase().includes(searchTerm.toLowerCase())) && (paperSearch === "all" || paperSearch === value.award));
     const updateSearchTerm = function (event) {
         setTerm(document.getElementById("search").value);
         if (document.getElementById("awardValue").value === "false") {

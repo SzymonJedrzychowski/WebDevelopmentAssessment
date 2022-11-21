@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 
 function AuthorsPage() {
@@ -25,8 +25,8 @@ function AuthorsPage() {
     }, []);
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => value.first_name.includes(searchTerm) || value.last_name.includes(searchTerm);
-    const updateSearchTerm = function(event){
+    const search = (value) => (value.first_name + " " + value.middle_name + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
+    const updateSearchTerm = function (event) {
         setTerm(document.getElementById("search").value);
         event.preventDefault();
     }
@@ -34,7 +34,7 @@ function AuthorsPage() {
 
     const listOfAuthors = <ul>
         {authorsToShow.slice(0, limit).map(
-            (value, key) => <li key={key}><Link to={"/authors/"+value.author_id}>{value.first_name} {value.middle_name} {value.last_name}</Link></li>
+            (value, key) => <li key={key}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_name} {value.last_name}</Link></li>
         )}
     </ul>
 
@@ -56,5 +56,5 @@ function AuthorsPage() {
         </div>
     );
 }
- 
+
 export default AuthorsPage;
