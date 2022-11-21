@@ -55,7 +55,7 @@ function AuthorPage() {
 
     if (error) {
         return <div>
-            Result couldn't be found.
+            Results couldn't be found.
         </div>
     }
 
@@ -74,7 +74,7 @@ function AuthorPage() {
 
     const listOfPapers = <ul>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={key}><h4>{value.title}</h4><div><p>{value.abstract}</p><PapersAuthors paper_id={value.paper_id} /></div></li>
+            (value, key) => <li key={value.paper_id}><PapersAuthors data={value} /></li>
         )}
     </ul>
 

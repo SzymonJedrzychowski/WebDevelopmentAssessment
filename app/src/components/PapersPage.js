@@ -10,49 +10,27 @@ import PapersAuthors from './PapersAuthors';
  * 
  * @author Szymon Jedrzychowski
  */
-function PapersPage() {
-    const [papers, setPapers] = useState([]);
-    const [loading, setLoading] = useState(true);
+function PapersPage(preps) {
     const [limit, setLimit] = useState(10);
     const [searchTerm, setTerm] = useState("");
     const [paperSearch, setPaperSearch] = useState("all");
     var { track } = useParams();
 
-    var fetchLink = "http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers";
     if (track === undefined) {
         track = "papers";
-    } else if (["interactivity", "fullpapers", "wip", "competition", "doctoral", "rapid"].includes(track)) {
-        if (track === "interactivity") {
-            fetchLink += "?track=Interactivity";
-        } else {
-            fetchLink += "?track=" + track;
-        }
     }
 
     useEffect(() => {
-        fetch(fetchLink)
-            .then(
-                (response) => response.json()
-            )
-            .then(
-                (json) => {
-                    setLoading(false);
-                    setPapers(json);
-                }
-            )
-            .catch((err) => {
-                console.log(err.message);
-            });
-    }, [fetchLink]);
-
-    useEffect(() => {
-        setLoading(true);
         document.getElementById("search").value = "";
         document.getElementById("awardValue").value = "all"
-    }, [fetchLink])
+    }, [track])
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => ((value.title.toLowerCase().includes(searchTerm.toLowerCase()) || value.abstract.toLowerCase().includes(searchTerm.toLowerCase())) && (paperSearch === "all" || paperSearch === value.award));
+    const search = (value) => (
+        (value.title.toLowerCase().includes(searchTerm.toLowerCase())
+            || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
+        && (paperSearch === "all" || paperSearch === value.award) && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers")
+    );
     const updateSearchTerm = function (event) {
         setTerm(document.getElementById("search").value);
         if (document.getElementById("awardValue").value === "false") {
@@ -62,11 +40,11 @@ function PapersPage() {
         }
         event.preventDefault();
     }
-    let papersToShow = papers.filter(search);
+    let papersToShow = preps.data.papers.filter(search);
 
     const listOfPapers = <ul>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={key}><h4>{value.title}</h4><div><p>{value.abstract}</p><PapersAuthors paper_id={value.paper_id} /></div></li>
+            (value, key) => <li key={value.paper_id}><PapersAuthors data={value} /></li>
         )}
     </ul>
 
@@ -88,9 +66,9 @@ function PapersPage() {
             </Form>
             <h1>{track}</h1>
             <p>Welcome to the {track}!</p>
-            {loading && <p>Loading...</p>}
+            {preps.data.loadingPapers && <p>Loading...</p>}
             {listOfPapers}
-            {!loading && <button onClick={showMore}>Show More</button>}
+            {!preps.data.loadingPapers && <button onClick={showMore}>Show More</button>}
         </div>
     );
 }

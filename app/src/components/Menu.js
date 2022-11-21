@@ -15,7 +15,9 @@ function Menu() {
     return (
         <Navbar collapseOnSelect bg="light" expand="lg">
             <Container>
-                <Navbar.Brand href="/assessment/app/">Home</Navbar.Brand>
+                <LinkContainer to="/">
+                    <Navbar.Brand>Home</Navbar.Brand>
+                </LinkContainer>
                 <Navbar.Toggle aria-controls="basic-navbar-nav" />
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="me-auto">
