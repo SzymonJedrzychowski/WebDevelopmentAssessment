@@ -9,9 +9,9 @@ function AuthorsPage(props) {
     const showMore = () => setLimit(limit + 10);
     const search = (value) => (value.first_name + " " + value.middle_name + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
     const updateSearchTerm = function (event) {
-        setTerm(document.getElementById("search").value);
-        event.preventDefault();
+        setTerm(event.target.value);
     }
+    const preventSubmission = (event) => event.preventDefault();
     let authorsToShow = props.data.authors.filter(search);
 
     const listOfAuthors = <ul>
@@ -22,7 +22,7 @@ function AuthorsPage(props) {
 
     return (
         <div>
-            <Form onSubmit={updateSearchTerm} className="d-flex">
+            <Form onSubmit={preventSubmission} className="d-flex">
                 <Form.Control
                     id="search"
                     onChange={updateSearchTerm}

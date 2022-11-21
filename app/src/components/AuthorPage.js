@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
 import PapersAuthors from './PapersAuthors';
+import PapersSearchForm from './PapersSearchForm';
 
 function AuthorPage() {
     const [papers, setPapers] = useState([]);
@@ -10,8 +10,8 @@ function AuthorPage() {
     const [authorLoading, setLoadingAuthor] = useState(true);
     const [error, setError] = useState(false);
     const [limit, setLimit] = useState(10);
-    const [searchTerm, setTerm] = useState("");
-    const [paperSearch, setPaperSearch] = useState("all");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [paperSearchTerm, setPaperSearchTerm] = useState("all");
     var { author_id } = useParams();
 
     useEffect(() => {
@@ -60,15 +60,16 @@ function AuthorPage() {
     }
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => ((value.title.toLowerCase().includes(searchTerm.toLowerCase()) || value.abstract.toLowerCase().includes(searchTerm.toLowerCase())) && (paperSearch === "all" || paperSearch === value.award));
-    const updateSearchTerm = function (event) {
-        setTerm(document.getElementById("search").value);
-        if (document.getElementById("awardValue").value === "false") {
-            setPaperSearch(null);
+    const search = (value) => (
+        (value.title.toLowerCase().includes(searchTerm.toLowerCase())
+            || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
+        && (paperSearchTerm === "all" || paperSearchTerm === value.award));
+    const updateSearchTerm = function (targetId, targetValue) {
+        if (targetId == "search") {
+            setSearchTerm(targetValue);
         } else {
-            setPaperSearch(document.getElementById("awardValue").value);
+            setPaperSearchTerm(targetValue);
         }
-        event.preventDefault();
     }
     let papersToShow = papers.filter(search);
 
@@ -81,20 +82,7 @@ function AuthorPage() {
     return (
         <div>
             <h1>{author.first_name} {author.middle_initial} {author.last_name}</h1>
-            <Form onSubmit={updateSearchTerm} className="d-flex">
-                <Form.Control
-                    id="search"
-                    onChange={updateSearchTerm}
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                />
-                <Form.Select id="awardValue" aria-label="Default select example" onChange={updateSearchTerm}>
-                    <option value="all">All papers</option>
-                    <option value="true">Only rewarded papers</option>
-                    <option value="false">Only non-rewarded papers</option>
-                </Form.Select>
-            </Form>
+            <PapersSearchForm handler={updateSearchTerm} />
             {(papersLoading && authorLoading) && <p>Loading...</p>}
             {listOfPapers}
             {(!papersLoading && authorLoading) && <button onClick={showMore}>Show More</button>}

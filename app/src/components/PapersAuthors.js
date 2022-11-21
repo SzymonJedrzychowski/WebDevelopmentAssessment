@@ -8,18 +8,18 @@ function PapersAuthors(props) {
 
     const fetchAuthors = () => {
         fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?affiliation&paper_id=" + props.data.paper_id)
-        .then(
-            (response) => response.json()
-        )
-        .then(
-            (json) => {
-                setAuthors(json);
-                setLoading(false)
-            }
-        )
-        .catch((err) => {
-            console.log(err.message);
-        });
+            .then(
+                (response) => response.json()
+            )
+            .then(
+                (json) => {
+                    setAuthors(json);
+                    setLoading(false)
+                }
+            )
+            .catch((err) => {
+                console.log(err.message);
+            });
     }
 
     const showDetails = () => {

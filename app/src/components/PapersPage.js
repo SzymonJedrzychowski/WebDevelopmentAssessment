@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import Form from 'react-bootstrap/Form';
 import PapersAuthors from './PapersAuthors';
+import PapersSearchForm from './PapersSearchForm';
 
 /**
  * PapersPage
@@ -12,9 +12,18 @@ import PapersAuthors from './PapersAuthors';
  */
 function PapersPage(preps) {
     const [limit, setLimit] = useState(10);
-    const [searchTerm, setTerm] = useState("");
-    const [paperSearch, setPaperSearch] = useState("all");
+    const [searchTerm, setSearchTerm] = useState("");
+    const [paperSearchTerm, setPaperSearchTerm] = useState("all");
     var { track } = useParams();
+    const trackNames = {
+        "papers": "All Papers",
+        "interactivity": "Interactivity",
+        "wip": "Work-In-Progress",
+        "fullpapers": "Full Papers",
+        "competition": "Student Game Design Competition",
+        "doctoral": "Doctoral Consortium",
+        "rapid": "Rapid Communications"
+    }
 
     if (track === undefined) {
         track = "papers";
@@ -29,16 +38,14 @@ function PapersPage(preps) {
     const search = (value) => (
         (value.title.toLowerCase().includes(searchTerm.toLowerCase())
             || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
-        && (paperSearch === "all" || paperSearch === value.award) && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers")
-    );
-    const updateSearchTerm = function (event) {
-        setTerm(document.getElementById("search").value);
-        if (document.getElementById("awardValue").value === "false") {
-            setPaperSearch(null);
+        && (paperSearchTerm === "all" || paperSearchTerm === value.award)
+        && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers"));
+    const updateSearchTerm = function (targetId, targetValue) {
+        if (targetId == "search") {
+            setSearchTerm(targetValue);
         } else {
-            setPaperSearch(document.getElementById("awardValue").value);
+            setPaperSearchTerm(targetValue);
         }
-        event.preventDefault();
     }
     let papersToShow = preps.data.papers.filter(search);
 
@@ -50,22 +57,8 @@ function PapersPage(preps) {
 
     return (
         <div>
-            <Form onSubmit={updateSearchTerm} className="d-flex">
-                <Form.Control
-                    id="search"
-                    onChange={updateSearchTerm}
-                    placeholder="Search"
-                    className="me-2"
-                    aria-label="Search"
-                />
-                <Form.Select id="awardValue" aria-label="Default select example" onChange={updateSearchTerm}>
-                    <option value="all">All papers</option>
-                    <option value="true">Only rewarded papers</option>
-                    <option value="false">Only non-rewarded papers</option>
-                </Form.Select>
-            </Form>
-            <h1>{track}</h1>
-            <p>Welcome to the {track}!</p>
+            <PapersSearchForm handler={updateSearchTerm} />
+            <h1>{trackNames[track.toLowerCase()]}</h1>
             {preps.data.loadingPapers && <p>Loading...</p>}
             {listOfPapers}
             {!preps.data.loadingPapers && <button onClick={showMore}>Show More</button>}
