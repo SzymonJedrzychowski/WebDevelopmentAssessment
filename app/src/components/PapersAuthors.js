@@ -13,7 +13,7 @@ function PapersAuthors(props) {
             )
             .then(
                 (json) => {
-                    setAuthors(json);
+                    setAuthors(json.data);
                     setLoading(false)
                 }
             )

@@ -41,7 +41,7 @@ function PapersPage(preps) {
         && (paperSearchTerm === "all" || paperSearchTerm === value.award)
         && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers"));
     const updateSearchTerm = function (targetId, targetValue) {
-        if (targetId == "search") {
+        if (targetId === "search") {
             setSearchTerm(targetValue);
         } else {
             setPaperSearchTerm(targetValue);

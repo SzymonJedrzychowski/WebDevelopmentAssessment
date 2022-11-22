@@ -22,7 +22,7 @@ function AuthorPage() {
             .then(
                 (json) => {
                     setLoadingAuthor(false);
-                    setAuthor(json[0]);
+                    setAuthor(json.data[0]);
                 }
             )
             .catch((err) => {
@@ -39,7 +39,7 @@ function AuthorPage() {
             .then(
                 (json) => {
                     setLoadingPapers(false);
-                    setPapers(json);
+                    setPapers(json.data);
                 }
             )
             .catch((err) => {
@@ -65,7 +65,7 @@ function AuthorPage() {
             || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
         && (paperSearchTerm === "all" || paperSearchTerm === value.award));
     const updateSearchTerm = function (targetId, targetValue) {
-        if (targetId == "search") {
+        if (targetId === "search") {
             setSearchTerm(targetValue);
         } else {
             setPaperSearchTerm(targetValue);

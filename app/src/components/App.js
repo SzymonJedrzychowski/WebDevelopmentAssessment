@@ -31,7 +31,7 @@ function App() {
       )
       .then(
         (json) => {
-          setPapers(json)
+          setPapers(json.data)
           setLoadingPapers(false)
         }
       )
@@ -49,7 +49,7 @@ function App() {
       )
       .then(
         (json) => {
-          setAuthors(json)
+          setAuthors(json.data)
           setLoadingAuthors(false)
         }
       )

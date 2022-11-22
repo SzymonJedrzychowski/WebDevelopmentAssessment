@@ -3,11 +3,11 @@ import Form from 'react-bootstrap/Form';
 function PapersSearchForm(props) {
     const preventSubmission = (event) => event.preventDefault();
     const updateSearchTerm = (event) => {
-        if (event.target.id == "search") {
+        if (event.target.id === "search") {
             props.handler(event.target.id, event.target.value);
         } else {
             let awardValue = event.target.value;
-            if (awardValue == "false") {
+            if (awardValue === "false") {
                 awardValue = null;
             } else {
                 awardValue = event.target.value;
