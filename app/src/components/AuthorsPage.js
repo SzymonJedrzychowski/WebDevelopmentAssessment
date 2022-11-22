@@ -7,7 +7,7 @@ function AuthorsPage(props) {
     const [searchTerm, setTerm] = useState("");
 
     const showMore = () => setLimit(limit + 10);
-    const search = (value) => (value.first_name + " " + value.middle_name + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
+    const search = (value) => (value.first_name + " " + value.middle_initial + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
     const updateSearchTerm = function (event) {
         setTerm(event.target.value);
     }
@@ -16,7 +16,7 @@ function AuthorsPage(props) {
 
     const listOfAuthors = <ul>
         {authorsToShow.slice(0, limit).map(
-            (value, key) => <li key={value.author_id}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_name} {value.last_name}</Link></li>
+            (value) => <li key={value.author_id}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></li>
         )}
     </ul>
 

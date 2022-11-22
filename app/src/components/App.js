@@ -65,7 +65,7 @@ function App() {
       <Header />
       <Menu />
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route path="/" element={<HomePage data={getData()}/>} />
         <Route path="/papers">
           <Route index element={<PapersPage data={getData()} />} />
           <Route path=":track" element={<PapersPage data={getData()} />} />

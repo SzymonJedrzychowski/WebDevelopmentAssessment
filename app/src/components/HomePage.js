@@ -1,3 +1,5 @@
+import HomePageSearch from "./HomePageSearch";
+
 /**
  * Home page component
  * 
@@ -5,11 +7,11 @@
  * 
  * @author Szymon Jedrzychowski
  */
-function HomePage() {
+function HomePage(props) {
     return (
         <div>
-            <h1>Home</h1>
-            <p>Welcome to the home page!</p>
+            <h2>CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play</h2>
+            <HomePageSearch data={props.data}/>
         </div>
     );
 }
