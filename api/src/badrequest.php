@@ -1,21 +1,24 @@
 <?php
 
 /**
- * BadRequest class
- *
  * Class that is used as alternative exception.
  * 
+ * This class is used to throw the exception
+ * whenever incorrect param was provided for specific endpoint.
+ * 
+ * Base code written by
  * @author John Rooksby
+ * Modified by
+ * @author Szymon Jedrzychowski
  */
 class BadRequest extends Exception
 {
 
     /**
-     * badRequestMessage method
+     * Method that sets the response code to 400 and returns error message
+     * as output in array format the same as the Endpoint class $data variable
      * 
-     * Function that sets the response code to 400 and returns error message as output in array format
-     * 
-     * @return string error message
+     * @return array error message in array format
      */
     public function badRequestMessage()
     {
