@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
+import ListGroup from 'react-bootstrap/ListGroup';
+import '../styles/PapersPage.scss'
 
 /**
  * PapersPage
@@ -49,19 +51,19 @@ function PapersPage(preps) {
     }
     let papersToShow = preps.data.papers.filter(search);
 
-    const listOfPapers = <ul>
+    const listOfPapers = <ListGroup>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={value.paper_id}><PapersAuthors data={value} /></li>
+            (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
         )}
-    </ul>
+        {(!preps.data.loadingPapers && limit<papersToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
+    </ListGroup>
 
     return (
-        <div>
-            <PapersSearchForm handler={updateSearchTerm} />
+        <div className="papersGroup">
             <h1>{trackNames[track.toLowerCase()]}</h1>
+            <PapersSearchForm handler={updateSearchTerm} searchTerm={setSearchTerm} paperSearchTerm={setPaperSearchTerm} />
             {preps.data.loadingPapers && <p>Loading...</p>}
             {listOfPapers}
-            {!preps.data.loadingPapers && <button onClick={showMore}>Show More</button>}
         </div>
     );
 }

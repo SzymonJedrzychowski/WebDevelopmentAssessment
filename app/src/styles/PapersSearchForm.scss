@@ -1,0 +1,30 @@
+@import "../index.scss";
+
+form{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    gap: 1em;
+    margin: 1em !important;
+}
+
+select{
+    max-width: fit-content;
+}
+
+@media screen and (max-width: 600px) {
+    form{
+        flex-direction: column;
+        justify-content: baseline;
+        margin: 1em !important;
+    }
+
+    input{
+        margin: 0 !important;
+    }
+
+    select{
+        max-width: none;
+        margin: 0 !important;
+    }
+}

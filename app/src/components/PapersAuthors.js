@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
+import ListGroup from 'react-bootstrap/ListGroup';
 
 function PapersAuthors(props) {
     const [authors, setAuthors] = useState([]);
@@ -29,19 +30,19 @@ function PapersAuthors(props) {
 
     const listOfAuthors =
         authors.map(
-            (value, key) => <p key={key}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link> {value.country} {value.state} {value.city} {value.institution} {value.department}</p>
+            (value) => <p key={value.author_id}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link> {value.country} {value.state} {value.city} {value.institution} {value.department}</p>
         );
 
     return (
-        <div onClick={showDetails}>
-            <h4>{props.data.title}</h4>
+        <ListGroup.Item action onClick={showDetails}>
+            <h2>{props.data.title}</h2>
             {visible && <div>
                 <p>{props.data.abstract}</p>
                 <p>Authors:</p>
                 {listOfAuthors}
                 {loading && <p>Loading...</p>}
             </div>}
-        </div>
+        </ListGroup.Item>
     )
 }
 
