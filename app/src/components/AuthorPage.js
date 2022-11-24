@@ -2,8 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
+import ListGroup from 'react-bootstrap/ListGroup';
+import '../styles/AuthorPage.css'
 
-function AuthorPage() {
+function AuthorPage(props) {
     const [papers, setPapers] = useState([]);
     const [author, setAuthor] = useState([]);
     const [papersLoading, setLoadingPapers] = useState(true);
@@ -73,19 +75,19 @@ function AuthorPage() {
     }
     let papersToShow = papers.filter(search);
 
-    const listOfPapers = <ul>
+    const listOfPapers = <ListGroup>
         {papersToShow.slice(0, limit).map(
-            (value, key) => <li key={value.paper_id}><PapersAuthors data={value} /></li>
+            (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
         )}
-    </ul>
+        {((!papersLoading && !authorLoading) && limit<papersToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
+    </ListGroup>
 
     return (
-        <div>
+        <div className="papersGroup">
             <h1>{author.first_name} {author.middle_initial} {author.last_name}</h1>
-            <PapersSearchForm handler={updateSearchTerm} />
+            <PapersSearchForm handler={updateSearchTerm} searchTerm={setSearchTerm} paperSearchTerm={setPaperSearchTerm} />
             {(papersLoading && authorLoading) && <p>Loading...</p>}
             {listOfPapers}
-            {(!papersLoading && authorLoading) && <button onClick={showMore}>Show More</button>}
         </div>
     );
 }

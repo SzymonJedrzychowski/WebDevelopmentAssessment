@@ -1,0 +1,35 @@
+.authorsGroup {
+    margin: 1em 3em 1em 3em;
+}
+
+.author:first-child {
+    margin-top: 1em;
+}
+
+.author:first-child button {
+    border-top-left-radius: 25px;
+    border-top-right-radius: 25px;
+}
+
+.author:nth-child(even) button {
+    background-color: lightgray !important;
+}
+
+.author:last-child button {
+    border-bottom-right-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+h2 {
+    margin: 0.2em;
+}
+
+.author a {
+    text-decoration: none;
+}
+
+@media screen and (max-width: 600px) {
+    .authorsGroup {
+        margin: 1em 1em 1em 1em;
+    }
+}

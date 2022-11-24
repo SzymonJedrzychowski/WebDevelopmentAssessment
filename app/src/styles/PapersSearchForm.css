@@ -1,5 +1,3 @@
-@import "../index.scss";
-
 form{
     display: flex;
     flex-direction: row;

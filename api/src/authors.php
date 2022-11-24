@@ -32,7 +32,7 @@ class Authors extends Endpoint
             $sql .= " WHERE author_id = :author_id";
             $params[':author_id'] = $_GET['author_id'];
         } elseif (filter_has_var(INPUT_GET, 'paper_id') and filter_has_var(INPUT_GET, 'affiliation')) {
-            $sql = "SELECT DISTINCT author_id, first_name, middle_initial, last_name, affiliation.country, affiliation.state, affiliation.city, affiliation.institution, affiliation.department
+            $sql = "SELECT author_id, first_name, middle_initial, last_name, affiliation.country, affiliation.state, affiliation.city, affiliation.institution, affiliation.department
                 FROM author
                 JOIN paper_has_author ON paper_has_author.authorId = author.author_id
                 JOIN paper ON paper_has_author.paper_id = paper.paper_id

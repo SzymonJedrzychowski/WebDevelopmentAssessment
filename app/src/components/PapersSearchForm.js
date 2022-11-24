@@ -1,6 +1,6 @@
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
-import '../styles/PapersSearchForm.scss'
+import '../styles/PapersSearchForm.css'
 
 function PapersSearchForm(props) {
     const preventSubmission = (event) => event.preventDefault();

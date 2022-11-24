@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
+import ListGroup from 'react-bootstrap/ListGroup';
+import Button from 'react-bootstrap/esm/Button';
+import '../styles/AuthorsPage.css';
 
 function AuthorsPage(props) {
     const [limit, setLimit] = useState(10);
@@ -13,15 +16,20 @@ function AuthorsPage(props) {
     }
     const preventSubmission = (event) => event.preventDefault();
     let authorsToShow = props.data.authors.filter(search);
+    const resetSearch = (event) => {
+        setTerm("")
+        document.getElementById("search").value = "";
+    }
 
-    const listOfAuthors = <ul>
+    const listOfAuthors = <ListGroup>
         {authorsToShow.slice(0, limit).map(
-            (value) => <li key={value.author_id}><Link to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></li>
+            (value) => <div className="author" key={value.author_id}><Link to={"/authors/" + value.author_id}><ListGroup.Item action>{value.first_name} {value.middle_initial} {value.last_name}</ListGroup.Item></Link></div>
         )}
-    </ul>
+        {(!props.data.loadingAuthors && limit<authorsToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
+    </ListGroup>
 
     return (
-        <div>
+        <div className='authorsGroup'>
             <h1>Authors</h1>
             <Form onSubmit={preventSubmission} className="d-flex">
                 <Form.Control
@@ -31,10 +39,10 @@ function AuthorsPage(props) {
                     className="me-2"
                     aria-label="Search"
                 />
+                <Button onClick={resetSearch}>Reset</Button>
             </Form>
             {props.data.loadingAuthors && <p>Loading...</p>}
             {listOfAuthors}
-            {!props.data.loadingAuthors && <button onClick={showMore}>Show More</button>}
         </div>
     );
 }

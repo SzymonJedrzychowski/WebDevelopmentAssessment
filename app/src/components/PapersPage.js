@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
 import ListGroup from 'react-bootstrap/ListGroup';
-import '../styles/PapersPage.scss'
+import '../styles/PapersPage.css'
 
 /**
  * PapersPage
@@ -12,7 +12,7 @@ import '../styles/PapersPage.scss'
  * 
  * @author Szymon Jedrzychowski
  */
-function PapersPage(preps) {
+function PapersPage(props) {
     const [limit, setLimit] = useState(10);
     const [searchTerm, setSearchTerm] = useState("");
     const [paperSearchTerm, setPaperSearchTerm] = useState("all");
@@ -49,20 +49,20 @@ function PapersPage(preps) {
             setPaperSearchTerm(targetValue);
         }
     }
-    let papersToShow = preps.data.papers.filter(search);
+    let papersToShow = props.data.papers.filter(search);
 
     const listOfPapers = <ListGroup>
         {papersToShow.slice(0, limit).map(
             (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
         )}
-        {(!preps.data.loadingPapers && limit<papersToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
+        {(!props.data.loadingPapers && limit<papersToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
     </ListGroup>
 
     return (
         <div className="papersGroup">
             <h1>{trackNames[track.toLowerCase()]}</h1>
             <PapersSearchForm handler={updateSearchTerm} searchTerm={setSearchTerm} paperSearchTerm={setPaperSearchTerm} />
-            {preps.data.loadingPapers && <p>Loading...</p>}
+            {props.data.loadingPapers && <p>Loading...</p>}
             {listOfPapers}
         </div>
     );

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Link } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
-import "../styles/PapersAuthors.scss"
+import "../styles/PapersAuthors.css"
 
 function PapersAuthors(props) {
     const [authors, setAuthors] = useState([]);
@@ -30,8 +30,29 @@ function PapersAuthors(props) {
         setVisible(!visible);
     }
 
+    const modifyAuthors = (authors) => {
+        var dict = {};
+        var tempAuthors = [];
+        for (let i = 0; i < authors.length; i++) {
+            if (!(authors[i].author_id in dict)) {
+                tempAuthors.push(authors[i]);
+                dict[authors[i].author_id] = 1;
+            } else {
+                tempAuthors.push(authors[i]);
+                tempAuthors[i].author_id = tempAuthors[i].author_id + "_" + dict[authors[i].author_id];
+                dict[authors[i].author_id] += 1
+                tempAuthors[i].first_name = "";
+                tempAuthors[i].middle_initial = "";
+                tempAuthors[i].last_name = "";
+            }
+        }
+        return tempAuthors;
+    }
+
+    const tempListAuthors = modifyAuthors(authors);
+
     const listOfAuthors =
-        authors.map(
+    tempListAuthors.map(
             (value) => <tr key={value.author_id}>
                 <td><Link className="authorLink" to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></td>
                 <td>{value.country}</td>
