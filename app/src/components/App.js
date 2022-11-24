@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
 import HomePage from './HomePage';
-import Header from './Header';
 import Footer from './Footer';
 import PapersPage from './PapersPage'
 import Menu from './Menu';
 import AuthorsPage from './AuthorsPage';
 import AuthorPage from './AuthorPage';
+import '../styles/App.css'
 
 /**
  * App
@@ -62,18 +62,19 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
       <Menu />
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/papers">
-          <Route index element={<PapersPage data={getData()} />} />
-          <Route path=":track" element={<PapersPage data={getData()} />} />
-        </Route>
-        <Route path="/authors/" element={<AuthorsPage data={getData()} />} />
-        <Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
-        <Route path="*" element={<p>Not found</p>} />
-      </Routes>
+      <div className="content">
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/papers">
+            <Route index element={<PapersPage data={getData()} />} />
+            <Route path=":track" element={<PapersPage data={getData()} />} />
+          </Route>
+          <Route path="/authors/" element={<AuthorsPage data={getData()} />} />
+          <Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
+          <Route path="*" element={<p>Not found</p>} />
+        </Routes>
+      </div>
       <Footer />
     </div>
   );

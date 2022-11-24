@@ -1,3 +1,5 @@
+import '../styles/Footer.css'
+
 /**
  * Footer
  * 
@@ -6,7 +8,7 @@
  */
 function Footer() {
     return (
-        <footer>Northumbria University - w20020581</footer>
+        <footer className="static-bottom"><div>Northumbria University - w20020581</div></footer>
     )
 }
 
