@@ -22,6 +22,7 @@ function AuthorsPage(props) {
 
     return (
         <div>
+            <h1>Authors</h1>
             <Form onSubmit={preventSubmission} className="d-flex">
                 <Form.Control
                     id="search"
@@ -31,7 +32,6 @@ function AuthorsPage(props) {
                     aria-label="Search"
                 />
             </Form>
-            <h1>Authors</h1>
             {props.data.loadingAuthors && <p>Loading...</p>}
             {listOfAuthors}
             {!props.data.loadingAuthors && <button onClick={showMore}>Show More</button>}
