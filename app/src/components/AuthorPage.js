@@ -5,7 +5,7 @@ import PapersSearchForm from './PapersSearchForm';
 import ListGroup from 'react-bootstrap/ListGroup';
 import '../styles/AuthorPage.css'
 
-function AuthorPage(props) {
+function AuthorPage() {
     const [papers, setPapers] = useState([]);
     const [author, setAuthor] = useState([]);
     const [papersLoading, setLoadingPapers] = useState(true);

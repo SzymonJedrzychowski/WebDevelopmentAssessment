@@ -8,7 +8,7 @@ import '../styles/Footer.css'
  */
 function Footer() {
     return (
-        <footer className="static-bottom"><div>Northumbria University - w20020581</div></footer>
+        <footer><div>Northumbria University - w20020581</div></footer>
     )
 }
 

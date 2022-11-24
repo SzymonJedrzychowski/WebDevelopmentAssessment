@@ -15,69 +15,69 @@ import '../styles/App.css'
  * @author Szymon Jedrzychowski
  */
 function App() {
-  const [papers, setPapers] = useState([]);
-  const [authors, setAuthors] = useState([]);
-  const [loadingPapers, setLoadingPapers] = useState(true);
-  const [loadingAuthors, setLoadingAuthors] = useState(true);
+	const [papers, setPapers] = useState([]);
+	const [authors, setAuthors] = useState([]);
+	const [loadingPapers, setLoadingPapers] = useState(true);
+	const [loadingAuthors, setLoadingAuthors] = useState(true);
 
-  const getData = () => {
-    return { papers, authors, loadingPapers, loadingAuthors };
-  }
+	const getData = () => {
+		return { papers, authors, loadingPapers, loadingAuthors };
+	}
 
-  useEffect(() => {
-    fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
-      .then(
-        (response) => response.json()
-      )
-      .then(
-        (json) => {
-          setPapers(json.data)
-          setLoadingPapers(false)
-        }
-      )
-      .catch(
-        (e) => {
-          console.log(e.message)
-        }
-      )
-  }, []);
+	useEffect(() => {
+		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
+			.then(
+				(response) => response.json()
+			)
+			.then(
+				(json) => {
+					setPapers(json.data)
+					setLoadingPapers(false)
+				}
+			)
+			.catch(
+				(e) => {
+					console.log(e.message)
+				}
+			)
+	}, []);
 
-  useEffect(() => {
-    fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors")
-      .then(
-        (response) => response.json()
-      )
-      .then(
-        (json) => {
-          setAuthors(json.data)
-          setLoadingAuthors(false)
-        }
-      )
-      .catch(
-        (e) => {
-          console.log(e.message)
-        }
-      )
-  }, []);
+	useEffect(() => {
+		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors")
+			.then(
+				(response) => response.json()
+			)
+			.then(
+				(json) => {
+					setAuthors(json.data)
+					setLoadingAuthors(false)
+				}
+			)
+			.catch(
+				(e) => {
+					console.log(e.message)
+				}
+			)
+	}, []);
 
-  return (
-    <div className="App">
-      <Menu />
-      <div className="content">
-        <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/papers">
-            <Route index element={<PapersPage data={getData()} />} />
-            <Route path=":track" element={<PapersPage data={getData()} />} />
-          </Route>
-          <Route path="/authors/" element={<AuthorsPage data={getData()} />} />
-          <Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
-          <Route path="*" element={<p>Not found</p>} />
-        </Routes>
-      </div>
-      <Footer />
-    </div>
-  );
+	return (
+		<div className="App">
+			<div className="content">
+				<Menu />
+				<Routes>
+					<Route path="/" element={<HomePage />} />
+					<Route path="/papers">
+						<Route index element={<PapersPage data={getData()} />} />
+						<Route path=":track" element={<PapersPage data={getData()} />} />
+					</Route>
+					<Route path="/authors/" element={<AuthorsPage data={getData()} />} />
+					<Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
+					<Route path="*" element={<p>Not found</p>} />
+				</Routes>
+			</div>
+			<Footer />
+		</div>
+	);
 }
 
 export default App;
