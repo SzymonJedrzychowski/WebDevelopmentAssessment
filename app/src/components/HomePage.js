@@ -7,7 +7,7 @@
  */
 function HomePage() {
     return (
-        <div>
+        <div className="mainTitle">
             <h1>CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play</h1>
         </div>
     );

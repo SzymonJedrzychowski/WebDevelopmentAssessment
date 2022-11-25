@@ -30,6 +30,6 @@ h2 {
 
 @media screen and (max-width: 600px) {
     .authorsGroup {
-        margin: 1em 1em 1em 1em;
+        margin: 1em;
     }
 }

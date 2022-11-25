@@ -4,3 +4,13 @@
     flex-direction: column;
     justify-content: space-between; 
 }
+
+.mainTitle{
+    margin: 1em 3em 1em 3em;
+}
+
+@media screen and (max-width: 600px) {
+    .mainTitle{
+        margin: 1em;
+    }
+}
