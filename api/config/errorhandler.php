@@ -4,9 +4,10 @@
  * General error handler
  *
  * Throw an exception if the error is not a warning (2) or notice (8). 
- * Do nothing otherwise
+ * Do nothing otherwise.
  * 
  * @author John Rooksby
+ * @author Szymon Jedrzychowski
  */
 function errorHandler($errno, $errstr, $errfile, $errline)
 {

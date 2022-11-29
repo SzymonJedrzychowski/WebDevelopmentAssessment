@@ -6,28 +6,21 @@
  * This class is used to throw the exception
  * whenever incorrect param was provided for specific endpoint.
  * 
- * Base code written by
+ * Built upon the workshops material by:
  * @author John Rooksby
- * Modified by
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 class BadRequest extends Exception
 {
-
     /**
-     * Method that sets the response code to 400 and returns error message
-     * as output in array format the same as the Endpoint class $data variable
+     * Override the Exception constructor to always set code to 400 by default.
      * 
-     * @return array error message in array format
+     * @param string $message - a message explaining the error
+     * @param int $code - the relevant http status code (value 400 by default)
      */
-    public function badRequestMessage()
+    public function __construct($message, $code = 400)
     {
-        http_response_code(400);
-        $output = array(
-            "length" => 0,
-            "message" => $this->message,
-            "data" => []
-        );
-        return $output;
+        parent::__construct($message, $code);
     }
 }

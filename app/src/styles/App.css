@@ -1,16 +1,32 @@
-.App{
+.App {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; 
+    justify-content: space-between;
 }
 
-.mainTitle{
+.mainTitle {
     margin: 1em 3em 1em 3em;
 }
 
+body {
+    margin: 0;
+    width: 100%;
+    position: relative;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px !important;
+}
+
+h2 {
+    font-size: 18px !important;
+    margin: 0.3em !important;
+}
+
 @media screen and (max-width: 600px) {
-    .mainTitle{
+    .mainTitle {
         margin: 1em;
     }
 }

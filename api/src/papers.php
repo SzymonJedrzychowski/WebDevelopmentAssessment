@@ -3,17 +3,23 @@
 /**
  * Responsible for handling /papers endpoint.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Papers extends Endpoint
-{   
+{
     /**
      * Override parent method to get the Papers data.
      * 
-     * @throws BadRequest if incorrect param was provided
+     * @throws BadRequest if incorrect param was provided or wrong request method was used
      */
     protected function initialiseSQL()
     {
+        // Check if correct request method was used.
+        $this->validateRequestMethod("GET");
+
         $sql = "SELECT paper.paper_id, title, award, abstract, track.name, track.short_name FROM paper JOIN track ON paper.track_id=track.track_id";
         $params = array();
 

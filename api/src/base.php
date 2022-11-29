@@ -3,6 +3,9 @@
 /**
  * Responsible for handling / (base) endpoint.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Base extends Endpoint
@@ -12,21 +15,18 @@ class Base extends Endpoint
      * contains fixed data and does not require connection to the database.
      */
     public function __construct()
-    {   
-        // Student data array
+    {
         $student = array(
             "first_name" => "Szymon",
             "last_name" => "Jedrzychowski",
             "id" => "w20020581"
         );
 
-        // Module information array
         $module = array(
             "code" => "KF6012",
             "name" => "Web Application Integration",
         );
 
-        // Data array
         $data = array(
             "student" => $student,
             "module" => $module,

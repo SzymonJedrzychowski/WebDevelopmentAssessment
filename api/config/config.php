@@ -1,5 +1,12 @@
 <?php
 
+/**
+ * Load the configuration for the api.
+ * 
+ * @author John Rooksby
+ * @author Szymon Jedrzychowski
+ */
+
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 error_reporting(E_ALL);

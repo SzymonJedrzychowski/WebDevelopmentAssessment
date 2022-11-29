@@ -6,6 +6,7 @@
  * Function that loads necessery functions from src directory if necessary.
  * 
  * @author John Rooksby
+ * @author Szymon Jedrzychowski
  */
 function autoloader($className){
     $filename = "src\\" . strtolower($className) . ".php";

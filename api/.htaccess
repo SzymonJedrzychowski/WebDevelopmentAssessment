@@ -1,3 +1,2 @@
 RewriteEngine on
-RewriteRule documentation/ documentation/index.html [L]
 RewriteRule ^(.*)$ index.php

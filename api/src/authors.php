@@ -3,6 +3,9 @@
 /**
  * Responsible for handling /authors endpoint.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Authors extends Endpoint
@@ -10,24 +13,27 @@ class Authors extends Endpoint
     /**
      * Override parent method to get the Authors data.
      * 
-     * @throws BadRequest if incorrect param was provided
+     * @throws BadRequest if incorrect param was provided or wrong request method was used
      */
     protected function initialiseSQL()
     {
+        // Check if correct request method was used.
+        $this->validateRequestMethod("GET");
+
         $sql = "SELECT author_id, first_name, middle_initial, last_name FROM author";
         $params = array();
 
-        // Check if correct params were provided
+        // Check if correct params were provided.
         $this->checkAvailableParams($this->getAvailableParams());
 
-        // Check for specific params clashes and connections
+        // Check for specific params clashes and connections.
         if (filter_has_var(INPUT_GET, 'affiliation') and !filter_has_var(INPUT_GET, 'paper_id')) {
             throw new BadRequest("Parameter affiliation cannot be used without parameter paper_id.");
         } elseif (filter_has_var(INPUT_GET, 'author_id') and (filter_has_var(INPUT_GET, 'affiliation') or filter_has_var(INPUT_GET, 'paper_id'))) {
             throw new BadRequest("Parameter author_id cannot be used with parameters affiliation or paper_id");
         }
 
-        // Modify the sqlCommand according to provided params
+        // Modify the sqlCommand according to provided params.
         if (filter_has_var(INPUT_GET, 'author_id')) {
             $sql .= " WHERE author_id = :author_id";
             $params[':author_id'] = $_GET['author_id'];
