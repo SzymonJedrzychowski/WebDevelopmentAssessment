@@ -1,24 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
+import ListGroup from 'react-bootstrap/ListGroup';
+
+// Import modules
 import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
-import ListGroup from 'react-bootstrap/ListGroup';
-import Form from 'react-bootstrap/Form';
-import Button from 'react-bootstrap/esm/Button';
+import DataNavigation from './DataNavigation'
+
+// Import styling
 import '../styles/PapersPage.css'
 
 /**
  * PapersPage
  * 
- * function that creates page for general papers and all categories
+ * PapersPage displays the data of all papers.
  * 
  * @author Szymon Jedrzychowski
  */
 function PapersPage(props) {
-    const [limit, setLimit] = useState(10);
-    const [searchTerm, setSearchTerm] = useState("");
-    const [paperSearchTerm, setPaperSearchTerm] = useState("all");
-    const [pageCount, setPageCount] = useState(0);
+    // pageLimit is variable that is used to determine number of entries on one page
+    const [pageLimit, setPageLimit] = useState(10);
+
+    const [searchTerm, setSearchTerm] = useState('');
+    const [rewardStatusSearch, setRewardStatusSearch] = useState('all');
+    const [currentPage, setCurrentPage] = useState(0);
+
+    // Use params to get which track of papers should be displayed
     var { track } = useParams();
     const trackNames = {
         "papers": "All Papers",
@@ -30,79 +37,71 @@ function PapersPage(props) {
         "rapid": "Rapid Communications"
     }
 
+    // track will be undefined in case all papers need to be displayed
     if (track === undefined) {
         track = "papers";
     }
 
+    // Reset the form values and corresponding states on entering new page (of different track)
     useEffect(() => {
-        document.getElementById("search").value = "";
+        document.getElementById("searchTerm").value = "";
         document.getElementById("awardValue").value = "all"
-        setPageCount(0);
+        setCurrentPage(0);
     }, [track])
 
-    const setPaperLimit = (event) => {
-        setPageCount(0);
-        setLimit(event.target.value)
+    // Handler for changing number of entries on page
+    const setPageLimitHandler = (event) => {
+        setCurrentPage(0);
+        setPageLimit(event.target.value);
     }
-    const setPage = (event) => {
-        setPageCount(event.target.value)
+
+    // Handler for changing current page
+    const setCurrentPageHandler = (event) => {
+        setCurrentPage(event.target.value)
     };
-    const search = (value) => (
-        (value.title.toLowerCase().includes(searchTerm.toLowerCase())
-            || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
-        && (paperSearchTerm === "all" || paperSearchTerm === value.award)
-        && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers"));
+
+    // Handler for updating search term
     const updateSearchTerm = function (targetId, targetValue) {
-        if (targetId === "search") {
+        // Reset page to index 0 on searching
+        setCurrentPage(0);
+
+        // Update correct value, depending on which variable has changed
+        if (targetId === "searchTerm") {
             setSearchTerm(targetValue);
         } else {
-            setPaperSearchTerm(targetValue);
+            setRewardStatusSearch(targetValue);
         }
     }
-    let papersToShow = props.data.papers.filter(search);
-    const pageButtons = (currentPage, setPage, papersToShow, limit) => {
-        currentPage = parseInt(currentPage);
-        let l = Math.ceil(papersToShow.length / limit);
-        return (
-            <>
-                {(currentPage>0) && <Button onClick={setPage} value={0}>{"<<"}</Button>}
-                {(currentPage<=0) && <Button disabled>{"<<"}</Button>}
-                {(currentPage + 1 >= l && currentPage-2 >= 0) && <Button onClick={setPage} value={currentPage - 2}>{currentPage - 1}</Button>}
-                {currentPage - 1 >= 0 && <Button onClick={setPage} value={currentPage - 1}>{currentPage}</Button>}
-                {(currentPage - 1 < 0 && currentPage + 2 >= l) && <Button disabled>-</Button>}
-                <Button className="thisPage">{currentPage + 1}</Button>
-                {(currentPage + 1 >= l && currentPage-2 < 0) && <Button disabled>-</Button>}
-                {currentPage + 1 < l && <Button onClick={setPage} value={currentPage + 1}>{currentPage + 2}</Button>}
-                {(currentPage - 1 < 0 && currentPage + 2 < l) && <Button onClick={setPage} value={currentPage + 2}>{currentPage + 3}</Button>}
-                {(currentPage<l-1) && <Button onClick={setPage} value={l - 1}>{">>"}</Button>}
-                {(currentPage>=l-1) && <Button disabled>{">>"}</Button>}
-            </>
-        );
-    }
+
+    // Filter for papers
+    const searchPapers = (value) => (
+        (value.title.toLowerCase().includes(searchTerm.toLowerCase())
+            || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
+        && (rewardStatusSearch === "all" || rewardStatusSearch === value.award)
+        && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers"));
+
+    // Use the filter to get papers that should be shown
+    let papersToShow = props.data.papers.filter(searchPapers);
+
+    // Create JSX variable for showing papers
     const listOfPapers = <ListGroup>
-        {papersToShow.slice(limit * pageCount, limit * (parseInt(pageCount) + 1)).map(
+        {papersToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
             (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
         )}
+
+        {papersToShow.length === 0 && <div key="noData"><ListGroup.Item><h2>No data found</h2></ListGroup.Item></div>}
+
         {(!props.data.loadingPapers) &&
-            <ListGroup.Item className="navi">
-                <Form.Group className="itemsPP">
-                    <Form.Label>Items per page: </Form.Label>
-                    <Form.Select aria-label="Default select example" onChange={setPaperLimit}>
-                        <option value="10">10</option>
-                        <option value="25">25</option>
-                        <option value="50">50</option>
-                    </Form.Select>
-                </Form.Group>
-                <Form.Group className="buttons">
-                    {pageButtons(pageCount, setPage, papersToShow, limit)}
-                </Form.Group>
-            </ListGroup.Item>}
+            <ListGroup.Item className="dataNavigation">
+                {<DataNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} dataToShow={papersToShow} pageLimit={pageLimit} setPageLimit={setPageLimitHandler} />}
+            </ListGroup.Item>
+        }
     </ListGroup>
 
     return (
         <div className="papersGroup">
             <h1>{trackNames[track.toLowerCase()]}</h1>
-            <PapersSearchForm handler={updateSearchTerm} searchTerm={setSearchTerm} paperSearchTerm={setPaperSearchTerm} />
+            <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm} setRewardStatusSearch={setRewardStatusSearch} />
             {props.data.loadingPapers && <p>Loading...</p>}
             {listOfPapers}
         </div>

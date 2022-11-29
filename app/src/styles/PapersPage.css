@@ -24,41 +24,6 @@ h2 {
     margin: 0.2em;
 }
 
-.showMore {
-    background-color: gray !important;
-    font-weight: bold;
-    text-align: center !important;
-}
-
-.navi{
-    display: flex !important;
-    flex-direction: row !important;
-    justify-content: space-between;
-}
-
-.itemsPP{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-}
-
-label{
-    min-width: fit-content;
-    margin: 0 1em !important;
-}
-
-select{
-    min-width: fit-content;
-}
-
-.buttons{
-    margin: 0 1em !important;
-}
-
-.thisPage{
-    background-color: darkblue;
-}
-
 @media screen and (max-width: 600px) {
     .papersGroup {
         margin: 1em

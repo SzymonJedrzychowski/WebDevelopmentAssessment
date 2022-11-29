@@ -1,11 +1,15 @@
 import { Routes, Route } from "react-router-dom";
 import React, { useState, useEffect } from 'react';
+
+// Import modules
 import HomePage from './HomePage';
 import Footer from './Footer';
 import PapersPage from './PapersPage'
 import Menu from './Menu';
 import AuthorsPage from './AuthorsPage';
 import AuthorPage from './AuthorPage';
+
+// Import styling
 import '../styles/App.css'
 
 /**
@@ -20,10 +24,12 @@ function App() {
 	const [loadingPapers, setLoadingPapers] = useState(true);
 	const [loadingAuthors, setLoadingAuthors] = useState(true);
 
+	// Return dictionary with data from database
 	const getData = () => {
 		return { papers, authors, loadingPapers, loadingAuthors };
 	}
 
+	// Get data of papers by API fetch
 	useEffect(() => {
 		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
 			.then(
@@ -42,6 +48,7 @@ function App() {
 			)
 	}, []);
 
+	// Get data of authors by API fetch
 	useEffect(() => {
 		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors")
 			.then(

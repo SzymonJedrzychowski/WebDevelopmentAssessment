@@ -1,3 +1,6 @@
+// Import styling
+import '../styles/HomePage.css';
+
 /**
  * Home page component
  * 

@@ -3,29 +3,82 @@ import { Link } from "react-router-dom";
 import Form from 'react-bootstrap/Form';
 import ListGroup from 'react-bootstrap/ListGroup';
 import Button from 'react-bootstrap/esm/Button';
+
+// Import modules
+import DataNavigation from './DataNavigation';
+
+// Import styling
 import '../styles/AuthorsPage.css';
 
+
+/**
+ * AuthorsPage component
+ *
+ * AuthorsPage displays the data (first and last name) of all authors
+ * and allows to click on any author to go to their page.
+ * 
+ * @author Szymon Jedrzychowski
+ */
 function AuthorsPage(props) {
-    const [limit, setLimit] = useState(10);
-    const [searchTerm, setTerm] = useState("");
+    // pageLimit is variable that is used to determine number of entries on one page
+    const [pageLimit, setPageLimit] = useState(10);
 
-    const showMore = () => setLimit(limit + 10);
-    const search = (value) => (value.first_name + " " + value.middle_initial + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
+    const [searchTerm, setSearchTerm] = useState("");
+    const [currentPage, setCurrentPage] = useState(0);
+
+    // Handler for updating search term
     const updateSearchTerm = function (event) {
-        setTerm(event.target.value);
-    }
-    const preventSubmission = (event) => event.preventDefault();
-    let authorsToShow = props.data.authors.filter(search);
-    const resetSearch = (event) => {
-        setTerm("")
-        document.getElementById("search").value = "";
+        setCurrentPage(0);
+        setSearchTerm(event.target.value);
     }
 
+    // Function to reset the search term
+    const resetSearch = () => {
+        setSearchTerm('');
+        document.getElementById("searchTerm").value = "";
+    }
+
+    // Handler for changing number of entries on page
+    const setPageLimitHandler = (event) => {
+        setCurrentPage(0);
+        setPageLimit(event.target.value);
+    }
+
+    // Handler for changing current page
+    const setCurrentPageHandler = (event) => {
+        setCurrentPage(event.target.value)
+    };
+
+    // Prevent submission of form (on pressing enter)
+    const preventSubmission = (event) => event.preventDefault()
+
+    // Filter for searching actors (by first or last name)
+    const searchAuthors = (value) =>
+        (value.first_name + " " + value.middle_initial + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
+
+    // Use the filter to get actors that should be shown
+    let authorsToShow = props.data.authors.filter(searchAuthors);
+
+    // Create JSX variable for showing authors
     const listOfAuthors = <ListGroup>
-        {authorsToShow.slice(0, limit).map(
-            (value) => <div className="author" key={value.author_id}><Link to={"/authors/" + value.author_id}><ListGroup.Item action>{value.first_name} {value.middle_initial} {value.last_name}</ListGroup.Item></Link></div>
+        {authorsToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
+            (value) => <div className="author" key={value.author_id}>
+                <Link to={"/authors/" + value.author_id}>
+                    <ListGroup.Item action>
+                        <h2>{value.first_name} {value.middle_initial} {value.last_name}
+                        </h2>
+                    </ListGroup.Item>
+                </Link>
+            </div>
         )}
-        {(!props.data.loadingAuthors && limit<authorsToShow.length) && <ListGroup.Item action onClick={showMore} className="showMore">Show More</ListGroup.Item>}
+
+        {authorsToShow.length === 0 && <div key="noData"><ListGroup.Item><h2>No data found</h2></ListGroup.Item></div>}
+
+        {(!props.data.loadingActors) &&
+            <ListGroup.Item className="dataNavigation">
+                {<DataNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} dataToShow={authorsToShow} pageLimit={pageLimit} setPageLimit={setPageLimitHandler} />}
+            </ListGroup.Item>
+        }
     </ListGroup>
 
     return (

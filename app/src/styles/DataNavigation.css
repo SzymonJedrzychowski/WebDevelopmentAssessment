@@ -1,0 +1,66 @@
+.dataNavigation{
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: space-between;
+    border-radius: 0 0 25px 25px !important;
+}
+
+.pageLimitSelection{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.jumpToPage{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-right: 1em;
+}
+
+select{
+    min-width: fit-content;
+}
+
+.pageButtons{
+    margin: 0 1em !important;
+}
+
+.currentPage{
+    background-color: darkblue !important;
+}
+
+label{
+    min-width: fit-content;
+    margin: 0 1em !important;
+}
+
+@media screen and (max-width: 800px) {
+    .dataNavigation {
+        display: flex;
+        flex-direction: column !important;
+        gap: 10px;
+    }
+
+    .jumpToPage{
+        display: flex;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .pageLimitSelection{
+        display: flex;
+        justify-content: center;
+    }
+
+    .pageButtons{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        margin: 0 !important;
+    }
+
+    label{
+        margin: 0 1em 0 0 !important;
+    }
+}
