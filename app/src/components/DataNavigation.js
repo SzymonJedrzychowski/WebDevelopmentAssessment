@@ -5,9 +5,7 @@ import Button from 'react-bootstrap/esm/Button';
 import "../styles/DataNavigation.css"
 
 /**
- * DataNavigation component
- *
- * Data navigation component is responsible for displaying page controls in pages that display data.
+ * DataNavigation is responsible for displaying page controls in pages that display data.
  * 
  * @author Szymon Jedrzychowski
  */

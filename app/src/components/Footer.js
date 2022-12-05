@@ -2,8 +2,7 @@
 import '../styles/Footer.css'
 
 /**
- * Footer
- * 
+ * Footer is responsible for displaying footer message.
  * 
  * @author Szymon Jedrzychowski
  */

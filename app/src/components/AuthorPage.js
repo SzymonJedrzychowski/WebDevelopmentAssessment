@@ -11,10 +11,11 @@ import DataNavigation from './DataNavigation';
 import '../styles/AuthorPage.css'
 
 /**
- * AuthorPage component
- *
  * AuthorPage is responsible for displaying page for specific author and their papers.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 function AuthorPage() {

@@ -7,10 +7,11 @@ import Table from 'react-bootstrap/Table';
 import "../styles/PapersAuthors.css"
 
 /**
- * PapersAuthors component
- *
  * PapersAuthors displays the data of the paper (including authors).
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 function PapersAuthors(props) {

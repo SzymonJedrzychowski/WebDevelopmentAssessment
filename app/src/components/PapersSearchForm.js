@@ -5,8 +5,6 @@ import Form from 'react-bootstrap/Form';
 import '../styles/PapersSearchForm.css'
 
 /**
- * PapersSearchForm component
- *
  * PapersSearchForm is responsible for displaying form that can be used to search
  * for specific papers - their titles or abstracts
  * 

@@ -12,11 +12,12 @@ import '../styles/AuthorsPage.css';
 
 
 /**
- * AuthorsPage component
- *
  * AuthorsPage displays the data (first and last name) of all authors
  * and allows to click on any author to go to their page.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 function AuthorsPage(props) {
@@ -84,10 +85,9 @@ function AuthorsPage(props) {
     return (
         <div className='authorsGroup'>
             <h1>Authors</h1>
-            <Form onSubmit={preventSubmission} className="d-flex">
+            <Form onSubmit={preventSubmission} onChange={updateSearchTerm} className="d-flex">
                 <Form.Control
-                    id="search"
-                    onChange={updateSearchTerm}
+                    id="searchTerm"
                     placeholder="Search"
                     className="me-2"
                     aria-label="Search"

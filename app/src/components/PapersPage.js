@@ -11,10 +11,11 @@ import DataNavigation from './DataNavigation'
 import '../styles/PapersPage.css'
 
 /**
- * PapersPage
- * 
  * PapersPage displays the data of all papers.
  * 
+ * Built upon the workshops material by:
+ * @author John Rooksby
+ * Modified by:
  * @author Szymon Jedrzychowski
  */
 function PapersPage(props) {

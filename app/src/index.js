@@ -1,16 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/App';
 import reportWebVitals from './reportWebVitals';
-import { BrowserRouter } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+
+// Import modules
+import App from './components/App';
+import Documentation from './documentationComponents/Documentation';
+
+// Import styling
 import './index.css';
+
+// Import bootstrap
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
 	<React.StrictMode>
-		<BrowserRouter basename='/assessment/app'>
-			<App />
+		<BrowserRouter basename="/assessment/">
+			<Routes>
+				<Route path="/app/*" element={<App />} />
+				<Route path="/documentation/*" element={<Documentation />} />
+			</Routes>
 		</BrowserRouter>
 	</React.StrictMode>
 );
