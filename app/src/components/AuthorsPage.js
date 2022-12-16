@@ -64,12 +64,9 @@ function AuthorsPage(props) {
     const listOfAuthors = <ListGroup>
         {authorsToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
             (value) => <div className="author" key={value.author_id}>
-                <Link to={"/authors/" + value.author_id}>
-                    <ListGroup.Item action>
-                        <h2>{value.first_name} {value.middle_initial} {value.last_name}
-                        </h2>
-                    </ListGroup.Item>
-                </Link>
+                <ListGroup.Item as={Link} to={"/authors/" + value.author_id} action>
+                    <h2>{value.first_name} {value.middle_initial} {value.last_name}</h2>
+                </ListGroup.Item>
             </div>
         )}
 

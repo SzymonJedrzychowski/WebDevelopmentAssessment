@@ -9,7 +9,8 @@ import '../styles/HomePage.css';
 function HomePage() {
     return (
         <div className='homePage'>
-            <h1>CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play</h1>
+            <h1>Conference papers database</h1>
+            <div>CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play</div>
         </div>
     );
 }

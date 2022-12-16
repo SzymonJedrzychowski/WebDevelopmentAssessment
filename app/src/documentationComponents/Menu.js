@@ -1,7 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { LinkContainer } from 'react-router-bootstrap'
+import { Link } from 'react-router-dom';
 
 /**
  * Navigation for the pages of the documentation.
@@ -13,16 +13,14 @@ function Menu() {
         <header>
             <Navbar collapseOnSelect bg="light" expand="lg">
                 <Container>
-                    <LinkContainer to="/documentation">
-                        <Navbar.Brand>Documentation</Navbar.Brand>
-                    </LinkContainer>
+                    <Navbar.Brand as={Link} to="/documentation">Documentation</Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto">
-                            <LinkContainer to="/documentation/base"><Nav.Link>Base</Nav.Link></LinkContainer>
-                            <LinkContainer to="/documentation/papers"><Nav.Link>Papers</Nav.Link></LinkContainer>
-                            <LinkContainer to="/documentation/authors"><Nav.Link>Authors</Nav.Link></LinkContainer>
-                            <LinkContainer to="/documentation/authenticate"><Nav.Link>Authenticate</Nav.Link></LinkContainer>
+                            <Nav.Link as={Link} to="/documentation/base">Base</Nav.Link>
+                            <Nav.Link as={Link} to="/documentation/papers">Papers</Nav.Link>
+                            <Nav.Link as={Link} to="/documentation/authors">Authors</Nav.Link>
+                            <Nav.Link as={Link} to="/documentation/authenticate">Authenticate</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

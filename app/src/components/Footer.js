@@ -8,7 +8,10 @@ import '../styles/Footer.css'
  */
 function Footer() {
     return (
-        <footer><div>Northumbria University - w20020581</div></footer>
+        <footer>
+            <a href="https://www.flaticon.com/free-icons/press-conference" title="press conference icons">Press conference icons created by Prosymbols Premium - Flaticon</a>
+            <div>Northumbria University - w20020581</div>
+        </footer>
     )
 }
 
