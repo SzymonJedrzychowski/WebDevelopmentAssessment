@@ -1,5 +1,7 @@
 <?php
 
+use FirebaseJWT\JWT;
+
 /**
  * Responsible for handling /authenticate endpoint.
  * 
@@ -32,10 +34,13 @@ class Authenticate extends Endpoint
         // Check if credentials correspond to account in database.
         $this->validateCredentials($queryResult);
 
-        $this->setData(array(
-            "length" => count($queryResult),
-            "message" => "Success",
-            "data" => $queryResult
+        // Create the token
+        $data['token'] = $this->createJWT($queryResult);
+
+        $this->setData( array(
+            "length" => 0, 
+            "message" => "success",
+            "data" => $data
         ));
     }
 
@@ -75,5 +80,26 @@ class Authenticate extends Endpoint
         } elseif (!password_verify($_SERVER['PHP_AUTH_PW'], $data[0]['password'])) {
             throw new ClientErrorException("Incorrect credentials.", 401);
         }
+    }
+
+    private function createJWT($queryResult) {
+        $secretKey = SECRET;
+ 
+        // for the iat and exp claims we need to know the time
+        $time = time();
+       
+        // In the payload we use the time for the iat claim and add  
+        // one day for the exp claim. For the iss claim we get
+        // the name of the host the code is executing on
+        $tokenPayload = [
+          'iat' => $time,
+          'exp' => strtotime('+1 day', $time),
+          'iss' => $_SERVER['HTTP_HOST'],
+          'sub' => $queryResult[0]['id']
+        ];
+              
+        $jwt = JWT::encode($tokenPayload, $secretKey, 'HS256');
+        
+        return $jwt;
     }
 }
