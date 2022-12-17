@@ -1,10 +1,18 @@
 import { Buffer } from 'buffer';
 import React, { useState, useEffect } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+
+// Import modules
 import UpdateAward from './UpdateAward';
+
+// Import styling
+import '../styles/AdminPage.css';
 
 function AdminPage(props) {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [name, setName] = useState("");
 
     const handleUsername = (event) => {
         setUsername(event.target.value);
@@ -19,7 +27,7 @@ function AdminPage(props) {
         props.data.handleAuthenticated(false)
     }
 
-    const awardDictionary = {"true": "true", null: "false"};
+    const awardDictionary = { "true": "true", null: "false" };
 
     const allPapers = props.data.papers.map(
         (value, key) => <section key={key}>
@@ -31,6 +39,7 @@ function AdminPage(props) {
         () => {
             if (localStorage.getItem('token')) {
                 props.data.handleAuthenticated(true)
+                setName(localStorage.getItem('name'));
             }
         }
         , [])
@@ -51,7 +60,9 @@ function AdminPage(props) {
                 (json) => {
                     if (json.message === "success") {
                         props.data.handleAuthenticated(true)
+                        setName(json.data.name)
                         localStorage.setItem('token', json.data.token);
+                        localStorage.setItem('name', name);
                     }
                 })
             .catch(
@@ -62,31 +73,31 @@ function AdminPage(props) {
     }
 
     return (
-        <div>
+        <div className="papersGroup">
             {props.data.authenticated && <div>
-                <h2>Admin Page</h2>
+                <h1>Admin Page</h1>
+                <div>Hello {name}</div>
                 <input type="button" value="Sign out" onClick={handleSignOut} />
                 {allPapers}
             </div>
             }
             {!props.data.authenticated && <div>
                 <h2>Sign in</h2>
-                <input
-                    type="text"
-                    placeholder="username"
-                    value={username}
-                    onChange={handleUsername}
-                />
-                <input
-                    type="password"
-                    placeholder="password"
-                    value={password}
-                    onChange={handlePassword}
-                />
-                <input type="button"
-                    value="Submit"
-                    onClick={handleClick}
-                />
+                <Form>
+                    <Form.Group className="mb-3" onChange={handleUsername} controlId="username">
+                        <Form.Label>Username:</Form.Label>
+                        <Form.Control aria-label="Default select example" />
+                    </Form.Group>
+
+                    <Form.Group className="mb-3" onChange={handlePassword} controlId="password">
+                        <Form.Label>Password:</Form.Label>
+                        <Form.Control type="password" aria-label="Default select example" />
+                    </Form.Group>
+
+                    <Button variant="primary" onClick={handleClick}>
+                        Log in
+                    </Button>
+                </Form>
             </div>
             }
         </div>

@@ -70,7 +70,7 @@ function PapersAuthors(props) {
     const listOfAuthors =
         tempListAuthors.map(
             (value) => <tr key={value.author_id}>
-                <td><Link className="authorLink" to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></td>
+                <td><Link className="authorLink" to={"/app/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></td>
                 <td>{value.country}</td>
                 <td>{value.institution}</td>
                 <td>{value.department}</td>

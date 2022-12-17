@@ -36,6 +36,7 @@ class Authenticate extends Endpoint
 
         // Create the token
         $data['token'] = $this->createJWT($queryResult);
+        $data['name'] = $queryResult[0]["name"];
 
         $this->setData( array(
             "length" => 0, 
@@ -93,9 +94,9 @@ class Authenticate extends Endpoint
         // the name of the host the code is executing on
         $tokenPayload = [
           'iat' => $time,
-          'exp' => strtotime('+1 day', $time),
+          'exp' => strtotime('+1 minutes', $time),
           'iss' => $_SERVER['HTTP_HOST'],
-          'sub' => $queryResult[0]['id']
+          'sub' => $queryResult[0]['account_id']
         ];
               
         $jwt = JWT::encode($tokenPayload, $secretKey, 'HS256');

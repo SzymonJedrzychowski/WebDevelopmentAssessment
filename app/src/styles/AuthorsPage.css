@@ -6,12 +6,12 @@
     margin-top: 1em;
 }
 
-.author:first-child button {
+.author:first-child {
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
 }
 
-.author:nth-child(even) button {
+.author:nth-child(even) a {
     background-color: lightgray !important;
 }
 
