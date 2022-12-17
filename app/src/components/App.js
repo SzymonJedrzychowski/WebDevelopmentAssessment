@@ -27,6 +27,9 @@ function App() {
 	const [loadingPapers, setLoadingPapers] = useState(true);
 	const [loadingAuthors, setLoadingAuthors] = useState(true);
 	const [authenticated, setAuthenticated] = useState(false);
+	const [update, setUpdated] = useState(0);
+
+	const handleUpdate = () => { setUpdated(update + 1) }
 
 	// Return dictionary with data from database
 	const getData = () => {
@@ -34,6 +37,11 @@ function App() {
 	}
 
 	const handleAuthenticated = (isAuthenticated) => { setAuthenticated(isAuthenticated) }
+	
+	const getAdminPageData = () => {
+		return { papers, loadingPapers, authenticated, handleAuthenticated, handleUpdate }
+	}
+
 
 	// Get data of papers by API fetch
 	useEffect(() => {
@@ -52,7 +60,7 @@ function App() {
 					console.log(e.message)
 				}
 			)
-	}, []);
+	}, [update]);
 
 	// Get data of authors by API fetch
 	useEffect(() => {
@@ -85,7 +93,7 @@ function App() {
 					</Route>
 					<Route path="/authors/" element={<AuthorsPage data={getData()} />} />
 					<Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
-					<Route path="/admin" element={<AdminPage authenticated={authenticated} handleAuthenticated={setAuthenticated} data={getData()} />} />
+					<Route path="/admin" element={<AdminPage data={getAdminPageData()} />} />
 					<Route path="*" element={<p>Not found</p>} />
 				</Routes>
 			</div>

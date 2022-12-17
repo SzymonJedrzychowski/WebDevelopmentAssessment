@@ -1,5 +1,6 @@
 import { Buffer } from 'buffer';
 import React, { useState, useEffect } from 'react';
+import UpdateAward from './UpdateAward';
 
 function AdminPage(props) {
     const [username, setUsername] = useState("");
@@ -15,13 +16,21 @@ function AdminPage(props) {
 
     const handleSignOut = () => {
         localStorage.removeItem('token')
-        props.handleAuthenticated(false)
+        props.data.handleAuthenticated(false)
     }
+
+    const awardDictionary = {"true": "true", null: "false"};
+
+    const allPapers = props.data.papers.map(
+        (value, key) => <section key={key}>
+            <UpdateAward paper={value} awardDictionary={awardDictionary} handleUpdate={props.data.handleUpdate} />
+        </section>
+    )
 
     useEffect(
         () => {
             if (localStorage.getItem('token')) {
-                props.handleAuthenticated(true)
+                props.data.handleAuthenticated(true)
             }
         }
         , [])
@@ -41,7 +50,7 @@ function AdminPage(props) {
             .then(
                 (json) => {
                     if (json.message === "success") {
-                        props.handleAuthenticated(true)
+                        props.data.handleAuthenticated(true)
                         localStorage.setItem('token', json.data.token);
                     }
                 })
@@ -54,12 +63,13 @@ function AdminPage(props) {
 
     return (
         <div>
-            {props.authenticated && <div>
+            {props.data.authenticated && <div>
                 <h2>Admin Page</h2>
                 <input type="button" value="Sign out" onClick={handleSignOut} />
+                {allPapers}
             </div>
             }
-            {!props.authenticated && <div>
+            {!props.data.authenticated && <div>
                 <h2>Sign in</h2>
                 <input
                     type="text"
