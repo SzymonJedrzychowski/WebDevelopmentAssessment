@@ -23,26 +23,49 @@ function AdminPage(props) {
     }
 
     const handleSignOut = () => {
-        localStorage.removeItem('token')
-        props.data.handleAuthenticated(false)
+        setName("");
+        localStorage.removeItem('token');
+        localStorage.removeItem('name');
+        props.data.handleAuthenticated(false);
     }
 
     const awardDictionary = { "true": "true", null: "false" };
 
     const allPapers = props.data.papers.map(
         (value, key) => <section key={key}>
-            <UpdateAward paper={value} awardDictionary={awardDictionary} handleUpdate={props.data.handleUpdate} />
+            <UpdateAward paper={value} awardDictionary={awardDictionary} handleUpdate={props.data.handleUpdate} handleSignOut={handleSignOut}/>
         </section>
     )
 
     useEffect(
         () => {
             if (localStorage.getItem('token')) {
-                props.data.handleAuthenticated(true)
-                setName(localStorage.getItem('name'));
+                fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify",
+                    {
+                        method: 'POST',
+                        headers: new Headers({ "Authorization": "Bearer " + localStorage.getItem('token') })
+                    })
+                    .then(
+                        (response) => {
+                            return response.json()
+                        })
+                    .then(
+                        (json) => {
+                            if (json.message === "Success") {
+                                props.data.handleAuthenticated(true);
+                                setName(localStorage.getItem('name'));
+                            }else{
+                                localStorage.removeItem('name');
+                                localStorage.removeItem('token');
+                            }
+                        })
+                    .catch(
+                        (e) => {
+                            console.log(e.message)
+                        }
+                    )
             }
-        }
-        , [])
+        });
 
     const handleClick = () => {
         const encodedString = Buffer.from(username + ":" + password).toString('base64');
@@ -58,11 +81,11 @@ function AdminPage(props) {
                 })
             .then(
                 (json) => {
-                    if (json.message === "success") {
+                    if (json.message === "Success") {
                         props.data.handleAuthenticated(true)
                         setName(json.data.name)
                         localStorage.setItem('token', json.data.token);
-                        localStorage.setItem('name', name);
+                        localStorage.setItem('name', json.data.name);
                     }
                 })
             .catch(

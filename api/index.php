@@ -42,6 +42,9 @@ if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
             case '/update':
             	$endpoint = new Update();
             	break;
+            case '/verify':
+                $endpoint = new Verify();
+                break;
             default:
                 $endpoint = new ClientError("Path not found: " . $path, 404);
                 break;

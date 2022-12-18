@@ -40,7 +40,7 @@ class Authenticate extends Endpoint
 
         $this->setData( array(
             "length" => 0, 
-            "message" => "success",
+            "message" => "Success",
             "data" => $data
         ));
     }

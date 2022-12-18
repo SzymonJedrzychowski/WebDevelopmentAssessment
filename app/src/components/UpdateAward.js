@@ -13,11 +13,15 @@ function UpdateAward(props) {
                 body: formData
             })
             .then(
-                (response) => response.text()
+                (response) => response.json()
             )
             .then(
                 (json) => {
-                    props.handleUpdate()
+                    if(json.message === "Success"){
+                        props.handleUpdate()
+                    }else{
+                        props.handleSignOut();
+                    }
                 })
             .catch(
                 (e) => {
