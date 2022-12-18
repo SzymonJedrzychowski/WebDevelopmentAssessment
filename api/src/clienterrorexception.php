@@ -1,13 +1,9 @@
 <?php
 
 /**
- * ClientErrorException class
+ * Class that is used as alternative Exception for cases of user error.
  *
- * Class that is used as alternative exception for incorrect login process.
- * 
- * Built upon the workshops material by:
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class ClientErrorException extends Exception

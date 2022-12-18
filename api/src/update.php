@@ -3,27 +3,41 @@
 use FirebaseJWT\JWT;
 use FirebaseJWT\Key;
 
-/** 
- * Update class responsible for updating the value of award status of papers.
- * 
- * Built upon the workshops material by:
+/**
+ * Responsible for handling /update endpoint.
+ *
+ * This class is responsible for updating the award status of given paper.
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
-class Update extends Endpoint
+class Update extends Verify
 {
+    /**
+     * Override the __construct method to match the requirements of the /update endpoint.
+     *
+     * @throws BadRequest           If request method is incorrect.
+     * @throws ClientErrorException If token format is wrong, decoding of token threw an Exception
+     *                              or issuer does not agree with the host.
+     *                              Also thrown when incorrect parameters were used.
+     */
     public function __construct()
     {
-        $this->validateRequestMethod("POST");
-        $this->validateToken();
+        // Connect to the database.
+        $db = new Database("db/chiplay.sqlite");
 
-        // Validate the update parameters
+        // Check if correct request method was used.
+        $this->validateRequestMethod("POST");
+
+        // Validate the JWT.
+        parent::validateToken();
+
+        // Validate the update parameters.
         $this->validateUpdateParams();
 
-        $db = new Database("db/chiplay.sqlite");
+        // Initialise the SQL command and parameters and get the data from the database.
         $this->initialiseSQL();
-        $queryResult = $db->executeSQL($this->getSQLCommand(), $this->getSQLParams());
+        $db->executeSQL($this->getSQLCommand(), $this->getSQLParams());
 
         $this->setData(array(
             "length" => 0,
@@ -32,36 +46,11 @@ class Update extends Endpoint
         ));
     }
 
-    private function validateToken()
-    {
-        $key = SECRET;
-
-        $allHeaders = getallheaders();
-        $authorizationHeader = "";
-
-        if (array_key_exists('Authorization', $allHeaders)) {
-            $authorizationHeader = $allHeaders['Authorization'];
-        } elseif (array_key_exists('authorization', $allHeaders)) {
-            $authorizationHeader = $allHeaders['authorization'];
-        }
-
-        if (substr($authorizationHeader, 0, 7) != 'Bearer ') {
-            throw new ClientErrorException("Bearer token required", 401);
-        }
-
-        $jwt = trim(substr($authorizationHeader, 7));
-
-        try {
-            $decoded = JWT::decode($jwt, new Key($key, 'HS256'));
-        } catch (Exception $e) {
-            throw new ClientErrorException($e->getMessage(), 401);
-        }
-
-        if ($decoded->iss != $_SERVER['HTTP_HOST']) {
-            throw new ClientErrorException("invalid token issuer", 401);
-        }
-    }
-
+    /**
+     * Check if correct parameters were used.
+     *
+     * @throws ClientErrorException If incorrect parameters were used.
+     */
     private function validateUpdateParams()
     {
         if (!filter_has_var(INPUT_POST, 'award')) {
@@ -71,20 +60,28 @@ class Update extends Endpoint
             throw new ClientErrorException("paper_id parameter required", 400);
         }
 
-        $awards = ["true", "false"];
-        if (!in_array(strtolower($_POST['award']), $awards)) {
-            throw new ClientErrorException("invalid award", 400);
+        $possibleAwards = ["true", "false"];
+        if (!in_array(strtolower($_POST['award']), $possibleAwards)) {
+            throw new ClientErrorException("invalid award value", 400);
         }
     }
 
+    /**
+     * Override parent method to get prepare SQL command and variables to update award status of paper.
+     */
     protected function initialiseSQL()
     {
-        $awardIds = ["true" => "true", "false" => null];
+        // Create array mapping correct values to the database.
+        $awardMap = ["true" => "true", "false" => null];
 
-        $awardId = $awardIds[$_POST['award']];
+        // Get award from POST after passing it through $awardMap.
+        $award = $awardMap[$_POST['award']];
 
         $sql = "UPDATE paper SET award = :award WHERE paper_id = :paper_id";
         $this->setSQLCommand($sql);
-        $this->setSQLParams(['award' => $awardId, 'paper_id' => $_POST['paper_id']]);
+        $this->setSQLParams([
+            'award' => $award,
+            'paper_id' => $_POST['paper_id']
+        ]);
     }
 }

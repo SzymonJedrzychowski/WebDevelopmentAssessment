@@ -1,14 +1,9 @@
 <?php
 
 /**
- * Endpoint class
- * 
- * Endpoint class is responsible for handling all endpoints of the api.
- * Other endpoints extend this class.
- * 
- * Built upon the workshops material by:
+ * Endpoint class is responsible for handling all endpoints of the api (as their parent class).
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 
@@ -19,23 +14,17 @@ abstract class Endpoint
     private $data;
 
     /**
-     * During construction of the object, it connects to database,
-     * creates and executes the sqlCommand and modifies the data array.
-     * 
-     * @throws BadRequest if incorrect param was provided or wrong request method was used
+     * __construct method that can be used by endpoints to connect to the database and get the data for the endpoint.
      */
     public function __construct()
     {
         // Connect to the database.
         $db = new Database("db/chiplay.sqlite");
 
-        // Update $sqlCommand and $sqlParams.
+        // Initialise the SQL command and parameters and get the data from the database.
         $this->initialiseSQL();
-
-        // Execute the $sqlCommand.
         $data = $db->executeSQL($this->sqlCommand, $this->sqlParams);
 
-        // Modify the data to array format.
         $this->setData(array(
             "length" => count($data),
             "message" => "Success",
@@ -54,10 +43,10 @@ abstract class Endpoint
 
     /**
      * Validate if request method is allowed for specific endpoint.
-     * 
-     * @param string $method - method allowed for the endpoint
-     * 
-     * @throws BadRequest if wrong request method was used
+     *
+     * @param string $method Method that is allowed for given endpoint.
+     *
+     * @throws BadRequest If request method is incorrect.
      */
     protected function validateRequestMethod($method)
     {
@@ -67,8 +56,8 @@ abstract class Endpoint
     }
 
     /**
-     * Return params that are available for specific endpoint.
-     * 
+     * Return parameters that are available for specific endpoint.
+     *
      * @return array array of available params
      */
     protected function getAvailableParams()
@@ -76,10 +65,13 @@ abstract class Endpoint
         return [];
     }
 
+
     /**
-     * Check if correct params were provided for specific endpoint.
-     * 
-     * @throws BadRequest if incorrect param was provided
+     * Check if correct parameters were provided for specific endpoint.
+     *
+     * @param string[] $availableParams Array of available parameters.
+     *
+     * @throws BadRequest If incorrect parameter(s) was provided.
      */
     protected function checkAvailableParams($availableParams)
     {
@@ -91,19 +83,49 @@ abstract class Endpoint
     }
 
     /**
-     * Setter method for $data.
-     * 
-     * @param array $array - array with data in specified format 
+     * Getter for $SqlCommand
+     *
+     * @return string SQL command.
      */
-    protected function setData($array)
+    public function getSqlCommand()
     {
-        $this->data = $array;
+        return $this->sqlCommand;
     }
 
     /**
-     * Getter method for $data.
-     * 
-     * @return array $data - array with endpoint data
+     * Setter for $SqlCommand
+     *
+     * @param string $sqlCommand SQL command.
+     */
+    public function setSqlCommand($sqlCommand)
+    {
+        $this->sqlCommand = $sqlCommand;
+    }
+
+    /**
+     * Getter for $sqlParams.
+     *
+     * @return array Array of parameters.
+     */
+    public function getSqlParams()
+    {
+        return $this->sqlParams;
+    }
+
+    /**
+     * Setter for $sqlParams.
+     *
+     * @param array $sqlParams Array of parameters.
+     */
+    public function setSqlParams($sqlParams)
+    {
+        $this->sqlParams = $sqlParams;
+    }
+
+    /**
+     * Getter for $data.
+     *
+     * @return array Data fetched from the database.
      */
     public function getData()
     {
@@ -111,42 +133,12 @@ abstract class Endpoint
     }
 
     /**
-     * Setter method for $sqlCommand.
-     * 
-     * @param string $sqlCommand - SQL command that is to be executed
+     * Setter for $data.
+     *
+     * @param array $data Data fetched from the database.
      */
-    protected function setSQLCommand($sqlCommand)
+    public function setData($data)
     {
-        $this->sqlCommand = $sqlCommand;
-    }
-
-    /**
-     * Getter method for $sqlCommand.
-     * 
-     * @return string $sqlCommand - string with command to be executed
-     */
-    protected function getSQLCommand()
-    {
-        return $this->sqlCommand;
-    }
-
-    /**
-     * Setter method for $sqlParams.
-     * 
-     * @param array $params - array of params for SQL command
-     */
-    protected function setSQLParams($params)
-    {
-        $this->sqlParams = $params;
-    }
-
-    /**
-     * Getter method for $sqlCommand.
-     * 
-     * @return array $sqlParams - array with params for SQL command
-     */
-    protected function getSQLParams()
-    {
-        return $this->sqlParams;
+        $this->data = $data;
     }
 }

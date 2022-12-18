@@ -2,17 +2,14 @@
 
 /**
  * Responsible for handling / (base) endpoint.
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Base extends Endpoint
 {
     /**
-     * Override the __construct method of parent as base endpoint
-     * contains fixed data and does not require connection to the database.
+     * Override the __construct method to match the requirements of the / (base) endpoint.
      */
     public function __construct()
     {

@@ -2,11 +2,9 @@
 include 'config/config.php';
 
 /**
- * index file that is responsible for managing endpoints.
- * 
- * Built upon the workshops material by:
+ * Index file that is responsible for managing endpoints.
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 

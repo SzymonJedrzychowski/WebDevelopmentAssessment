@@ -4,18 +4,20 @@ use FirebaseJWT\JWT;
 
 /**
  * Responsible for handling /authenticate endpoint.
- * 
- * Built upon the workshops material by:
+ *
+ * This class reads and validates received parameters and find if an account in database matches the credentials.
+ * If yes, the JWT is returned. Else, an Exception will be thrown.
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Authenticate extends Endpoint
 {
     /**
-     * Authenticate endpoint requires different __construct method.
-     * 
-     * @throws ClientErrorException if auth parameters are not provided or do not correspond to any account in database 
+     * Override the __construct method to match the requirements of the /authenticate endpoint.
+     *
+     * @throws BadRequest               If request method is incorrect.
+     * @throws ClientErrorException     If there are problems with login process.
      */
     public function __construct()
     {
@@ -28,37 +30,31 @@ class Authenticate extends Endpoint
         // Check if authentication parameters are provided.
         $this->validateAuthParameters();
 
+        // Initialise the SQL command and parameters and get the data from the database.
         $this->initialiseSQL();
         $queryResult = $db->executeSQL($this->getSQLCommand(), $this->getSQLParams());
 
         // Check if credentials correspond to account in database.
         $this->validateCredentials($queryResult);
 
-        // Create the token
+        // Create the token and append it to data array.
         $data['token'] = $this->createJWT($queryResult);
+
+        // Append the name of username to data array.
         $data['name'] = $queryResult[0]["name"];
 
-        $this->setData( array(
-            "length" => 0, 
+        $this->setData(array(
+            "length" => 0,
             "message" => "Success",
             "data" => $data
         ));
     }
 
-    /**
-     * Override parent method to get the accounts data.
-     */
-    protected function initialiseSQL()
-    {
-        $sql = "SELECT account_id, name, username, password FROM account WHERE username = :username";
-        $this->setSQLCommand($sql);
-        $this->setSQLParams(['username' => $_SERVER['PHP_AUTH_USER']]);
-    }
 
     /**
      * Validate if auth parameters are provided.
-     * 
-     * @throws ClientErrorException if username and password were not provided
+     *
+     * @throws ClientErrorException If parameters are not provided.
      */
     private function validateAuthParameters()
     {
@@ -68,11 +64,22 @@ class Authenticate extends Endpoint
     }
 
     /**
+     * Set SQL command to get the user data from database.
+     */
+    protected function initialiseSQL()
+    {
+        // Create SQL command to get users data.
+        $sql = "SELECT account_id, name, username, password FROM account WHERE username = :username";
+        $this->setSQLCommand($sql);
+        $this->setSQLParams(['username' => $_SERVER['PHP_AUTH_USER']]);
+    }
+
+    /**
      * Validate if auth parameters correspond to account in database.
-     * 
-     * @param array $data - data from select querry from database
-     * 
-     * @throws ClientErrorException if username and password do not correspond to any account in database
+     *
+     * @param array $data Entry of username from database.
+     *
+     * @throws ClientErrorException If username and password do not correspond to accounts in the database.
      */
     private function validateCredentials($data)
     {
@@ -83,24 +90,30 @@ class Authenticate extends Endpoint
         }
     }
 
-    private function createJWT($queryResult) {
+    /**
+     * Create the JWT for authorized user.
+     *
+     * @param array $queryResult Entry of username from database.
+     *
+     * @return string JWT for authorized user.
+     */
+    private function createJWT($queryResult)
+    {
+        // Get the global secret key.
         $secretKey = SECRET;
- 
-        // for the iat and exp claims we need to know the time
+
+        // Get the time for 'iat' and 'exp' claims.
         $time = time();
-       
-        // In the payload we use the time for the iat claim and add  
-        // one day for the exp claim. For the iss claim we get
-        // the name of the host the code is executing on
+
+        // Set the claims for the token.
         $tokenPayload = [
-          'iat' => $time,
-          'exp' => strtotime('+1 minutes', $time),
-          'iss' => $_SERVER['HTTP_HOST'],
-          'sub' => $queryResult[0]['account_id']
+            'iat' => $time,
+            'exp' => strtotime('+60 minutes', $time),
+            'iss' => $_SERVER['HTTP_HOST'],
+            'sub' => $queryResult[0]['account_id']
         ];
-              
-        $jwt = JWT::encode($tokenPayload, $secretKey, 'HS256');
-        
-        return $jwt;
+
+        // Encode the token.
+        return JWT::encode($tokenPayload, $secretKey, 'HS256');
     }
 }

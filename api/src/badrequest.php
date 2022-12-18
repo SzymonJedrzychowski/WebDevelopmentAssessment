@@ -1,23 +1,23 @@
 <?php
 
 /**
- * Class that is used as alternative exception.
- * 
- * This class is used to throw the exception
- * whenever incorrect param was provided for specific endpoint.
- * 
- * Built upon the workshops material by:
+ * Class that is used as alternative Exception.
+ *
+ * This class is used to throw the Exception
+ * whenever incorrect param was provided for specific endpoint
+ * or incorrect request method was used.
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class BadRequest extends Exception
 {
     /**
-     * Override the Exception constructor to always set code to 400 by default.
-     * 
-     * @param string $message - a message explaining the error
-     * @param int $code - the relevant http status code (value 400 by default)
+     * Override the Exception constructor to set code 400 by default.
+     *
+     * @param string    $message    Message that explains the error.
+     * @param int       $code       HTTP code relevant to the error.
+     *                              Default value: 400.
      */
     public function __construct($message, $code = 400)
     {

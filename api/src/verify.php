@@ -3,19 +3,30 @@
 use FirebaseJWT\JWT;
 use FirebaseJWT\Key;
 
-/** 
- * Update class responsible for updating the value of award status of papers.
- * 
- * Built upon the workshops material by:
+/**
+ * Responsible for handling /verify endpoint.
+ *
+ * This class is responsible for checking the token and if it is still valid.
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Verify extends Endpoint
 {
+
+    /**
+     * Override the __construct method to match the requirements of the /verify endpoint.
+     *
+     * @throws BadRequest           If request method is incorrect.
+     * @throws ClientErrorException If token format is wrong, decoding of token threw an Exception
+     *                              or issuer does not agree with the host.
+     */
     public function __construct()
     {
+        // Check if correct request method was used.
         $this->validateRequestMethod("POST");
+
+        // Validate the JWT.
         $this->validateToken();
 
         $this->setData(array(
@@ -25,7 +36,14 @@ class Verify extends Endpoint
         ));
     }
 
-    private function validateToken()
+
+    /**
+     * Check if the token is valid.
+     *
+     * @throws ClientErrorException If token format is wrong, decoding of token threw an Exception
+     *                              or issuer does not agree with the host.
+     */
+    protected function validateToken()
     {
         $key = SECRET;
 

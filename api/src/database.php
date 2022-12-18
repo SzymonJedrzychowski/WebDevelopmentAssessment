@@ -2,10 +2,8 @@
 
 /**
  * Class responsible for connecting to database and fetching the data.
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 class Database
@@ -13,20 +11,23 @@ class Database
     private $dbConnection;
 
     /**
-     * Method responsible for preparing the name of the database.
-     * 
-     * @param string $dbName - path of the database file
+     * __construct method that prepares the name of database and connects to it.
+     *
+     * @param string $dbName Path to the database file.
      */
     public function __construct($dbName)
     {
+        // Prepare the database location and name.
         $dbName = str_replace("\\", DIRECTORY_SEPARATOR, $dbName);
+
+        // Connect to the database.
         $this->setDbConnection($dbName);
     }
 
     /**
-     * Method responsible for connecting to database.
-     * 
-     * @param string $dbName - prepared path of the database file
+     * Method responsible for connecting to the database.
+     *
+     * @param string $dbName Database location and name.
      */
     private function setDbConnection($dbName)
     {
@@ -35,18 +36,20 @@ class Database
     }
 
     /**
-     * Method responsible for executing the SQL querry and fetching data.
-     * 
-     * @param string $sql - SQL querry
-     * @param array $params - array of params for SQL querry
-     * 
-     * @return array data fetched from database 
+     * Method responsible for executing the SQL query and fetching data.
+     *
+     * @param string    $sql    SQL command.
+     * @param array     $params Parameters for the SQL query.
+     *
+     * @return array Data fetched from the database.
      */
-    public function executeSQL($sql, $params = [])
+    public function executeSQL($sql, $params)
     {
+        // Prepare the SQL query and then execute it.
         $stmt = $this->dbConnection->prepare($sql);
         $stmt->execute($params);
 
+        // Return the fetched data.
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
