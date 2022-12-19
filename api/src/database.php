@@ -8,6 +8,9 @@
  */
 class Database
 {
+    /**
+     * @var PDO $dbConnection Connection with database.
+     */
     private $dbConnection;
 
     /**

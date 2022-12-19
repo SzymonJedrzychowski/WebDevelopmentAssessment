@@ -1,3 +1,5 @@
+import ListGroup from 'react-bootstrap/ListGroup';
+
 function UpdateAward(props) {
     const handleSelect = (event) => {
         const formData = new FormData();
@@ -30,13 +32,13 @@ function UpdateAward(props) {
     }
 
     return (
-        <div>
+        <ListGroup.Item>
             {props.paper.title}
             <select value={props.awardDictionary[props.paper.award]} onChange={handleSelect}>
                 <option value="true">Awarded</option>
                 <option value="false">Not awarded</option>
             </select>
-        </div>
+        </ListGroup.Item>
     )
 }
 

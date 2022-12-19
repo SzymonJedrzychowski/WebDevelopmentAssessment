@@ -9,8 +9,18 @@
 
 abstract class Endpoint
 {
+    /**
+     * @var string $sqlCommand SQL query to get the data.
+     */
     private $sqlCommand;
+
+    /**
+     * @var array $sqlParams Parameters for the SQL query.
+     */
     private $sqlParams;
+    /**
+     * @var array $data Result of database query.
+     */
     private $data;
 
     /**
@@ -34,6 +44,7 @@ abstract class Endpoint
 
     /**
      * Initialise the $sqlCommand and $sqlParams variables.
+     * Override in child classes to meet the endpoint requirements.
      */
     protected function initialiseSQL()
     {

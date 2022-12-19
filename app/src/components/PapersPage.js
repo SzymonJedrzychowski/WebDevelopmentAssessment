@@ -27,7 +27,7 @@ function PapersPage(props) {
     const [currentPage, setCurrentPage] = useState(0);
 
     // Use params to get which track of papers should be displayed
-    var { track } = useParams();
+    let {track} = useParams();
     const trackNames = {
         "papers": "All Papers",
         "interactivity": "Interactivity",
