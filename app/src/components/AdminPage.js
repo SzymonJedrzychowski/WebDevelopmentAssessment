@@ -138,7 +138,7 @@ function AdminPage(props) {
 
                 <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm}
                                   setRewardStatusSearch={setRewardStatusSearch}
-                                  placeholder="Search for title"/>
+                                  placeholder="Search paper by title"/>
 
                 <GenerateTable dataToShow={papersToShow}
                                loadingData={props.data.loadingAuthors}

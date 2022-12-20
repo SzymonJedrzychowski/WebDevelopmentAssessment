@@ -1,3 +1,20 @@
 .homePage {
-    margin: 0 1em 0 1em !important;
+    margin: 0 2em 0 2em;
+}
+
+.homeSection {
+    display: flex;
+    flex-direction: row;
+}
+
+.homeSection img{
+    border-radius: 25px;
+}
+
+.recommendation {
+    margin: 1em;
+}
+
+.homeText {
+    margin: 1em;
 }

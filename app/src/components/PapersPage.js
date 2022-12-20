@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
+import React, {useState, useEffect} from 'react';
+import {useParams} from "react-router-dom";
+import {useLocation} from "react-router-dom"
 
 // Import modules
 import PapersSearchForm from './PapersSearchForm';
@@ -21,6 +22,9 @@ function PapersPage(props) {
     const [searchTerm, setSearchTerm] = useState('');
     const [rewardStatusSearch, setRewardStatusSearch] = useState('all');
     const [currentPage, setCurrentPage] = useState(0);
+
+    // Using useLocation hook to get the data from home page recommendations.
+    const recommendation = useLocation();
 
     // Use params to get which track of papers should be displayed
     let {track} = useParams();
@@ -46,6 +50,12 @@ function PapersPage(props) {
         setCurrentPage(0);
     }, [track])
 
+    useEffect(() => {
+        if(recommendation.state){
+            document.getElementById("searchTerm").value = recommendation.state.title;
+            setSearchTerm(recommendation.state.title);
+        }
+    }, [recommendation.state])
     // Handler for changing number of entries on page
     const setPageLimitHandler = (event) => {
         setCurrentPage(0);
@@ -87,11 +97,11 @@ function PapersPage(props) {
             <PapersSearchForm handler={updateSearchTerm}
                               setSearchTerm={setSearchTerm}
                               setRewardStatusSearch={setRewardStatusSearch}
-                              placeholder="Search for title or abstract"/>
+                              placeholder="Search paper by title or abstract"/>
 
             <GenerateTable dataToShow={papersToShow}
                            setCurrentPageHandler={setCurrentPageHandler}
-                           setPageLimitHandler = {setPageLimitHandler}
+                           setPageLimitHandler={setPageLimitHandler}
                            currentPage={currentPage}
                            pageLimit={pageLimit}
                            loadingData={props.data.loadingPapers}
