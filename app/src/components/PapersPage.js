@@ -1,21 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
-import ListGroup from 'react-bootstrap/ListGroup';
 
 // Import modules
-import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
-import DataNavigation from './DataNavigation'
+import GenerateTable from "./GenerateTable";
 
 // Import styling
-import '../styles/PapersPage.css'
+import "../styles/TablePage.css";
 
 /**
  * PapersPage displays the data of all papers.
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 function PapersPage(props) {
@@ -84,27 +80,23 @@ function PapersPage(props) {
     // Use the filter to get papers that should be shown
     let papersToShow = props.data.papers.filter(searchPapers);
 
-    // Create JSX variable for showing papers
-    const listOfPapers = <ListGroup>
-        {papersToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
-            (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
-        )}
-
-        {papersToShow.length === 0 && <div key="noData"><ListGroup.Item><h2>No data found</h2></ListGroup.Item></div>}
-
-        {(!props.data.loadingPapers) &&
-            <ListGroup.Item className="dataNavigation">
-                {<DataNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} dataToShow={papersToShow} pageLimit={pageLimit} setPageLimit={setPageLimitHandler} />}
-            </ListGroup.Item>
-        }
-    </ListGroup>
-
     return (
-        <div className="papersGroup">
+        <div className="pageContent">
             <h1>{trackNames[track.toLowerCase()]}</h1>
-            <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm} setRewardStatusSearch={setRewardStatusSearch} />
-            {props.data.loadingPapers && <p>Loading...</p>}
-            {listOfPapers}
+
+            <PapersSearchForm handler={updateSearchTerm}
+                              setSearchTerm={setSearchTerm}
+                              setRewardStatusSearch={setRewardStatusSearch}
+                              placeholder="Search for title or abstract"/>
+
+            <GenerateTable dataToShow={papersToShow}
+                           setCurrentPageHandler={setCurrentPageHandler}
+                           setPageLimitHandler = {setPageLimitHandler}
+                           currentPage={currentPage}
+                           pageLimit={pageLimit}
+                           loadingData={props.data.loadingPapers}
+                           type={"papers"}
+            />
         </div>
     );
 }

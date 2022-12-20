@@ -1,4 +1,5 @@
 import ListGroup from 'react-bootstrap/ListGroup';
+import Form from "react-bootstrap/Form";
 
 function UpdateAward(props) {
     const handleSelect = (event) => {
@@ -11,7 +12,7 @@ function UpdateAward(props) {
         fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/update",
             {
                 method: 'POST',
-                headers: new Headers({ "Authorization": "Bearer " + token }),
+                headers: new Headers({"Authorization": "Bearer " + token}),
                 body: formData
             })
             .then(
@@ -19,9 +20,9 @@ function UpdateAward(props) {
             )
             .then(
                 (json) => {
-                    if(json.message === "Success"){
+                    if (json.message === "Success") {
                         props.handleUpdate()
-                    }else{
+                    } else {
                         props.handleSignOut();
                     }
                 })
@@ -32,12 +33,14 @@ function UpdateAward(props) {
     }
 
     return (
-        <ListGroup.Item>
-            {props.paper.title}
-            <select value={props.awardDictionary[props.paper.award]} onChange={handleSelect}>
-                <option value="true">Awarded</option>
-                <option value="false">Not awarded</option>
-            </select>
+        <ListGroup.Item className="admin">
+            <h2>{props.paper.title}</h2>
+            <div className="selectOption">
+                <Form.Select id="awardValue" aria-label="Default select example" value={props.awardDictionary[props.paper.award]} onChange={handleSelect}>
+                    <option value="true">Awarded</option>
+                    <option value="false">Not awarded</option>
+                </Form.Select>
+            </div>
         </ListGroup.Item>
     )
 }

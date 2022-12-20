@@ -1,21 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from "react-router-dom";
-import ListGroup from 'react-bootstrap/ListGroup';
+import React, {useState, useEffect} from 'react';
+import {useParams} from "react-router-dom";
 
 // Import modules
-import PapersAuthors from './PapersAuthors';
 import PapersSearchForm from './PapersSearchForm';
-import DataNavigation from './DataNavigation';
+import GenerateTable from "./GenerateTable";
 
 // Import styling
-import '../styles/AuthorPage.css'
+import "../styles/TablePage.css";
 
 /**
  * AuthorPage is responsible for displaying page for specific author and their papers.
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 function AuthorPage() {
@@ -35,7 +31,7 @@ function AuthorPage() {
     const [currentPage, setCurrentPage] = useState(0);
 
     // Use params to get id of the current author
-    var { author_id } = useParams();
+    const {author_id} = useParams();
 
     // Get data of authors in specific paper by API fetch
     useEffect(() => {
@@ -88,9 +84,9 @@ function AuthorPage() {
     // Handler for changing current page
     const setCurrentPageHandler = (event) => {
         setCurrentPage(event.target.value)
-    };  
+    };
 
-    // If error occured while loading data, display error message
+    // If error occurred while loading data, display error message
     if (error) {
         return <div>
             Results couldn't be found.
@@ -98,7 +94,7 @@ function AuthorPage() {
     }
 
     // Handler for updating search term
-    const updateSearchTerm = function (targetId, targetValue) {
+    const updateSearchTerm = (targetId, targetValue) => {
         // Reset page to index 0 on searching
         setCurrentPage(0);
 
@@ -119,29 +115,23 @@ function AuthorPage() {
     // Use the filter to get papers that should be shown
     let papersToShow = papers.filter(searchPapers);
 
-    // Create JSX variable for showing papers
-    const listOfPapers = <ListGroup>
-        {papersToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
-            (value) => <div key={value.paper_id} className="paper"><PapersAuthors data={value} /></div>
-        )}
-
-        {papersToShow.length === 0 &&
-            <div key="noData"><ListGroup.Item><h2>No data found</h2></ListGroup.Item></div>
-        }
-
-        {(!papersLoading && !authorLoading) &&
-            <ListGroup.Item className="dataNavigation">
-                {<DataNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} dataToShow={papersToShow} pageLimit={pageLimit} setPageLimit={setPageLimitHandler} />}
-            </ListGroup.Item>
-        }
-    </ListGroup>
-
     return (
-        <div className="papersGroup">
+        <div className="pageContent">
             <h1>{author.first_name} {author.middle_initial} {author.last_name}</h1>
-            <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm} setRewardStatusSearch={setRewardStatusSearch} />
-            {(papersLoading && authorLoading) && <p>Loading...</p>}
-            {listOfPapers}
+
+            <PapersSearchForm handler={updateSearchTerm}
+                              setSearchTerm={setSearchTerm}
+                              setRewardStatusSearch={setRewardStatusSearch}
+                              placeholder="Search for title or abstract"/>
+
+            <GenerateTable dataToShow={papersToShow}
+                           loadingData={(papersLoading && authorLoading)}
+                           currentPage={currentPage}
+                           setCurrentPageHandler={setCurrentPageHandler}
+                           pageLimit={pageLimit}
+                           setPageLimitHandler={setPageLimitHandler}
+                           type={"papers"}
+            />
         </div>
     );
 }

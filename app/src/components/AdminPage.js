@@ -1,16 +1,15 @@
-import {Buffer} from 'buffer';
 import React, {useState, useEffect} from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import ListGroup from "react-bootstrap/ListGroup";
+import {Buffer} from 'buffer';
 
 // Import modules
-import UpdateAward from './UpdateAward';
-import DataNavigation from "./DataNavigation";
 import PapersSearchForm from "./PapersSearchForm";
+import GenerateTable from "./GenerateTable";
 
 // Import styling
-import '../styles/AdminPage.css';
+import "../styles/TablePage.css";
+import "../styles/AdminPage.css";
 
 function AdminPage(props) {
     // pageLimit is variable that is used to determine number of entries on one page
@@ -118,8 +117,7 @@ function AdminPage(props) {
         }
     }
     const searchPapers = (value) => (
-        (value.title.toLowerCase().includes(searchTerm.toLowerCase())
-            || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
+        value.title.toLowerCase().includes(searchTerm.toLowerCase())
         && (rewardStatusSearch === "all" || rewardStatusSearch === value.award));
 
     // Use the filter to get papers that should be shown
@@ -127,40 +125,38 @@ function AdminPage(props) {
 
     const awardDictionary = {"true": "true", null: "false"};
 
-    // Create JSX variable for showing papers
-    const listOfPapers = <ListGroup>
-        {papersToShow.slice(pageLimit * currentPage, pageLimit * (parseInt(currentPage) + 1)).map(
-            (value) => <div key={value.paper_id} className="paper">
-                <UpdateAward paper={value}
-                             awardDictionary={awardDictionary}
-                             handleUpdate={props.data.handleUpdate}
-                             handleSignOut={handleSignOut}/>
-            </div>
-        )}
-
-        {papersToShow.length === 0 && <div key="noData"><ListGroup.Item><h2>No data found</h2></ListGroup.Item></div>}
-
-        {(!props.data.loadingPapers) &&
-            <ListGroup.Item className="dataNavigation">
-                {<DataNavigation currentPage={currentPage} setCurrentPage={setCurrentPageHandler} dataToShow={papersToShow} pageLimit={pageLimit} setPageLimit={setPageLimitHandler} />}
-            </ListGroup.Item>
-        }
-    </ListGroup>
-
     return (
-        <div className="papersGroup">
+        <div className="pageContent">
             <h1>Admin Page</h1>
             {props.data.authenticated && <div>
-                <h2>Welcome, {name}!</h2>
-                <input type="button" value="Sign out" onClick={handleSignOut}/>
-                <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm} setRewardStatusSearch={setRewardStatusSearch} />
-                {props.data.loadingPapers && <p>Loading...</p>}
-                {listOfPapers}
+                <div className="loggedIn">
+                    <h2>Welcome, {name}!</h2>
+                    <Button variant="primary" onClick={handleSignOut}>
+                        Sign out
+                    </Button>
+                </div>
+
+                <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm}
+                                  setRewardStatusSearch={setRewardStatusSearch}
+                                  placeholder="Search for title"/>
+
+                <GenerateTable dataToShow={papersToShow}
+                               loadingData={props.data.loadingAuthors}
+                               currentPage={currentPage}
+                               setCurrentPageHandler={setCurrentPageHandler}
+                               pageLimit={pageLimit}
+                               setPageLimitHandler={setPageLimitHandler}
+                               awardDictionary={awardDictionary}
+                               handleUpdate={props.data.handleUpdate}
+                               handleSignOut={handleSignOut}
+                               type={"admin"}
+                />
             </div>
             }
-            {!props.data.authenticated && <div>
-                <h2>Sign in</h2>
-                <Form>
+            {!props.data.authenticated && <div className="loginContent">
+
+                <Form className="loginForm">
+                    <h2>Sign in</h2>
                     <Form.Group className="mb-3" onChange={handleUsername} controlId="username">
                         <Form.Label>Username:</Form.Label>
                         <Form.Control aria-label="Default select example"/>

@@ -15,10 +15,8 @@ import '../styles/App.css'
 
 /**
  * App is responsible for loading data and routing to other pages.
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 function App() {

@@ -38,10 +38,10 @@ function PapersSearchForm(props) {
     }
 
     return (
-        <Form onSubmit={preventSubmission} onChange={updateSearchTerm}>
+        <Form onSubmit={preventSubmission} onChange={updateSearchTerm} className="searchForm">
             <Form.Control
                 id="searchTerm"
-                placeholder="Search for title or abstract"
+                placeholder={props.placeholder}
                 aria-label="Search"
             />
             <Form.Select id="awardValue" aria-label="Default select example">

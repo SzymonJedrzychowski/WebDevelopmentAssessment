@@ -44,7 +44,7 @@ function PapersAuthors(props) {
         setVisible(!visible);
     }
 
-    // Function modifyAuthors is resposnible for changing repeating authors to empty space
+    // Function modifyAuthors is responsible for changing repeating authors to empty space
     const modifyAuthors = (authors) => {
         var dict = {};
         var tempAuthors = [];
