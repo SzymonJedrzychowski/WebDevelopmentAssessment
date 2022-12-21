@@ -21,6 +21,10 @@ h2 {
     margin: 0.3em !important;
 }
 
+.navbar .container{
+    align-items: baseline !important;
+}
+
 @media screen and (max-width: 600px) {
     h1 {
         margin: 1em !important;

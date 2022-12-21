@@ -53,4 +53,9 @@ h2 {
     .pageContent {
         margin: 1em;
     }
+
+    .admin {
+        display: flex;
+        flex-direction: column !important;
+    }
 }

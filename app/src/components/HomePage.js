@@ -14,7 +14,9 @@ import photo from '../assets/mainPagePhoto.jpg';
  * @author Szymon Jedrzychowski
  */
 function HomePage(props) {
+    // Deep copy the data to not cause original data to be sorted
     const papersToShow = JSON.parse(JSON.stringify(props.data.papers)).sort(() => 0.5 - Math.random()).slice(0, 5);
+
     // Sending state so that useLocation hook can get the title of the clicked paper.
     const papersPrepared =
         <ListGroup>
@@ -25,11 +27,10 @@ function HomePage(props) {
         <div className='homePage'>
             <h1>Conference papers database</h1>
             <div className="homeSection">
-                <div>
+                <div className="imageSection">
                     <img src={photo} alt="Tech conference"/>
-                    <p>Photo of conference meeting.</p>
                 </div>
-                <div>
+                <div className="textSection">
                     <div className="homeText">
                         <h2>CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play</h2>
                         <p>This website is a place where you can find different resources related to the CHI PLAY '21

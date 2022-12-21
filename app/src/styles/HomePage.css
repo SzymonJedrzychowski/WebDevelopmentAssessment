@@ -5,10 +5,23 @@
 .homeSection {
     display: flex;
     flex-direction: row;
+    justify-content: space-around;
+    gap: 10px;
 }
 
-.homeSection img{
+.imageSection {
+    min-width: 640px;
+    max-width: 50%;
+}
+
+.imageSection img{
     border-radius: 25px;
+    max-width:100%;
+}
+
+.textSection{
+    max-width: 50%;
+    min-width: 200px;
 }
 
 .recommendation {
@@ -17,4 +30,29 @@
 
 .homeText {
     margin: 1em;
+}
+
+@media screen and (max-width: 1200px) {
+    .homeSection {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        gap: 10px;
+    }
+
+    .imageSection {
+        max-width: 100%;
+        margin: auto;
+        display: block;
+    }
+
+    .textSection{
+        max-width: 100%;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .imageSection {
+        min-width: 100%;
+    }
 }
