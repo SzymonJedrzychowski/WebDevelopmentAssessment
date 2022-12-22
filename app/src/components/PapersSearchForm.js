@@ -3,33 +3,22 @@ import Form from 'react-bootstrap/Form';
 
 // Import styling
 import '../styles/PapersSearchForm.css'
+import {generalHandleSearchTerm} from "./Functions";
 
 /**
  * PapersSearchForm is responsible for displaying form that can be used to search
- * for specific papers - their titles or abstracts
- * 
+ * for specific papers - their titles or abstracts.
+ *
  * @author Szymon Jedrzychowski
  */
 function PapersSearchForm(props) {
-    // Prevent submission of form (on pressing enter)
+    // Prevent submission of form (on pressing enter).
     const preventSubmission = (event) => event.preventDefault();
-    
-    // Handler for updating search term
-    const updateSearchTerm = (event) => {
-        if (event.target.id === "search") {
-            props.handler(event.target.id, event.target.value);
-        } else {
-            let awardValue = event.target.value;
-            if (awardValue === "false") {
-                awardValue = null;
-            } else {
-                awardValue = event.target.value;
-            }
-            props.handler(event.target.id, awardValue);
-        }
-    }
 
-    // Function to reset the search term
+    // Handler for updating the search term.
+    const handleSearchTerm = (event) => generalHandleSearchTerm(event, props.setCurrentPage, props.setSearchTerm, props.setRewardStatusSearch);
+
+    // Function to reset the search term.
     const resetSearch = () => {
         props.setSearchTerm("");
         props.setRewardStatusSearch("all");
@@ -38,7 +27,7 @@ function PapersSearchForm(props) {
     }
 
     return (
-        <Form onSubmit={preventSubmission} onChange={updateSearchTerm} className="searchForm">
+        <Form onSubmit={preventSubmission} onChange={handleSearchTerm} className="searchForm">
             <Form.Control
                 id="searchTerm"
                 placeholder={props.placeholder}
@@ -50,7 +39,7 @@ function PapersSearchForm(props) {
                 <option value="false">Only non-rewarded papers</option>
             </Form.Select>
             <Button onClick={resetSearch}>Reset</Button>
-        </Form >
+        </Form>
     );
 }
 

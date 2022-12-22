@@ -1,5 +1,5 @@
-import { Routes, Route } from "react-router-dom";
-import React, { useState, useEffect } from 'react';
+import {Routes, Route} from "react-router-dom";
+import React, {useState, useEffect} from 'react';
 
 // Import modules
 import HomePage from './HomePage';
@@ -20,84 +20,95 @@ import '../styles/App.css'
  * @author Szymon Jedrzychowski
  */
 function App() {
-	const [papers, setPapers] = useState([]);
-	const [authors, setAuthors] = useState([]);
-	const [loadingPapers, setLoadingPapers] = useState(true);
-	const [loadingAuthors, setLoadingAuthors] = useState(true);
-	const [authenticated, setAuthenticated] = useState(false);
-	const [update, setUpdated] = useState(0);
+    // States used for data loading.
+    const [papers, setPapers] = useState([]);
+    const [authors, setAuthors] = useState([]);
+    const [loadingPapers, setLoadingPapers] = useState(true);
+    const [loadingAuthors, setLoadingAuthors] = useState(true);
 
-	const handleUpdate = () => { setUpdated(update + 1) }
+    // State used for authentication.
+    const [authenticated, setAuthenticated] = useState(false);
 
-	// Return dictionary with data from database
-	const getData = () => {
-		return { papers, authors, loadingPapers, loadingAuthors };
-	}
+    // State used for fetching the data again after update of award.
+    const [update, setUpdated] = useState(0);
 
-	const handleAuthenticated = (isAuthenticated) => { setAuthenticated(isAuthenticated) }
-	
-	const getAdminPageData = () => {
-		return { papers, loadingPapers, authenticated, handleAuthenticated, handleUpdate }
-	}
+    // Handler for update value.
+    const handleUpdate = () => {
+        setUpdated(update + 1)
+    }
 
+    // Return dictionary with data from database.
+    const getData = () => {
+        return {papers, authors, loadingPapers, loadingAuthors};
+    }
 
-	// Get data of papers by API fetch
-	useEffect(() => {
-		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
-			.then(
-				(response) => response.json()
-			)
-			.then(
-				(json) => {
-					setPapers(json.data)
-					setLoadingPapers(false)
-				}
-			)
-			.catch(
-				(e) => {
-					console.log(e.message)
-				}
-			)
-	}, [update]);
+    // Handler for authenticated value.
+    const handleAuthenticated = (isAuthenticated) => {
+        setAuthenticated(isAuthenticated)
+    }
 
-	// Get data of authors by API fetch
-	useEffect(() => {
-		fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors")
-			.then(
-				(response) => response.json()
-			)
-			.then(
-				(json) => {
-					setAuthors(json.data)
-					setLoadingAuthors(false)
-				}
-			)
-			.catch(
-				(e) => {
-					console.log(e.message)
-				}
-			)
-	}, []);
+    // Return dictionary with data from database (plus data important for updates and authentication).
+    const getAdminPageData = () => {
+        return {papers, loadingPapers, authenticated, handleAuthenticated, handleUpdate}
+    }
 
-	return (
-		<div className="App">
-			<div className="content">
-				<Menu />
-				<Routes>
-					<Route path="/" element={<HomePage data={getData()}/>} />
-					<Route path="/papers">
-						<Route index element={<PapersPage data={getData()} />} />
-						<Route path=":track" element={<PapersPage data={getData()} />} />
-					</Route>
-					<Route path="/authors/" element={<AuthorsPage data={getData()} />} />
-					<Route path="/authors/:author_id" element={<AuthorPage data={getData()} />} />
-					<Route path="/admin" element={<AdminPage data={getAdminPageData()} />} />
-					<Route path="*" element={<p>Not found</p>} />
-				</Routes>
-			</div>
-			<Footer />
-		</div>
-	);
+    // Get data of all papers.
+    useEffect(() => {
+        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers")
+            .then(
+                (response) => response.json()
+            )
+            .then(
+                (json) => {
+                    setPapers(json.data)
+                    setLoadingPapers(false)
+                }
+            )
+            .catch(
+                (e) => {
+                    console.log(e.message)
+                }
+            )
+    }, [update]);
+
+    // Get data of all authors.
+    useEffect(() => {
+        fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors")
+            .then(
+                (response) => response.json()
+            )
+            .then(
+                (json) => {
+                    setAuthors(json.data)
+                    setLoadingAuthors(false)
+                }
+            )
+            .catch(
+                (e) => {
+                    console.log(e.message)
+                }
+            )
+    }, []);
+
+    return (
+        <div className="App">
+            <div className="content">
+                <Menu/>
+                <Routes>
+                    <Route path="/" element={<HomePage data={getData()}/>}/>
+                    <Route path="/papers">
+                        <Route index element={<PapersPage data={getData()}/>}/>
+                        <Route path=":track" element={<PapersPage data={getData()}/>}/>
+                    </Route>
+                    <Route path="/authors/" element={<AuthorsPage data={getData()}/>}/>
+                    <Route path="/authors/:authorId" element={<AuthorPage data={getData()}/>}/>
+                    <Route path="/admin" element={<AdminPage data={getAdminPageData()}/>}/>
+                    <Route path="*" element={<p>Not found</p>}/>
+                </Routes>
+            </div>
+            <Footer/>
+        </div>
+    );
 }
 
 export default App;

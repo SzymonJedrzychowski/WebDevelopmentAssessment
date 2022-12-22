@@ -47,6 +47,7 @@ class Authors extends Endpoint
         } elseif (filter_has_var(INPUT_GET, 'paper_id')
             and filter_has_var(INPUT_GET, 'affiliation')
         ) {
+            // SELECT DISTINCT is used as it was noticed that some of the affiliations are repeating in the database.
             $sql = "SELECT DISTINCT author_id, first_name, middle_initial, last_name, affiliation.country, affiliation.state,
                 affiliation.city, affiliation.institution, affiliation.department
                 FROM author

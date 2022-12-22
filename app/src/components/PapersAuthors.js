@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link } from "react-router-dom";
+import React, {useState} from 'react';
+import {Link} from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
 
@@ -8,20 +8,18 @@ import "../styles/PapersAuthors.css"
 
 /**
  * PapersAuthors displays the data of the paper (including authors).
- * 
- * Built upon the workshops material by:
+ *
  * @author John Rooksby
- * Modified by:
  * @author Szymon Jedrzychowski
  */
 function PapersAuthors(props) {
     const [authors, setAuthors] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    // visible variable changes the visibility of given FilmActor component
+    // visible variable changes the visibility of given PapersAuthors component.
     const [visible, setVisible] = useState(false);
 
-    // Get data of actors in specific film by API fetch
+    // Get data of authors in specific paper.
     const fetchAuthors = () => {
         fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?affiliation&paper_id=" + props.data.paper_id)
             .then(
@@ -38,21 +36,24 @@ function PapersAuthors(props) {
             });
     }
 
-    // Function showDetails is called when button of specific paper is pressed
+    // Function showDetails is called when button of specific paper is pressed.
     const showDetails = () => {
         fetchAuthors();
         setVisible(!visible);
     }
 
-    // Function modifyAuthors is responsible for changing repeating authors to empty space
+    // Function modifyAuthors is responsible for changing repeating authors to empty space.
     const modifyAuthors = (authors) => {
-        var dict = {};
-        var tempAuthors = [];
+        let dict = {};
+        let tempAuthors = [];
         for (let i = 0; i < authors.length; i++) {
+            // If author_id is not in the dictionary, add the data to tempAuthors array and add the id to the dictionary.
             if (!(authors[i].author_id in dict)) {
                 tempAuthors.push(authors[i]);
                 dict[authors[i].author_id] = 1;
-            } else {
+            }
+            // If yes, then add the entry without name of the author.
+            else {
                 tempAuthors.push(authors[i]);
                 tempAuthors[i].author_id = tempAuthors[i].author_id + "_" + dict[authors[i].author_id];
                 dict[authors[i].author_id] += 1
@@ -66,18 +67,20 @@ function PapersAuthors(props) {
 
     const tempListAuthors = modifyAuthors(authors);
 
-    // Create JSX variable with row for every author (and link to their page)
+    // Create JSX variable with row for every author (and link to their page).
     const listOfAuthors =
         tempListAuthors.map(
             (value) => <tr key={value.author_id}>
-                <td><Link className="authorLink" to={"/app/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link></td>
+                <td><Link className="authorLink"
+                          to={"/app/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link>
+                </td>
                 <td>{value.country}</td>
                 <td>{value.institution}</td>
                 <td>{value.department}</td>
             </tr>
         );
 
-    // Display data of paper and table with paper authors
+    // Display data of paper and table with paper authors.
     return (
         <ListGroup.Item action onClick={showDetails}>
             <h2>{props.data.title}</h2>
@@ -87,19 +90,20 @@ function PapersAuthors(props) {
                     <div><b>Authors:</b>
                         <Table responsive>
                             <thead>
-                                <tr>
-                                    <th>Name</th>
-                                    <th>Country</th>
-                                    <th>Institution</th>
-                                    <th>Department</th>
-                                </tr>
+                            <tr>
+                                <th>Name</th>
+                                <th>Country</th>
+                                <th>Institution</th>
+                                <th>Department</th>
+                            </tr>
                             </thead>
                             <tbody>
-                                {listOfAuthors}
+                            {listOfAuthors}
                             </tbody>
                         </Table>
-                        <p><b>Award status:</b> {props.data.award && "Received"}{!props.data.award && "Not received"}</p>
-                        {loading && <p>Loading...</p>}
+                        <p><b>Award status:</b> {props.data.award && "Received"}{!props.data.award && "Not received"}
+                        </p>
+                        {loading && <p>Data loading</p>}
                     </div>
                 </div>
             }

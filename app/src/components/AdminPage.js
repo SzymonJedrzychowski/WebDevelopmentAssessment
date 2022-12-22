@@ -3,26 +3,36 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import {Buffer} from 'buffer';
 
-// Import modules
+// Import modules.
 import PapersSearchForm from "./PapersSearchForm";
 import GenerateTable from "./GenerateTable";
+import {generalHandlePageLimit, generalHandleCurrentPage} from "./Functions";
 
-// Import styling
+// Import styling.
 import "../styles/TablePage.css";
 import "../styles/AdminPage.css";
 
+/**
+ * AdminPage is responsible for handling page related to changing award status of papers and including the authentication.
+ *
+ * @author John Rooksby
+ * @author Szymon Jedrzychowski
+ */
 function AdminPage(props) {
-    // pageLimit is variable that is used to determine number of entries on one page
+    // States used for page navigation.
     const [pageLimit, setPageLimit] = useState(10);
-
-    const [searchTerm, setSearchTerm] = useState('');
-    const [rewardStatusSearch, setRewardStatusSearch] = useState('all');
     const [currentPage, setCurrentPage] = useState(0);
 
+    // States used for search functionality.
+    const [searchTerm, setSearchTerm] = useState('');
+    const [rewardStatusSearch, setRewardStatusSearch] = useState('all');
+
+    // States used for authentication.
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
 
+    // Verify if current token is still valid (and get user name if token is valid).
     useEffect(
         () => {
             if (localStorage.getItem('token')) {
@@ -52,6 +62,7 @@ function AdminPage(props) {
             }
         });
 
+    // Function that is responsible for handling authentication after pressing the sign in button.
     const handleClick = () => {
         const encodedString = Buffer.from(username + ":" + password).toString('base64');
 
@@ -79,55 +90,44 @@ function AdminPage(props) {
             )
     }
 
+    // Handler for username value.
     const handleUsername = (event) => {
         setUsername(event.target.value);
     }
 
+    // Handler for password value.
     const handlePassword = (event) => {
         setPassword(event.target.value);
     }
 
+    // Handler for signing out.
     const handleSignOut = () => {
         setName("");
         localStorage.removeItem('token');
         props.data.handleAuthenticated(false);
     }
 
-    // Handler for changing number of entries on page
-    const setPageLimitHandler = (event) => {
-        setCurrentPage(0);
-        setPageLimit(event.target.value);
-    }
+    // Handler for changing number of entries on page.
+    const handlePageLimit = (event) => generalHandlePageLimit(event, setCurrentPage, setPageLimit);
 
-    // Handler for changing current page
-    const setCurrentPageHandler = (event) => {
-        setCurrentPage(event.target.value)
-    };
+    // Handler for changing current page.
+    const handleCurrentPage = (event) => generalHandleCurrentPage(event, setCurrentPage);
 
-    // Handler for updating search term
-    const updateSearchTerm = function (targetId, targetValue) {
-        // Reset page to index 0 on searching
-        setCurrentPage(0);
-
-        // Update correct value, depending on which variable has changed
-        if (targetId === "searchTerm") {
-            setSearchTerm(targetValue);
-        } else {
-            setRewardStatusSearch(targetValue);
-        }
-    }
+    // Filter used for papers.
     const searchPapers = (value) => (
         value.title.toLowerCase().includes(searchTerm.toLowerCase())
         && (rewardStatusSearch === "all" || rewardStatusSearch === value.award));
 
-    // Use the filter to get papers that should be shown
+    // Use the filter to get papers that should be shown.
     let papersToShow = props.data.papers.filter(searchPapers);
 
+    // Dictionary used to change null values from api to "false".
     const awardDictionary = {"true": "true", null: "false"};
 
     return (
         <div className="pageContent">
             <h1>Admin Page</h1>
+
             {props.data.authenticated && <div>
                 <div className="loggedIn">
                     <h2>Welcome, {name}!</h2>
@@ -136,23 +136,27 @@ function AdminPage(props) {
                     </Button>
                 </div>
 
-                <PapersSearchForm handler={updateSearchTerm} setSearchTerm={setSearchTerm}
-                                  setRewardStatusSearch={setRewardStatusSearch}
-                                  placeholder="Search paper by title"/>
+                <PapersSearchForm
+                    setCurrentPage={setCurrentPage}
+                    setSearchTerm={setSearchTerm}
+                    setRewardStatusSearch={setRewardStatusSearch}
+                    placeholder="Search paper by title"/>
 
-                <GenerateTable dataToShow={papersToShow}
-                               loadingData={props.data.loadingAuthors}
-                               currentPage={currentPage}
-                               setCurrentPageHandler={setCurrentPageHandler}
-                               pageLimit={pageLimit}
-                               setPageLimitHandler={setPageLimitHandler}
-                               awardDictionary={awardDictionary}
-                               handleUpdate={props.data.handleUpdate}
-                               handleSignOut={handleSignOut}
-                               type={"admin"}
+                <GenerateTable
+                    dataToShow={papersToShow}
+                    loadingData={props.data.loadingAuthors}
+                    currentPage={currentPage}
+                    handleCurrentPage={handleCurrentPage}
+                    pageLimit={pageLimit}
+                    handlePageLimit={handlePageLimit}
+                    awardDictionary={awardDictionary}
+                    handleUpdate={props.data.handleUpdate}
+                    handleSignOut={handleSignOut}
+                    type={"admin"}
                 />
             </div>
             }
+
             {!props.data.authenticated && <div className="loginContent">
 
                 <Form className="loginForm">

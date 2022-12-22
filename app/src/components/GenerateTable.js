@@ -7,7 +7,14 @@ import DataNavigation from "./DataNavigation";
 import PapersAuthors from "./PapersAuthors";
 import UpdateAward from "./UpdateAward";
 
-function generateTable(props) {
+/**
+ * GenerateTable function is responsible for displaying tables with data from database.
+ *
+ * @author Szymon Jedrzychowski
+ */
+function GenerateTable(props) {
+
+    // createRow creates a single row of table depending on the type value that is received by props.
     const createRow = (value) => {
         if (props.type === "papers") {
             return <div key={value.paper_id} className="entry">
@@ -21,10 +28,11 @@ function generateTable(props) {
             </div>
         } else if (props.type === "admin") {
             return <div key={value.paper_id} className="entry">
-                <UpdateAward paper={value}
-                             awardDictionary={props.awardDictionary}
-                             handleUpdate={props.handleUpdate}
-                             handleSignOut={props.handleSignOut}/>
+                <UpdateAward
+                    paper={value}
+                    awardDictionary={props.awardDictionary}
+                    handleUpdate={props.handleUpdate}
+                    handleSignOut={props.handleSignOut}/>
             </div>
         }
     }
@@ -34,20 +42,23 @@ function generateTable(props) {
             (value) => createRow(value)
         )}
 
-        {props.dataToShow.length === 0 &&
+        {props.loadingData &&
+            <div key="loading"><ListGroup.Item className="noData"><h2>Loading data</h2></ListGroup.Item></div>
+        }
+
+        {(props.dataToShow.length === 0 && !props.loadingData) &&
             <div key="noData"><ListGroup.Item className="noData"><h2>No data found</h2></ListGroup.Item></div>
         }
 
-        {(!props.loadingData) &&
-            <ListGroup.Item className="dataNavigation">
-                {<DataNavigation currentPage={props.currentPage}
-                                 setCurrentPage={props.setCurrentPageHandler}
-                                 dataToShow={props.dataToShow}
-                                 pageLimit={props.pageLimit}
-                                 setPageLimit={props.setPageLimitHandler}/>}
-            </ListGroup.Item>
+        {<ListGroup.Item className="dataNavigation">
+            {<DataNavigation currentPage={props.currentPage}
+                             handleCurrentPage={props.handleCurrentPage}
+                             dataToShow={props.dataToShow}
+                             pageLimit={props.pageLimit}
+                             handlePageLimit={props.handlePageLimit}/>}
+        </ListGroup.Item>
         }
     </ListGroup>
 }
 
-export default generateTable;
+export default GenerateTable;

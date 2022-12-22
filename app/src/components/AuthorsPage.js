@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 
 // Import modules
 import GenerateTable from "./GenerateTable";
+import {generalHandleCurrentPage, generalHandlePageLimit} from "./Functions";
 
 // Import styling
 import "../styles/TablePage.css";
@@ -16,50 +17,46 @@ import "../styles/TablePage.css";
  * @author Szymon Jedrzychowski
  */
 function AuthorsPage(props) {
-    // pageLimit is variable that is used to determine number of entries on one page
+    // States used for page navigation.
     const [pageLimit, setPageLimit] = useState(10);
-
-    const [searchTerm, setSearchTerm] = useState("");
     const [currentPage, setCurrentPage] = useState(0);
 
-    // Handler for updating search term
+    // States used for search functionality.
+    const [searchTerm, setSearchTerm] = useState("");
+
+    // Handler for updating search term.
     const updateSearchTerm = function (event) {
         setCurrentPage(0);
         setSearchTerm(event.target.value);
     }
 
-    // Function to reset the search term
+    // Function to reset the search term.
     const resetSearch = () => {
         setSearchTerm('');
         document.getElementById("searchTerm").value = "";
     }
 
-    // Handler for changing number of entries on page
-    const setPageLimitHandler = (event) => {
-        setCurrentPage(0);
-        setPageLimit(event.target.value);
-    }
+    // Handler for changing number of entries on page.
+    const handlePageLimit = (event) => generalHandlePageLimit(event, setCurrentPage, setPageLimit);
 
-    // Handler for changing current page
-    const setCurrentPageHandler = (event) => {
-        setCurrentPage(event.target.value)
-    };
+    // Handler for changing current page.
+    const handleCurrentPage = (event) => generalHandleCurrentPage(event, setCurrentPage);
 
-    // Prevent submission of form (on pressing enter)
+    // Prevent submission of form (on pressing enter).
     const preventSubmission = (event) => event.preventDefault()
 
-    // Filter for searching actors (by first or last name)
+    // Filter for searching actors (by first or last name).
     const searchAuthors = (value) =>
         (value.first_name + " " + value.middle_initial + " " + value.last_name).toLowerCase().includes(searchTerm.toLowerCase());
 
-    // Use the filter to get actors that should be shown
+    // Use the filter to get actors that should be shown.
     let authorsToShow = props.data.authors.filter(searchAuthors);
 
     return (
         <div className='pageContent'>
             <h1>Authors</h1>
 
-            <Form onSubmit={preventSubmission} onChange={updateSearchTerm} className="d-flex">
+            <Form onSubmit={preventSubmission} onChange={updateSearchTerm} className="searchForm">
                 <Form.Control
                     id="searchTerm"
                     placeholder="Search author name"
@@ -69,13 +66,14 @@ function AuthorsPage(props) {
                 <Button onClick={resetSearch}>Reset</Button>
             </Form>
 
-            <GenerateTable dataToShow={authorsToShow}
-                           loadingData={props.data.loadingAuthors}
-                           currentPage={currentPage}
-                           setCurrentPageHandler={setCurrentPageHandler}
-                           pageLimit={pageLimit}
-                           setPageLimitHandler = {setPageLimitHandler}
-                           type={"author"}
+            <GenerateTable
+                dataToShow={authorsToShow}
+                loadingData={props.data.loadingAuthors}
+                currentPage={currentPage}
+                handleCurrentPage={handleCurrentPage}
+                pageLimit={pageLimit}
+                handlePageLimit={handlePageLimit}
+                type={"author"}
             />
         </div>
     );

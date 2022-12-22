@@ -5,6 +5,7 @@ import {useLocation} from "react-router-dom"
 // Import modules
 import PapersSearchForm from './PapersSearchForm';
 import GenerateTable from "./GenerateTable";
+import {generalHandleCurrentPage, generalHandlePageLimit, generalHandleSearchTerm} from "./Functions";
 
 // Import styling
 import "../styles/TablePage.css";
@@ -16,17 +17,18 @@ import "../styles/TablePage.css";
  * @author Szymon Jedrzychowski
  */
 function PapersPage(props) {
-    // pageLimit is variable that is used to determine number of entries on one page
+    // States used for page navigation.
     const [pageLimit, setPageLimit] = useState(10);
+    const [currentPage, setCurrentPage] = useState(0);
 
+    // States used for search functionality.
     const [searchTerm, setSearchTerm] = useState('');
     const [rewardStatusSearch, setRewardStatusSearch] = useState('all');
-    const [currentPage, setCurrentPage] = useState(0);
 
     // Using useLocation hook to get the data from home page recommendations.
     const recommendation = useLocation();
 
-    // Use params to get which track of papers should be displayed
+    // Using params to get which track of papers should be displayed.
     let {track} = useParams();
     const trackNames = {
         "papers": "All Papers",
@@ -38,74 +40,62 @@ function PapersPage(props) {
         "rapid": "Rapid Communications"
     }
 
-    // track will be undefined in case all papers need to be displayed
+    // If track is undefined, all papers should be displayed.
     if (track === undefined) {
         track = "papers";
     }
 
-    // Reset the form values and corresponding states on entering new page (of different track)
+    // Reset the form values and corresponding states on entering new page (of different track).
     useEffect(() => {
         document.getElementById("searchTerm").value = "";
         document.getElementById("awardValue").value = "all"
+        setSearchTerm("");
+        setRewardStatusSearch("all");
         setCurrentPage(0);
     }, [track])
 
+    // Set the search term if page was accessed from recommendation.
     useEffect(() => {
-        if(recommendation.state){
+        if (recommendation.state) {
             document.getElementById("searchTerm").value = recommendation.state.title;
             setSearchTerm(recommendation.state.title);
         }
     }, [recommendation.state])
-    // Handler for changing number of entries on page
-    const setPageLimitHandler = (event) => {
-        setCurrentPage(0);
-        setPageLimit(event.target.value);
-    }
 
-    // Handler for changing current page
-    const setCurrentPageHandler = (event) => {
-        setCurrentPage(event.target.value)
-    };
+    // Handler for changing number of entries on page.
+    const handlePageLimit = (event) => generalHandlePageLimit(event, setCurrentPage, setPageLimit);
 
-    // Handler for updating search term
-    const updateSearchTerm = function (targetId, targetValue) {
-        // Reset page to index 0 on searching
-        setCurrentPage(0);
+    // Handler for changing current page.
+    const handleCurrentPage = (event) => generalHandleCurrentPage(event, setCurrentPage);
 
-        // Update correct value, depending on which variable has changed
-        if (targetId === "searchTerm") {
-            setSearchTerm(targetValue);
-        } else {
-            setRewardStatusSearch(targetValue);
-        }
-    }
-
-    // Filter for papers
+    // Filter used for papers.
     const searchPapers = (value) => (
         (value.title.toLowerCase().includes(searchTerm.toLowerCase())
             || value.abstract.toLowerCase().includes(searchTerm.toLowerCase()))
         && (rewardStatusSearch === "all" || rewardStatusSearch === value.award)
         && (value.short_name.toLowerCase() === track.toLowerCase() || track.toLowerCase() === "papers"));
 
-    // Use the filter to get papers that should be shown
+    // Use the filter to get papers that should be shown.
     let papersToShow = props.data.papers.filter(searchPapers);
 
     return (
         <div className="pageContent">
             <h1>{trackNames[track.toLowerCase()]}</h1>
 
-            <PapersSearchForm handler={updateSearchTerm}
-                              setSearchTerm={setSearchTerm}
-                              setRewardStatusSearch={setRewardStatusSearch}
-                              placeholder="Search paper by title or abstract"/>
+            <PapersSearchForm
+                setCurrentPage={setCurrentPage}
+                setSearchTerm={setSearchTerm}
+                setRewardStatusSearch={setRewardStatusSearch}
+                placeholder="Search paper by title or abstract"/>
 
-            <GenerateTable dataToShow={papersToShow}
-                           setCurrentPageHandler={setCurrentPageHandler}
-                           setPageLimitHandler={setPageLimitHandler}
-                           currentPage={currentPage}
-                           pageLimit={pageLimit}
-                           loadingData={props.data.loadingPapers}
-                           type={"papers"}
+            <GenerateTable
+                dataToShow={papersToShow}
+                loadingData={props.data.loadingPapers}
+                currentPage={currentPage}
+                handleCurrentPage={handleCurrentPage}
+                pageLimit={pageLimit}
+                handlePageLimit={handlePageLimit}
+                type={"papers"}
             />
         </div>
     );

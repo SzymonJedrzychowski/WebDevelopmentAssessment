@@ -14,13 +14,16 @@ import photo from '../assets/mainPagePhoto.jpg';
  * @author Szymon Jedrzychowski
  */
 function HomePage(props) {
-    // Deep copy the data to not cause original data to be sorted
+    // Deep copy the data to not cause original data to be sorted.
     const papersToShow = JSON.parse(JSON.stringify(props.data.papers)).sort(() => 0.5 - Math.random()).slice(0, 5);
 
     // Sending state so that useLocation hook can get the title of the clicked paper.
     const papersPrepared =
         <ListGroup>
-            {papersToShow.map((value) => <ListGroup.Item key={value.paper_id} as={Link} to="./papers" state={{title: value.title}}>{value.title}</ListGroup.Item>)}
+            {papersToShow.map((value) =>
+                <ListGroup.Item key={value.paper_id} as={Link} to="./papers" state={{title: value.title}}>
+                    {value.title}
+                </ListGroup.Item>)}
         </ListGroup>;
 
     return (
