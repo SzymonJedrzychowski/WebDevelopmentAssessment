@@ -10,7 +10,7 @@ select{
     max-width: fit-content;
 }
 
-@media screen and (max-width: 600px) {
+@media screen and (max-width: 760px) {
     .searchForm{
         flex-direction: column;
         margin: 1em !important;

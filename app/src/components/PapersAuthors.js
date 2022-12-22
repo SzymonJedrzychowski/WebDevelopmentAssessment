@@ -85,7 +85,7 @@ function PapersAuthors(props) {
                 <div className="paperInfo">
                     <p><b>Abstract:</b> {props.data.abstract}</p>
                     <div><b>Authors:</b>
-                        <Table>
+                        <Table responsive>
                             <thead>
                                 <tr>
                                     <th>Name</th>
