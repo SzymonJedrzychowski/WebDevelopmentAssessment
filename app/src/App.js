@@ -2,16 +2,16 @@ import {Routes, Route} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 
 // Import modules
-import HomePage from './HomePage';
-import Footer from './Footer';
-import PapersPage from './PapersPage'
-import Menu from './Menu';
-import AuthorsPage from './AuthorsPage';
-import AuthorPage from './AuthorPage';
-import AdminPage from './AdminPage';
+import HomePage from './components/HomePage';
+import Footer from './components/Footer';
+import PapersPage from './components/PapersPage'
+import Menu from './components/Menu';
+import AuthorsPage from './components/AuthorsPage';
+import AuthorPage from './components/AuthorPage';
+import AdminPage from './components/AdminPage';
 
 // Import styling
-import '../styles/App.css'
+import './styles/App.css'
 
 /**
  * App is responsible for loading data and routing to other pages.

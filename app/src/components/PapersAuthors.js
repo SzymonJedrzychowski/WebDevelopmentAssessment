@@ -72,7 +72,7 @@ function PapersAuthors(props) {
         tempListAuthors.map(
             (value) => <tr key={value.author_id}>
                 <td><Link className="authorLink"
-                          to={"/app/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link>
+                          to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link>
                 </td>
                 <td>{value.country}</td>
                 <td>{value.institution}</td>

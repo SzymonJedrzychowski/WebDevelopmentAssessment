@@ -22,7 +22,7 @@ function GenerateTable(props) {
             </div>;
         } else if (props.type === "author") {
             return <div className="entry" key={value.author_id}>
-                <ListGroup.Item as={Link} to={"/app/authors/" + value.author_id} action>
+                <ListGroup.Item as={Link} to={"/authors/" + value.author_id} action>
                     <h2>{value.first_name} {value.middle_initial} {value.last_name}</h2>
                 </ListGroup.Item>
             </div>

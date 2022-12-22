@@ -27,7 +27,7 @@ class Base extends Endpoint
         $data = array(
             "student" => $student,
             "module" => $module,
-            "documentation" => "http://unn-w20020581.newnumyspace.co.uk/assessment/api/documentation/",
+            "documentation" => "http://unn-w20020581.newnumyspace.co.uk/assessment/app/documentation",
             "conference_name" => "CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play"
         );
 

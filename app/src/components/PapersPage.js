@@ -5,7 +5,7 @@ import {useLocation} from "react-router-dom"
 // Import modules
 import PapersSearchForm from './PapersSearchForm';
 import GenerateTable from "./GenerateTable";
-import {generalHandleCurrentPage, generalHandlePageLimit, generalHandleSearchTerm} from "./Functions";
+import {generalHandleCurrentPage, generalHandlePageLimit} from "./Functions";
 
 // Import styling
 import "../styles/TablePage.css";
