@@ -74,6 +74,6 @@ class Authors extends Endpoint
      */
     protected function getAvailableParams()
     {
-        return ['author_id', 'paper_id', 'affiliation'];
+        return ['author_id' => 'int', 'paper_id'=> 'int', 'affiliation'=>'boolean'];
     }
 }

@@ -52,6 +52,6 @@ class Papers extends Endpoint
      */
     protected function getAvailableParams()
     {
-        return ['author_id', 'paper_id', 'affiliation'];
+        return ['track'=>'string', 'author_id'=>'int'];
     }
 }

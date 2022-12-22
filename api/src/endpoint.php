@@ -87,8 +87,12 @@ abstract class Endpoint
     protected function checkAvailableParams($availableParams)
     {
         foreach ($_GET as $key => $value) {
-            if (!in_array($key, $availableParams)) {
+            if (!key_exists($key, $availableParams)) {
                 throw new BadRequest("Invalid parameter " . $key);
+            }else{
+                if($availableParams[$key] == "int" and !is_numeric($value)){
+                    throw new BadRequest("Invalid parameter type " . $key . ". It should be a number.");
+                }
             }
         }
     }
