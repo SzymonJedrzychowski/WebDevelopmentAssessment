@@ -2,7 +2,49 @@ button {
     border-radius: 0px !important;
 }
 
-.list-group .list-group{
-    margin-left: 0.5em;
+.list-group {
+    margin-left: 1em;
 }
 
+.list-group-item{
+    border: none;
+}
+
+h2{
+    display: inline;
+    margin-bottom: 0px !important;
+    font-size: calc(1rem + .5vw) !important;
+}
+
+.clickable{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+svg{
+    width: calc(1rem + .5vw);
+}
+
+.dataContent p{
+    margin-top: 5px !important;
+    margin-bottom: 0px !important;
+    margin-left: 2.5em;
+}
+
+.dataContent p:first-child{
+    margin-top: 10px !important;
+}
+
+.dataContent p:last-child{
+    border-bottom: 1px black solid;
+    margin-bottom: 1em !important;
+}
+
+.clickable{
+    margin-bottom: 1em;
+}
+
+.endpoint{
+    margin: 1em;
+}
