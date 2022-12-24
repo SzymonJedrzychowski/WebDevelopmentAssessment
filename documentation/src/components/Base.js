@@ -9,61 +9,61 @@ function Base() {
 
     const data = [
         {
-            "class": "description",
+            "componentClass": "description",
             "title": "Description",
             "text": "Base endpoint can be used to get the general data of the project, including the author data."
         },
         {
-            "class": "methods",
+            "componentClass": "methods",
             "title": "Supported methods:",
             "text": "GET"
         },
         {
-            "class": "responses",
+            "componentClass": "responses",
             "title": "Responses:",
             "data": [
                 {
-                    "class": "response",
+                    "componentClass": "response",
                     "title": "200",
                     "data": [
                         {
-                            "class": "data",
+                            "componentClass": "data",
                             "title": "length",
                             "type": "int",
                             "text": "Length of data array."
                         },
                         {
-                            "class": "data",
+                            "componentClass": "data",
                             "title": "message",
                             "type": "string",
                             "text": "Message about the status of the fetch. Default: Success."
                         },
                         {
-                            "class": "data",
+                            "componentClass": "data",
                             "title": "data",
                             "type": "array",
                             "text": "Array containing data fetched from the database.",
                             "data": [
                                 {
-                                    "class": "data",
+                                    "componentClass": "data",
                                     "title": "student",
                                     "type": "array",
                                     "text": "Array containing data about the student.",
                                     "data": [
                                         {
-                                            "class": "data",
+                                            "componentClass": "data",
                                             "title": "first_name",
                                             "type": "string",
                                             "text": "First name of student."
                                         },
                                         {
-                                            "class": "data",
+                                            "componentClass": "data",
                                             "title": "last_name",
                                             "type": "string",
                                             "text": "Last name of student."
                                         },
                                         {
-                                            "class": "data",
+                                            "componentClass": "data",
                                             "title": "id",
                                             "type": "string",
                                             "text": "Id number of student."
@@ -71,19 +71,19 @@ function Base() {
                                     ]
                                 },
                                 {
-                                    "class": "data",
+                                    "componentClass": "data",
                                     "title": "module",
                                     "type": "array",
                                     "text": "Array containing data about the module.",
                                     "data": [
                                         {
-                                            "class": "data",
+                                            "componentClass": "data",
                                             "title": "code",
                                             "type": "string",
                                             "text": "Module code."
                                         },
                                         {
-                                            "class": "data",
+                                            "componentClass": "data",
                                             "title": "name",
                                             "type": "string",
                                             "text": "Name of of the module."
@@ -91,13 +91,13 @@ function Base() {
                                     ]
                                 },
                                 {
-                                    "class": "data",
+                                    "componentClass": "data",
                                     "title": "documentation",
                                     "type": "string",
                                     "text": "Link to the documentation website."
                                 },
                                 {
-                                    "class": "data",
+                                    "componentClass": "data",
                                     "title": "conference_name",
                                     "type": "string",
                                     "text": "Name of the conference."
@@ -110,10 +110,10 @@ function Base() {
         }
     ];
 
-    const toShow = data.map((value, key)=><Paragraph data={value} index={key} key={key}/>)
+    const toShow = data.map((value, key)=><Paragraph data={value} key={key}/>)
 
     return (
-        <div className='endpoint'>
+        <div className="endpoint">
             <h1>Base</h1>
             {toShow}
         </div>

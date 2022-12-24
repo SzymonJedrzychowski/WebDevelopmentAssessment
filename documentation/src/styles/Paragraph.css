@@ -6,45 +6,39 @@ button {
     margin-left: 1em;
 }
 
-.list-group-item{
+.list-group-item {
     border: none;
 }
 
-h2{
+h2 {
     display: inline;
     margin-bottom: 0px !important;
     font-size: calc(1rem + .5vw) !important;
 }
 
-.clickable{
+.clickable {
     display: flex;
     flex-direction: row;
     align-items: center;
+    margin-bottom: 0.5em;
+    margin-left: 0.5em;
 }
 
-svg{
+svg {
     width: calc(1rem + .5vw);
 }
 
-.dataContent p{
+.dataContent p {
     margin-top: 5px !important;
     margin-bottom: 0px !important;
-    margin-left: 2.5em;
+    margin-left: 1.5em;
 }
 
-.dataContent p:first-child{
-    margin-top: 10px !important;
-}
-
-.dataContent p:last-child{
+.dataContent p:last-child {
     border-bottom: 1px black solid;
     margin-bottom: 1em !important;
 }
 
-.clickable{
-    margin-bottom: 1em;
-}
-
-.endpoint{
+.endpoint {
     margin: 1em;
 }
