@@ -10,10 +10,16 @@ button {
     border: none;
 }
 
-h2 {
+h3 {
     display: inline;
     margin-bottom: 0px !important;
     font-size: calc(1rem + .5vw) !important;
+    margin-left: 0.5rem;
+}
+
+h2 {
+    font-size: calc(1rem + .5vw) !important;
+    margin-bottom: 0 !important;
 }
 
 .clickable {
@@ -29,9 +35,14 @@ svg {
 }
 
 .dataContent p {
-    margin-top: 5px !important;
-    margin-bottom: 0px !important;
-    margin-left: 1.5em;
+    margin-top: 5px;
+    margin-bottom: 0px;
+    min-width: fit-content;
+    margin-left: calc(1.5rem + .5vw);
+}
+
+a{
+    word-break: break-all !important;
 }
 
 .dataContent p:last-child {
@@ -41,4 +52,8 @@ svg {
 
 .endpoint {
     margin: 1em;
+}
+
+.responseDescription{
+    margin: 0 0 0.5em 0.5em !important;
 }

@@ -1,0 +1,195 @@
+import Paragraph from "./Paragraph";
+
+/**
+ * Papers is responsible for displaying documentation of papers endpoint - /papers.
+ * 
+ * @author Szymon Jedrzychowski
+ */
+function Papers() {
+
+    const data = [
+        {
+            "componentClass": "description",
+            "title": "Description",
+            "text": "Papers endpoint returns the data of papers that were presented during the conference."
+        },
+        {
+            "componentClass": "methods",
+            "title": "Supported methods:",
+            "text": "GET"
+        },
+        {
+            "componentClass": "parameters",
+            "title": "Parameters",
+            "data": [
+                {
+                    "componentClass": "data",
+                    "title": "track",
+                    "type": "string",
+                    "text": "Request will only return papers that have selected track type.",
+                    "possibleValues": "null, interactivity, fullpapers, wip, competition, doctoral, rapid"
+                },
+                {
+                    "componentClass": "data",
+                    "title": "author_id",
+                    "type": "int",
+                    "text": "Request will only return papers of selected author.",
+                    "exampleValue": 64216
+                }
+            ]
+        },
+        {
+            "componentClass": "responses",
+            "title": "Responses:",
+            "data": [
+                {
+                    "componentClass": "response",
+                    "title": "200",
+                    "responseStatus": "Success",
+                    "responseDescription": "Successful request.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the status of the fetch. Default: Success."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Array containing data fetched from the database.",
+                            "data": [
+                                {
+                                    "componentClass": "data",
+                                    "title": "paper",
+                                    "type": "object",
+                                    "text": "Object containing data about paper.",
+                                    "data": [
+                                        {
+                                            "componentClass": "data",
+                                            "title": "paper_id",
+                                            "type": "numeric string",
+                                            "text": "Id of paper."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "title",
+                                            "type": "string",
+                                            "text": "Title of paper."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "award",
+                                            "type": "boolean",
+                                            "text": "Award status of paper.",
+                                            "possibleValues": "True, null"
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "abstract",
+                                            "type": "string",
+                                            "text": "Abstract of paper."
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "400",
+                    "responseStatus": "Bad request",
+                    "responseDescription": "Wrong parameters or their combination was used; Parameters could be of wrong type.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Empty array.",
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "405",
+                    "responseStatus": "Method Not Allowed",
+                    "responseDescription": "Incorrect request method was used.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Empty array.",
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "componentClass": "exampleRequest",
+            "title": "Example of request",
+            "link": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers?track=wip&author_id=64323"
+        },
+        {
+            "componentClass": "exampleResponse",
+            "title": "Example of successful response",
+            "responseData": {
+                "length": 138,
+                "message": "Success",
+                "data": [
+                    {
+                        "paper_id": "64455",
+                        "title": "Can Digital Games Teach Scientific Inquiry? A Case of How Affordances Can Become Constraints",
+                        "award": null,
+                        "abstract": "Digital games are increasingly being used to teach the processes of scientific inquiry. These games often make at least one of four key assumptions about scientific inquiry: that inquiry is a problem-solving process which is value-neutral, bounded by strict subject-matter constraints, and conducted by practitioners separable from society. However, feminist, STS, and pragmatist scholars have demonstrated the flawed nature of these assumptions. They highlight instead that: inquiry is a process of problematization that is value-laden, unbounded by subject-matter, and conducted by practitioners who socially, politically, and culturally situated. In this paper, I argue that three of the key affordances of digital games—their procedural, evaluative, and fictional qualities—can constrain their ability to teach inquiry understood as such. I examine these affordances and their relationship to the nature of scientific inquiry through a design case examining our game Solaria designed to teach students how to inquire into the development of solar cells. Specifically, I ask: To what extent can the procedural, evaluative, and fictional affordances of digital games (designed to teach students about solar cells) support the learning of scientific inquiry as a problematizing, situated, and value-laden process, unbounded by subject-matter constraints? I discuss how these affordances of games supported but ultimately limited the design of the game by trivializing real situations, predetermining criteria for progress, and distancing students from real-world risks and responsibilities, respectively. In conclusion, I briefly discuss how understanding these limitations can support the design of educational environments to complement digital games for teaching scientific inquiry.",
+                        "name": "CHI PLAY 2021 Full Papers",
+                        "short_name": "fullpapers"
+                    }
+                ]
+            }
+        }
+    ];
+
+    const toShow = data.map((value, key) => <Paragraph data={value} key={key} />)
+
+    return (
+        <div className="endpoint">
+            <h1>Papers</h1>
+            {toShow}
+        </div>
+    );
+}
+
+export default Papers;

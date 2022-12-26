@@ -1,0 +1,239 @@
+import Paragraph from "./Paragraph";
+
+/**
+ * Authors is responsible for displaying documentation of authors endpoint - /authors.
+ * 
+ * @author Szymon Jedrzychowski
+ */
+function Authors() {
+
+    const data = [
+        {
+            "componentClass": "description",
+            "title": "Description",
+            "text": "Authors endpoint returns the data of authors of the papers from the conference."
+        },
+        {
+            "componentClass": "methods",
+            "title": "Supported methods:",
+            "text": "GET"
+        },
+        {
+            "componentClass": "parameters",
+            "title": "Parameters",
+            "data": [
+                {
+                    "componentClass": "data",
+                    "title": "author_id",
+                    "type": "int",
+                    "text": "Request will only return one return with selected id.",
+                    "exampleValue": 64216
+                },
+                {
+                    "componentClass": "data",
+                    "title": "paper_id",
+                    "type": "int",
+                    "text": "Request will only return authors of one selected paper. Cannot be used with author_id.",
+                    "exampleValue": 64456
+                },
+                {
+                    "componentClass": "data",
+                    "title": "affiliation",
+                    "type": "boolean",
+                    "text": "Request will return affiliation data of the authors for specific paper. Needs to be used with paper_id.",
+                    "possibleValues": "affiliation does not need any values in request. If affiliation appears in the request link, it will be considered as true."
+                }
+            ]
+        },
+        {
+            "componentClass": "responses",
+            "title": "Responses:",
+            "data": [
+                {
+                    "componentClass": "response",
+                    "title": "200",
+                    "responseStatus": "Success",
+                    "responseDescription": "Successful request.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the status of the fetch. Default: Success."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Array containing data fetched from the database.",
+                            "data": [
+                                {
+                                    "componentClass": "data",
+                                    "title": "author",
+                                    "type": "object",
+                                    "text": "Object containing data about author.",
+                                    "data": [
+                                        {
+                                            "componentClass": "data",
+                                            "title": "author_id",
+                                            "type": "numeric string",
+                                            "text": "Id of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "first_name",
+                                            "type": "string",
+                                            "text": "First name of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "middle_initial",
+                                            "type": "string",
+                                            "text": "Middle initial of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "last_name",
+                                            "type": "string",
+                                            "text": "Last name of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "country",
+                                            "type": "string",
+                                            "requirements": "affiliation and paper_id",
+                                            "text": "Country of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "state",
+                                            "type": "string",
+                                            "requirements": "affiliation and paper_id",
+                                            "text": "State of author. Can be null."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "city",
+                                            "type": "string",
+                                            "requirements": "affiliation and paper_id",
+                                            "text": "City of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "institution",
+                                            "type": "string",
+                                            "requirements": "affiliation and paper_id",
+                                            "text": "Institution of author."
+                                        },
+                                        {
+                                            "componentClass": "data",
+                                            "title": "department",
+                                            "type": "string",
+                                            "requirements": "affiliation and paper_id",
+                                            "text": "Department of author. Can be null."
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "400",
+                    "responseStatus": "Bad request",
+                    "responseDescription": "Wrong parameters or their combination was used; Parameters could be of wrong type.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Empty array.",
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "405",
+                    "responseStatus": "Method Not Allowed",
+                    "responseDescription": "Incorrect request method was used.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Empty array.",
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "componentClass": "exampleRequest",
+            "title": "Example of request",
+            "link": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation"
+        },
+        {
+            "componentClass": "exampleResponse",
+            "title": "Example of successful response",
+            "responseData": {
+                "length": 4,
+                "message": "Success",
+                "data": [
+                    {
+                        "author_id": "64251",
+                        "first_name": "Stuart",
+                        "middle_initial": "Iain",
+                        "last_name": "Gray",
+                        "country": "United Kingdom",
+                        "state": null,
+                        "city": "Bristol",
+                        "institution": "University of Bristol",
+                        "department": "Centre for Innovation"
+                    }
+                ]
+            }
+        }
+    ];
+
+    const toShow = data.map((value, key) => <Paragraph data={value} key={key} />)
+
+    return (
+        <div className="endpoint">
+            <h1>Authors</h1>
+            {toShow}
+        </div>
+    );
+}
+
+export default Authors;

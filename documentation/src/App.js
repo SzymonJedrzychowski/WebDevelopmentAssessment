@@ -5,6 +5,8 @@ import Footer from './components/Footer';
 import Menu from './components/Menu';
 import HomePage from './components/HomePage';
 import Base from './components/Base';
+import Papers from './components/Papers';
+import Authors from './components/Authors';
 
 // Import styling
 import './styles/Documentation.css'
@@ -22,9 +24,11 @@ function Documentation() {
 				<Routes>
 					<Route path="/" element={<HomePage />} />
 					<Route path="/base" element={<Base />} />
-					<Route path="/papers" />
-					<Route path="/authors/" />
+					<Route path="/papers" element={<Papers />}/>
+					<Route path="/authors/" element={<Authors />}/>
 					<Route path="/authenticate/" />
+					<Route path="/verify/" />
+					<Route path="/update/" />
 					<Route path="*" element={<p>Not found</p>} />
 				</Routes>
 			</div>

@@ -5,9 +5,6 @@ import Tabs from 'react-bootstrap/Tabs';
 // Import modules.
 import Paragraph from "./Paragraph";
 
-// Import styling.
-import "../styles/Endpoint.css";
-
 function Endpoint(props) {
     const [key, setKey] = useState(0);
 
@@ -15,9 +12,8 @@ function Endpoint(props) {
         if (Array.isArray(value)) {
             const components = value.map((newValue, key) => <Tab eventKey={key} key={key} title={newValue.title}><Endpoint data={newValue} index={key} /></Tab>);
             return <Tabs
-                id="controlled-tab-example"
                 activeKey={key}
-                onSelect={(k) => setKey(k)}
+                onSelect={(key) => setKey(key)}
                 className="mb-3"
             >
                 {components}
@@ -26,13 +22,11 @@ function Endpoint(props) {
 
         return (
             <div className={value.componentClass}>
-                {
-                    <div className="dataContent">
-                        {value.type && <p>Type: {value.type}</p>}
-                        {value.text && <p>{value.text}</p>}
-                        {Array.isArray(value.data) && <Paragraph data={value.data} />}
-                    </div>
-                }
+                <div className="dataContent">
+                    {value.responseStatus && <h2>Response status: {value.responseStatus}</h2>}
+                    {value.responseDescription && <p className="responseDescription">{value.responseDescription}</p>}
+                    <Paragraph data={value.data} />
+                </div>
             </div>);
     }
 

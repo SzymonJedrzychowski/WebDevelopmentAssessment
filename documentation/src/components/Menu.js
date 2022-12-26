@@ -21,6 +21,8 @@ function Menu() {
                             <Nav.Link as={Link} to="/papers">Papers</Nav.Link>
                             <Nav.Link as={Link} to="/authors">Authors</Nav.Link>
                             <Nav.Link as={Link} to="/authenticate">Authenticate</Nav.Link>
+                            <Nav.Link as={Link} to="/verify">Verify</Nav.Link>
+                            <Nav.Link as={Link} to="/update">Update</Nav.Link>
                         </Nav>
                     </Navbar.Collapse>
                 </Container>

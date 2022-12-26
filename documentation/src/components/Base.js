@@ -25,6 +25,8 @@ function Base() {
                 {
                     "componentClass": "response",
                     "title": "200",
+                    "responseStatus": "Success",
+                    "responseDescription": "Successful request.",
                     "data": [
                         {
                             "componentClass": "data",
@@ -105,12 +107,64 @@ function Base() {
                             ]
                         }
                     ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "405",
+                    "responseStatus": "Method Not Allowed",
+                    "responseDescription": "Incorrect request method was used.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Empty array.",
+                        }
+                    ]
                 }
             ]
+        },
+        {
+            "componentClass": "exampleRequest",
+            "title": "Example of request",
+            "link": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/"
+        },
+        {
+            "componentClass": "exampleResponse",
+            "title": "Example of successful response",
+            "responseData": {
+                "length": 4,
+                "message": "Success",
+                "data": {
+                    "student": {
+                        "first_name": "Szymon",
+                        "last_name": "Jedrzychowski",
+                        "id": "w20020581"
+                    },
+                    "module": {
+                        "code": "KF6012",
+                        "name": "Web Application Integration"
+                    },
+                    "documentation": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/documentation/",
+                    "conference_name": "CHI PLAY '21: The Annual Symposium on Computer-Human Interaction in Play"
+                }
+            }
         }
     ];
 
-    const toShow = data.map((value, key)=><Paragraph data={value} key={key}/>)
+    const toShow = data.map((value, key) => <Paragraph data={value} key={key} />)
 
     return (
         <div className="endpoint">
