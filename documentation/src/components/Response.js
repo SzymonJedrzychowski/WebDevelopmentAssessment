@@ -5,12 +5,12 @@ import Tabs from 'react-bootstrap/Tabs';
 // Import modules.
 import Paragraph from "./Paragraph";
 
-function Endpoint(props) {
+function Response({ data }) {
     const [key, setKey] = useState(0);
 
     const processValue = (value) => {
         if (Array.isArray(value)) {
-            const components = value.map((newValue, key) => <Tab eventKey={key} key={key} title={newValue.title}><Endpoint data={newValue} index={key} /></Tab>);
+            const components = value.map((newValue, key) => <Tab eventKey={key} key={key} title={newValue.title}><Response data={newValue} index={key} /></Tab>);
             return <Tabs
                 activeKey={key}
                 onSelect={(key) => setKey(key)}
@@ -32,9 +32,9 @@ function Endpoint(props) {
 
     return (
         <>
-            {processValue(props.data)}
+            {processValue(data)}
         </>
     );
 }
 
-export default Endpoint;
+export default Response;

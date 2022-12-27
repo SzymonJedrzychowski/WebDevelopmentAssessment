@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 // Import modules.
-import Endpoint from "./Endpoint.js";
+import Response from "./Response.js";
 
 // Import styling.
 import "../styles/Paragraph.css";
 
-function Paragraph(props) {
+function Paragraph({ data }) {
     const [visible, setVisible] = useState(true);
     const showDetails = () => {
         setVisible(!visible);
@@ -22,7 +22,7 @@ function Paragraph(props) {
                 </ListGroup>;
             }
 
-            return <Endpoint data={value}/>;
+            return <Response data={value} />;
         }
 
         return (
@@ -42,7 +42,7 @@ function Paragraph(props) {
                         {value.possibleValues && <p>Possible values: {value.possibleValues}</p>}
                         {value.exampleValue && <p>Example of value: {value.exampleValue}</p>}
                         {value.link && <p>GET: <a href={value.link}>{value.link}</a></p>}
-                        {value.responseData && <pre><p>{JSON.stringify(value.responseData, null, 2)}</p></pre>} 
+                        {value.responseData && <pre><p>{JSON.stringify(value.responseData, null, 2)}</p></pre>}
                         {Array.isArray(value.data) && <Paragraph data={value.data} />}
                     </div>
                 }
@@ -51,7 +51,7 @@ function Paragraph(props) {
 
     return (
         <>
-            {processValue(props.data)}
+            {processValue(data)}
         </>
     );
 }

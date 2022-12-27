@@ -1,13 +1,6 @@
-import Paragraph from "./Paragraph";
-
-/**
- * Base is responsible for displaying documentation of base endpoint - /.
- * 
- * @author Szymon Jedrzychowski
- */
-function Base() {
-
-    const data = [
+{
+    "header": "Base",
+    "data": [
         {
             "componentClass": "description",
             "title": "Description",
@@ -130,7 +123,7 @@ function Base() {
                             "componentClass": "data",
                             "title": "data",
                             "type": "array",
-                            "text": "Empty array.",
+                            "text": "Empty array."
                         }
                     ]
                 }
@@ -162,16 +155,5 @@ function Base() {
                 }
             }
         }
-    ];
-
-    const toShow = data.map((value, key) => <Paragraph data={value} key={key} />)
-
-    return (
-        <div className="endpoint">
-            <h1>Base</h1>
-            {toShow}
-        </div>
-    );
+    ]
 }
-
-export default Base;
