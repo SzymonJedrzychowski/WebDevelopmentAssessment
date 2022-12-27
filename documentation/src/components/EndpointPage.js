@@ -6,12 +6,12 @@ import Paragraph from './Paragraph';
  * 
  * @author Szymon Jedrzychowski
  */
-function EndpointPage({ documentationData }) {
-    const toShow = documentationData.data.map((value, key) => <Paragraph data={value} key={key} />)
+function EndpointPage(props) {
+    const toShow = props.documentationData.data.map((value, key) => <Paragraph data={value} key={key} />)
 
     return (
         <div className="endpoint">
-            <h1>{documentationData.header}</h1>
+            <h1>{props.documentationData.header}</h1>
             {toShow}
         </div>
     );

@@ -1,0 +1,141 @@
+{
+    "header": "Authenticate",
+    "data": [
+        {
+            "componentClass": "description",
+            "title": "Description",
+            "text": "Authenticate endpoint creates a JWT for user if the user logs in correctly."
+        },
+        {
+            "componentClass": "methods",
+            "title": "Supported methods:",
+            "text": "POST"
+        },
+        {
+            "componentClass": "parameters",
+            "title": "Parameters",
+            "data": [
+                {
+                    "componentClass": "data",
+                    "title": "Authorization: Basic",
+                    "type": "string",
+                    "text": "REQUIRED. Authorization header that includes base64 encoded username and password.",
+                    "exampleValue": "username.password"
+                }
+            ]
+        },
+        {
+            "componentClass": "responses",
+            "title": "Responses:",
+            "data": [
+                {
+                    "componentClass": "response",
+                    "title": "200",
+                    "responseStatus": "Success",
+                    "responseDescription": "Successful request.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the status of the fetch. Default: Success."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "type": "array",
+                            "text": "Array containing created token and data fetched from the database.",
+                            "data": [
+                                {
+                                    "componentClass": "data",
+                                    "title": "token",
+                                    "type": "string",
+                                    "text": "Base64 encoded JWT."
+                                },
+                                {
+                                    "componentClass": "data",
+                                    "title": "name",
+                                    "type": "string",
+                                    "text": "Name of current user."
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "401",
+                    "responseStatus": "Unauthorized",
+                    "responseDescription": "Credentials were not provided or were incorrect.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "405",
+                    "responseStatus": "Method Not Allowed",
+                    "responseDescription": "Incorrect request method was used.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "componentClass": "exampleRequest",
+            "title": "Example of request (cURL)",
+            "text": "curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authenticate' --header 'Authorization: Basic '"
+        },
+        {
+            "componentClass": "exampleResponse",
+            "title": "Example of successful response",
+            "responseData": {
+                "length": 2,
+                "message": "Success",
+                "data": {
+                    "token": "header.payload.signature",
+                    "name": "John"
+                }
+            }
+        }
+    ]
+}

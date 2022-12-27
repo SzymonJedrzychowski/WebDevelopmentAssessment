@@ -48,6 +48,10 @@ h2 {
     min-width: fit-content;
 }
 
+.form-select{
+    width: auto !important;
+}
+
 .admin h2{
     display:inline-block;
 }

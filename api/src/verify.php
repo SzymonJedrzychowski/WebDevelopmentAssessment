@@ -36,7 +36,7 @@ class Verify extends Endpoint
         $db = new Database("db/chiplay.sqlite");
 
         // Check if correct request method was used.
-        $this->validateRequestMethod("POST");
+        $this->validateRequestMethod("GET");
 
         // Validate the JWT.
         $this->validateToken();
@@ -49,7 +49,7 @@ class Verify extends Endpoint
         $data = $db->executeSQL($this->getSQLCommand(), $this->getSQLParams());
 
         $this->setData(array(
-            "length" => 0,
+            "length" => count($data),
             "message" => "Success",
             "data" => $data
         ));

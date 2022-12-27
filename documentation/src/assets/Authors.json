@@ -141,7 +141,7 @@
                     "componentClass": "response",
                     "title": "400",
                     "responseStatus": "Bad request",
-                    "responseDescription": "Wrong parameters or their combination was used; Parameters could be of wrong type.",
+                    "responseDescription": "Wrong parameters or their combination was used; Parameters are of wrong type.",
                     "data": [
                         {
                             "componentClass": "data",
@@ -158,8 +158,7 @@
                         {
                             "componentClass": "data",
                             "title": "data",
-                            "type": "array",
-                            "text": "Empty array."
+                            "text": "null"
                         }
                     ]
                 },
@@ -184,8 +183,7 @@
                         {
                             "componentClass": "data",
                             "title": "data",
-                            "type": "array",
-                            "text": "Empty array."
+                            "text": "null"
                         }
                     ]
                 }
@@ -193,8 +191,8 @@
         },
         {
             "componentClass": "exampleRequest",
-            "title": "Example of request",
-            "link": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation"
+            "title": "Example of request (cURL)",
+            "text": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation'"
         },
         {
             "componentClass": "exampleResponse",

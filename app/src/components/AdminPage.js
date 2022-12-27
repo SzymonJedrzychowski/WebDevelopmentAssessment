@@ -38,7 +38,7 @@ function AdminPage(props) {
             if (localStorage.getItem('token')) {
                 fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify",
                     {
-                        method: 'POST',
+                        method: 'GET',
                         headers: new Headers({"Authorization": "Bearer " + localStorage.getItem('token')})
                     })
                     .then(

@@ -122,8 +122,7 @@
                         {
                             "componentClass": "data",
                             "title": "data",
-                            "type": "array",
-                            "text": "Empty array."
+                            "text": "null"
                         }
                     ]
                 }
@@ -131,8 +130,8 @@
         },
         {
             "componentClass": "exampleRequest",
-            "title": "Example of request",
-            "link": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/"
+            "title": "Example of request (cURL)",
+            "text": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/'"
         },
         {
             "componentClass": "exampleResponse",

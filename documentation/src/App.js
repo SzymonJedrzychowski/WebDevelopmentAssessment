@@ -13,9 +13,9 @@ import './styles/Documentation.css'
 import baseData from './assets/Base.json';
 import papersData from './assets/Papers.json';
 import authorsData from './assets/Authors.json';
-//import authenticateData from './assets/Authenticate.json';
-//import verifyData from './assets/Verify.json';
-//import updateData from './assets/Update.json';
+import authenticateData from './assets/Authenticate.json';
+import verifyData from './assets/Verify.json';
+import updateData from './assets/Update.json';
 
 /**
  * Main class for the /documentation page.
@@ -32,9 +32,9 @@ function Documentation() {
 					<Route path="/base" element={<EndpointPage documentationData={baseData} />} />
 					<Route path="/papers" element={<EndpointPage documentationData={papersData} />} />
 					<Route path="/authors/" element={<EndpointPage documentationData={authorsData} />} />
-					<Route path="/authenticate/" />
-					<Route path="/verify/" />
-					<Route path="/update/" />
+					<Route path="/authenticate/" element={<EndpointPage documentationData={authenticateData} />} />
+					<Route path="/verify/" element={<EndpointPage documentationData={verifyData} />} />
+					<Route path="/update/" element={<EndpointPage documentationData={updateData} />} />
 					<Route path="*" element={<p>Not found</p>} />
 				</Routes>
 			</div>

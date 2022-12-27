@@ -1,0 +1,162 @@
+{
+    "header": "Update",
+    "data": [
+        {
+            "componentClass": "description",
+            "title": "Description",
+            "text": "Update endpoint updates the award status of selected paper."
+        },
+        {
+            "componentClass": "methods",
+            "title": "Supported methods:",
+            "text": "POST"
+        },
+        {
+            "componentClass": "parameters",
+            "title": "Parameters",
+            "data": [
+                {
+                    "componentClass": "data",
+                    "title": "Authorization: Bearer",
+                    "type": "string",
+                    "text": "REQUIRED. Authorization header that includes base64 encoded JWT of current user.",
+                    "exampleValue": "Bearer header.payload.signature"
+                },
+                {
+                    "componentClass": "data",
+                    "title": "Body: award",
+                    "type": "boolean",
+                    "text": "REQUIRED. Updated award status of the paper.",
+                    "possibleValues": "true, false"
+                },
+                {
+                    "componentClass": "data",
+                    "title": "Body: paper_id",
+                    "type": "int",
+                    "text": "REQUIRED. paper_id of selected paper.",
+                    "exampleValue": 64455
+                }
+            ]
+        },
+        {
+            "componentClass": "responses",
+            "title": "Responses:",
+            "data": [
+                {
+                    "componentClass": "response",
+                    "title": "200",
+                    "responseStatus": "Success",
+                    "responseDescription": "Successful request.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the status of the fetch. Default: Success."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "400",
+                    "responseStatus": "Bad request",
+                    "responseDescription": "Wrong parameters were used or required parameters were not used; Parameters are of wrong type.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "401",
+                    "responseStatus": "Unauthorized",
+                    "responseDescription": "User is unauthorized or the token is not valid.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                },
+                {
+                    "componentClass": "response",
+                    "title": "405",
+                    "responseStatus": "Method Not Allowed",
+                    "responseDescription": "Incorrect request method was used.",
+                    "data": [
+                        {
+                            "componentClass": "data",
+                            "title": "length",
+                            "type": "int",
+                            "text": "Length of data array."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "message",
+                            "type": "string",
+                            "text": "Message about the error of the request."
+                        },
+                        {
+                            "componentClass": "data",
+                            "title": "data",
+                            "text": "null"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "componentClass": "exampleRequest",
+            "title": "Example of request (cURL)",
+            "text": "curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/update' --header 'Authorization: Bearer ' --header 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'award=false' --data-urlencode 'paper_id=64455'"
+        },
+        {
+            "componentClass": "exampleResponse",
+            "title": "Example of successful response",
+            "responseData": {
+                "length": 0,
+                "message": "Success",
+                "data": null
+            }
+        }
+    ]
+}

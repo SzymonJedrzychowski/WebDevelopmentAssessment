@@ -9,7 +9,7 @@ import '../styles/Footer.css'
 function Footer() {
     return (
         <footer>
-            <div>Northumbria University - w20020581</div>
+            <div>Northumbria University - Szymon Jedrzychowski - w20020581</div>
         </footer>
     )
 }

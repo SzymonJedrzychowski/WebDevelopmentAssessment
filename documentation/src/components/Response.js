@@ -5,7 +5,7 @@ import Tabs from 'react-bootstrap/Tabs';
 // Import modules.
 import Paragraph from "./Paragraph";
 
-function Response({ data }) {
+function Response(props) {
     const [key, setKey] = useState(0);
 
     const processValue = (value) => {
@@ -32,7 +32,7 @@ function Response({ data }) {
 
     return (
         <>
-            {processValue(data)}
+            {processValue(props.data)}
         </>
     );
 }

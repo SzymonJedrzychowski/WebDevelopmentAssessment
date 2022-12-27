@@ -44,7 +44,7 @@ class Authenticate extends Endpoint
         $data['name'] = $queryResult[0]["name"];
 
         $this->setData(array(
-            "length" => 0,
+            "length" => count($data),
             "message" => "Success",
             "data" => $data
         ));

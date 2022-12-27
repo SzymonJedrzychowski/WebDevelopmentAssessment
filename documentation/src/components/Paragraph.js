@@ -7,7 +7,7 @@ import Response from "./Response.js";
 // Import styling.
 import "../styles/Paragraph.css";
 
-function Paragraph({ data }) {
+function Paragraph(props) {
     const [visible, setVisible] = useState(true);
     const showDetails = () => {
         setVisible(!visible);
@@ -41,7 +41,6 @@ function Paragraph({ data }) {
                         {value.text && <p>{value.text}</p>}
                         {value.possibleValues && <p>Possible values: {value.possibleValues}</p>}
                         {value.exampleValue && <p>Example of value: {value.exampleValue}</p>}
-                        {value.link && <p>GET: <a href={value.link}>{value.link}</a></p>}
                         {value.responseData && <pre><p>{JSON.stringify(value.responseData, null, 2)}</p></pre>}
                         {Array.isArray(value.data) && <Paragraph data={value.data} />}
                     </div>
@@ -51,7 +50,7 @@ function Paragraph({ data }) {
 
     return (
         <>
-            {processValue(data)}
+            {processValue(props.data)}
         </>
     );
 }
