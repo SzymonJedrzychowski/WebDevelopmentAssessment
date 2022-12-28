@@ -1,13 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 
 // Import modules.
 import Paragraph from "./Paragraph";
 
+/**
+ * Response is responsible for creating and showing Responses part of the api documentation.
+ * 
+ * @author Szymon Jedrzychowski
+ */
 function Response(props) {
+    // key variable is used to determine which Tab of the Tabs should be shown.
     const [key, setKey] = useState(0);
+    
+    // Reset currently displayed reponse when changing page.
+    useEffect(() => {
+        setKey(0);
+    }, [props.data])
 
+    // Create Tabs and Tab for each response.
     const processValue = (value) => {
         if (Array.isArray(value)) {
             const components = value.map((newValue, key) => <Tab eventKey={key} key={key} title={newValue.title}><Response data={newValue} index={key} /></Tab>);

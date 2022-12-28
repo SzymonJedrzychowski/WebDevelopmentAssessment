@@ -2,18 +2,20 @@ import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Link } from "react-router-dom";
 
-// Import modules
+// Import modules.
 import DataNavigation from "./DataNavigation";
 import PapersAuthors from "./PapersAuthors";
 import UpdateAward from "./UpdateAward";
 
+// Import styling.
+import "../styles/TablePage.css"
+
 /**
- * GenerateTable function is responsible for displaying tables with data from database.
+ * TablePage function is responsible for displaying tables with data from database.
  *
  * @author Szymon Jedrzychowski
  */
-function GenerateTable(props) {
-
+function TablePage(props) {
     // createRow creates a single row of table depending on the type value that is received by props.
     const createRow = (value) => {
         if (props.type === "papers") {
@@ -61,4 +63,4 @@ function GenerateTable(props) {
     </ListGroup>
 }
 
-export default GenerateTable;
+export default TablePage;

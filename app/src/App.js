@@ -1,7 +1,7 @@
 import {Routes, Route} from "react-router-dom";
 import React, {useState, useEffect} from 'react';
 
-// Import modules
+// Import modules.
 import HomePage from './components/HomePage';
 import Footer from './components/Footer';
 import PapersPage from './components/PapersPage'
@@ -10,7 +10,7 @@ import AuthorsPage from './components/AuthorsPage';
 import AuthorPage from './components/AuthorPage';
 import AdminPage from './components/AdminPage';
 
-// Import styling
+// Import styling.
 import './styles/App.css'
 
 /**

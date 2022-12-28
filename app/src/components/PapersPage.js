@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from "react-router-dom";
 import { useLocation } from "react-router-dom"
 
-// Import modules
+// Import modules.
 import PapersSearchForm from './PapersSearchForm';
-import GenerateTable from "./GenerateTable";
+import TablePage from "./TablePage";
 import { generalHandleCurrentPage, generalHandlePageLimit } from "./Functions";
 
-// Import styling
+// Import styling.
 import "../styles/TablePage.css";
 
 /**
@@ -88,7 +88,7 @@ function PapersPage(props) {
                 setRewardStatusSearch={setRewardStatusSearch}
                 placeholder="Search paper by title or abstract" />
 
-            <GenerateTable
+            <TablePage
                 dataToShow={papersToShow}
                 loadingData={props.data.loadingPapers}
                 currentPage={currentPage}

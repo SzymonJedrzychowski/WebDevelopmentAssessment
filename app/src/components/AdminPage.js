@@ -5,11 +5,10 @@ import { Buffer } from 'buffer';
 
 // Import modules.
 import PapersSearchForm from "./PapersSearchForm";
-import GenerateTable from "./GenerateTable";
+import TablePage from "./TablePage";
 import { generalHandlePageLimit, generalHandleCurrentPage } from "./Functions";
 
 // Import styling.
-import "../styles/TablePage.css";
 import "../styles/AdminPage.css";
 
 /**
@@ -147,7 +146,7 @@ function AdminPage(props) {
                     setRewardStatusSearch={setRewardStatusSearch}
                     placeholder="Search paper by title" />
 
-                <GenerateTable
+                <TablePage
                     dataToShow={papersToShow}
                     loadingData={props.data.loadingAuthors}
                     currentPage={currentPage}

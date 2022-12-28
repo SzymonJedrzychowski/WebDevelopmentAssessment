@@ -2,11 +2,11 @@ import React, { useState } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 
-// Import modules
-import GenerateTable from "./GenerateTable";
+// Import modules.
+import TablePage from "./TablePage";
 import { generalHandleCurrentPage, generalHandlePageLimit } from "./Functions";
 
-// Import styling
+// Import styling.
 import "../styles/TablePage.css";
 
 /**
@@ -66,7 +66,7 @@ function AuthorsPage(props) {
                 <Button onClick={resetSearch}>Reset</Button>
             </Form>
 
-            <GenerateTable
+            <TablePage
                 dataToShow={authorsToShow}
                 loadingData={props.data.loadingAuthors}
                 currentPage={currentPage}

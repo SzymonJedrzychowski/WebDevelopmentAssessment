@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 
-// Import styling
+// Import styling.
 import '../styles/HomePage.css';
 
 // Import photos

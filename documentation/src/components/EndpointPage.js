@@ -7,6 +7,7 @@ import Paragraph from './Paragraph';
  * @author Szymon Jedrzychowski
  */
 function EndpointPage(props) {
+    // Create paragraphs based on data in props.
     const toShow = props.documentationData.data.map((value, key) => <Paragraph data={value} key={key} />)
 
     return (

@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
 
-// Import styling
+// Import styling.
 import "../styles/PapersAuthors.css"
 
 /**

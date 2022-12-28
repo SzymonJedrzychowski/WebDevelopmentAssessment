@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import ListGroup from 'react-bootstrap/ListGroup';
 
 // Import modules.
@@ -7,13 +7,28 @@ import Response from "./Response.js";
 // Import styling.
 import "../styles/Paragraph.css";
 
+/**
+ * Paragraph is responsible for creating and showing different parts of the api documenation.
+ * 
+ * @author Szymon Jedrzychowski
+ */
 function Paragraph(props) {
+    // visible variable is used to determine if selected part should be displayed or not.
     const [visible, setVisible] = useState(true);
+
+    // Open all paragraphs when changing page.
+    useEffect(() => {
+        setVisible(true);
+    }, [props.data])
+
+    // Handler for variable visible.
     const showDetails = () => {
         setVisible(!visible);
     }
 
+    // Function processValue is responsible for creating different parts of the documentation paragraph.
     const processValue = (value) => {
+        // If value is an array, recursecily create another Paragraph.
         if (Array.isArray(value)) {
             if (value[0].componentClass !== "response") {
                 const components = value.map((newValue, key) => <Paragraph data={newValue} key={key} />);
@@ -25,6 +40,7 @@ function Paragraph(props) {
             return <Response data={value} />;
         }
 
+        // If value is not an array, display appropriate data.
         return (
             <div className={value.componentClass}>
                 <div className="clickable">

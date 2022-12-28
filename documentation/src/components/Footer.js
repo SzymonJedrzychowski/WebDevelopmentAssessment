@@ -1,4 +1,4 @@
-// Import styling
+// Import styling.
 import '../styles/Footer.css'
 
 /**

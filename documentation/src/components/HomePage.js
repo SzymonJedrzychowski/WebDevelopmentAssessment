@@ -1,8 +1,8 @@
-// Import styling
+// Import styling.
 import '../styles/HomePage.css';
 
 /**
- * This is the home page of the API documentation.
+ * HomePage is responsible for showing home page of the documentation.
  * 
  * @author Szymon Jedrzychowski
  */

@@ -1,7 +1,7 @@
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/esm/Button';
 
-// Import styling
+// Import styling.
 import "../styles/DataNavigation.css"
 
 /**

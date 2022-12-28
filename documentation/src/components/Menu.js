@@ -4,7 +4,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 
 /**
- * Navigation for the pages of the documentation.
+ * Menu is responsible for documentation navigation.
  * 
  * @author Szymon Jedrzychowski
  */

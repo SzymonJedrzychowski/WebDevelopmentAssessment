@@ -1,9 +1,11 @@
 import Button from 'react-bootstrap/esm/Button';
 import Form from 'react-bootstrap/Form';
 
-// Import styling
-import '../styles/PapersSearchForm.css'
+// Import modules.
 import { generalHandleSearchTerm } from "./Functions";
+
+// Import styling.
+import '../styles/PapersSearchForm.css'
 
 /**
  * PapersSearchForm is responsible for displaying form that can be used to search

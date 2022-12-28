@@ -1,12 +1,12 @@
 import { Routes, Route } from "react-router-dom";
 
-// Import modules
+// Import modules.
 import Footer from './components/Footer';
 import Menu from './components/Menu';
 import HomePage from './components/HomePage';
 import EndpointPage from "./components/EndpointPage";
 
-// Import styling
+// Import styling.
 import './styles/Documentation.css'
 
 // Import assets.
