@@ -1,10 +1,10 @@
-import React, {useState, useEffect} from 'react';
-import {useParams} from "react-router-dom";
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
 
 // Import modules
 import PapersSearchForm from './PapersSearchForm';
 import GenerateTable from "./GenerateTable";
-import {generalHandleCurrentPage, generalHandlePageLimit} from "./Functions";
+import { generalHandleCurrentPage, generalHandlePageLimit } from "./Functions";
 
 // Import styling
 import "../styles/TablePage.css";
@@ -34,7 +34,7 @@ function AuthorPage() {
     const [error, setError] = useState(false);
 
     // Use params to get id of the current author.
-    const {authorId} = useParams();
+    const { authorId } = useParams();
 
     // Get data of specific author.
     useEffect(() => {
@@ -105,17 +105,17 @@ function AuthorPage() {
             <h1>{author.first_name} {author.middle_initial} {author.last_name}</h1>
 
             <PapersSearchForm setCurrentPage={setCurrentPage}
-                              setSearchTerm={setSearchTerm}
-                              setRewardStatusSearch={setRewardStatusSearch}
-                              placeholder="Search for title or abstract"/>
+                setSearchTerm={setSearchTerm}
+                setRewardStatusSearch={setRewardStatusSearch}
+                placeholder="Search for title or abstract" />
 
             <GenerateTable dataToShow={papersToShow}
-                           loadingData={(papersLoading && authorLoading)}
-                           currentPage={currentPage}
-                           handleCurrentPage={handleCurrentPage}
-                           pageLimit={pageLimit}
-                           handlePageLimit={handlePageLimit}
-                           type={"papers"}
+                loadingData={(papersLoading && authorLoading)}
+                currentPage={currentPage}
+                handleCurrentPage={handleCurrentPage}
+                pageLimit={pageLimit}
+                handlePageLimit={handlePageLimit}
+                type={"papers"}
             />
         </div>
     );

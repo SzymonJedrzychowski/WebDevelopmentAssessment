@@ -1,12 +1,12 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import {Buffer} from 'buffer';
+import { Buffer } from 'buffer';
 
 // Import modules.
 import PapersSearchForm from "./PapersSearchForm";
 import GenerateTable from "./GenerateTable";
-import {generalHandlePageLimit, generalHandleCurrentPage} from "./Functions";
+import { generalHandlePageLimit, generalHandleCurrentPage } from "./Functions";
 
 // Import styling.
 import "../styles/TablePage.css";
@@ -32,6 +32,9 @@ function AdminPage(props) {
     const [password, setPassword] = useState("");
     const [name, setName] = useState("");
 
+    // State used when incorrect credentials were used.
+    const [loginError, setLoginError] = useState(false);
+
     // Verify if current token is still valid (and get user name if token is valid).
     useEffect(
         () => {
@@ -39,7 +42,7 @@ function AdminPage(props) {
                 fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify",
                     {
                         method: 'GET',
-                        headers: new Headers({"Authorization": "Bearer " + localStorage.getItem('token')})
+                        headers: new Headers({ "Authorization": "Bearer " + localStorage.getItem('token') })
                     })
                     .then(
                         (response) => {
@@ -69,7 +72,7 @@ function AdminPage(props) {
         fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/authenticate",
             {
                 method: 'POST',
-                headers: new Headers({"Authorization": "Basic " + encodedString})
+                headers: new Headers({ "Authorization": "Basic " + encodedString })
             })
             .then(
                 (response) => {
@@ -81,6 +84,8 @@ function AdminPage(props) {
                         props.data.handleAuthenticated(true)
                         setName(json.data.name)
                         localStorage.setItem('token', json.data.token);
+                    } else {
+                        setLoginError(true);
                     }
                 })
             .catch(
@@ -122,7 +127,7 @@ function AdminPage(props) {
     let papersToShow = props.data.papers.filter(searchPapers);
 
     // Dictionary used to change null values from api to "false".
-    const awardDictionary = {"true": "true", null: "false"};
+    const awardDictionary = { "true": "true", null: "false" };
 
     return (
         <div className="pageContent">
@@ -140,7 +145,7 @@ function AdminPage(props) {
                     setCurrentPage={setCurrentPage}
                     setSearchTerm={setSearchTerm}
                     setRewardStatusSearch={setRewardStatusSearch}
-                    placeholder="Search paper by title"/>
+                    placeholder="Search paper by title" />
 
                 <GenerateTable
                     dataToShow={papersToShow}
@@ -158,17 +163,21 @@ function AdminPage(props) {
             }
 
             {!props.data.authenticated && <div className="loginContent">
-
+                {loginError && <div className="loginForm loginError">
+                    <h2>Login error</h2>
+                    <p>Incorrect credentials were used. Please try again.</p>
+                </div>
+                }
                 <Form className="loginForm">
                     <h2>Sign in</h2>
                     <Form.Group className="mb-3" onChange={handleUsername} controlId="username">
                         <Form.Label>Username:</Form.Label>
-                        <Form.Control aria-label="Default select example"/>
+                        <Form.Control aria-label="Default select example" />
                     </Form.Group>
 
                     <Form.Group className="mb-3" onChange={handlePassword} controlId="password">
                         <Form.Label>Password:</Form.Label>
-                        <Form.Control type="password" aria-label="Default select example"/>
+                        <Form.Control type="password" aria-label="Default select example" />
                     </Form.Group>
 
                     <Button variant="primary" onClick={handleClick}>

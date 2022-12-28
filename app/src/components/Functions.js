@@ -32,4 +32,4 @@ function generalHandleSearchTerm(event, setCurrentPage, setSearchTerm, setReward
     }
 }
 
-export {generalHandlePageLimit, generalHandleCurrentPage, generalHandleSearchTerm};
+export { generalHandlePageLimit, generalHandleCurrentPage, generalHandleSearchTerm };

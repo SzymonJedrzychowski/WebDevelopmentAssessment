@@ -20,7 +20,7 @@ function UpdateAward(props) {
         fetch("http://unn-w20020581.newnumyspace.co.uk/assessment/api/update",
             {
                 method: 'POST',
-                headers: new Headers({"Authorization": "Bearer " + token}),
+                headers: new Headers({ "Authorization": "Bearer " + token }),
                 body: formData
             })
             .then(
@@ -45,7 +45,7 @@ function UpdateAward(props) {
             <h2>{props.paper.title}</h2>
             <div className="selectOption">
                 <Form.Select id="awardValue" aria-label="Default select example"
-                             value={props.awardDictionary[props.paper.award]} onChange={handleChange}>
+                    value={props.awardDictionary[props.paper.award]} onChange={handleChange}>
                     <option value="true">Awarded</option>
                     <option value="false">Not awarded</option>
                 </Form.Select>

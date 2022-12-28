@@ -1,4 +1,4 @@
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import ListGroup from "react-bootstrap/ListGroup";
 
 // Import styling
@@ -21,7 +21,7 @@ function HomePage(props) {
     const papersPrepared =
         <ListGroup>
             {papersToShow.map((value) =>
-                <ListGroup.Item key={value.paper_id} as={Link} to="./papers" state={{title: value.title}}>
+                <ListGroup.Item key={value.paper_id} as={Link} to="./papers" state={{ title: value.title }}>
                     {value.title}
                 </ListGroup.Item>)}
         </ListGroup>;
@@ -31,7 +31,7 @@ function HomePage(props) {
             <h1>Conference papers database</h1>
             <div className="homeSection">
                 <div className="imageSection">
-                    <img src={photo} alt="Tech conference"/>
+                    <img src={photo} alt="Tech conference" />
                 </div>
                 <div className="textSection">
                     <div className="homeText">
@@ -39,7 +39,7 @@ function HomePage(props) {
                         <p>This website is a place where you can find different resources related to the CHI PLAY '21
                             symposium.
                             You can check out information about different <Link to={"./papers"}>papers</Link> that
-                            were presented during the conference. <br/>
+                            were presented during the conference. <br />
                             Additionally, you can check out information about <Link to={"./authors"}>authors</Link> of
                             the papers.</p>
                     </div>

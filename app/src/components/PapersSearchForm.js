@@ -3,7 +3,7 @@ import Form from 'react-bootstrap/Form';
 
 // Import styling
 import '../styles/PapersSearchForm.css'
-import {generalHandleSearchTerm} from "./Functions";
+import { generalHandleSearchTerm } from "./Functions";
 
 /**
  * PapersSearchForm is responsible for displaying form that can be used to search

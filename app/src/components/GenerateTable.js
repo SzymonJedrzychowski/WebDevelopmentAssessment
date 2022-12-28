@@ -1,6 +1,6 @@
 import React from "react";
 import ListGroup from "react-bootstrap/ListGroup";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 // Import modules
 import DataNavigation from "./DataNavigation";
@@ -18,7 +18,7 @@ function GenerateTable(props) {
     const createRow = (value) => {
         if (props.type === "papers") {
             return <div key={value.paper_id} className="entry">
-                <PapersAuthors data={value}/>
+                <PapersAuthors data={value} />
             </div>;
         } else if (props.type === "author") {
             return <div className="entry" key={value.author_id}>
@@ -32,7 +32,7 @@ function GenerateTable(props) {
                     paper={value}
                     awardDictionary={props.awardDictionary}
                     handleUpdate={props.handleUpdate}
-                    handleSignOut={props.handleSignOut}/>
+                    handleSignOut={props.handleSignOut} />
             </div>
         }
     }
@@ -52,10 +52,10 @@ function GenerateTable(props) {
 
         {<ListGroup.Item className="dataNavigation">
             {<DataNavigation currentPage={props.currentPage}
-                             handleCurrentPage={props.handleCurrentPage}
-                             dataToShow={props.dataToShow}
-                             pageLimit={props.pageLimit}
-                             handlePageLimit={props.handlePageLimit}/>}
+                handleCurrentPage={props.handleCurrentPage}
+                dataToShow={props.dataToShow}
+                pageLimit={props.pageLimit}
+                handlePageLimit={props.handlePageLimit} />}
         </ListGroup.Item>
         }
     </ListGroup>

@@ -1,7 +1,10 @@
 .loginContent{
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    width: fit-content;
     justify-content: center;
+    gap: 1em;
+    margin: auto;
 }
 
 .loginForm h2 {
@@ -16,6 +19,16 @@
     padding: 2em !important;
     border: 1px black solid;
     border-radius: 25px;
+}
+
+.loginError{
+    background-color: lightcoral;
+    padding: 1em !important;
+}
+
+.loginError p {
+    text-align: center !important;
+    margin-bottom: 0;
 }
 
 .loggedIn{

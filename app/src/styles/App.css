@@ -13,12 +13,11 @@ body {
 h1 {
     margin: 1em 3em 1em 3em !important;
     text-align: center;
-    font-size: 30px !important;
+    font-size: calc(1.5rem + .6vw) !important;
 }
 
 h2 {
-    font-size: 18px !important;
-    margin: 0.3em !important;
+    font-size: calc(1rem + .4vw) !important;
 }
 
 .navbar .container{

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {Link} from "react-router-dom";
+import React, { useState } from 'react';
+import { Link } from "react-router-dom";
 import ListGroup from 'react-bootstrap/ListGroup';
 import Table from 'react-bootstrap/Table';
 
@@ -72,7 +72,7 @@ function PapersAuthors(props) {
         tempListAuthors.map(
             (value) => <tr key={value.author_id}>
                 <td><Link className="authorLink"
-                          to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link>
+                    to={"/authors/" + value.author_id}>{value.first_name} {value.middle_initial} {value.last_name}</Link>
                 </td>
                 <td>{value.country}</td>
                 <td>{value.institution}</td>
@@ -90,15 +90,15 @@ function PapersAuthors(props) {
                     <div><b>Authors:</b>
                         <Table responsive>
                             <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Country</th>
-                                <th>Institution</th>
-                                <th>Department</th>
-                            </tr>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Country</th>
+                                    <th>Institution</th>
+                                    <th>Department</th>
+                                </tr>
                             </thead>
                             <tbody>
-                            {listOfAuthors}
+                                {listOfAuthors}
                             </tbody>
                         </Table>
                         <p><b>Award status:</b> {props.data.award && "Received"}{!props.data.award && "Not received"}

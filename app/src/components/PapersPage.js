@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
-import {useParams} from "react-router-dom";
-import {useLocation} from "react-router-dom"
+import React, { useState, useEffect } from 'react';
+import { useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom"
 
 // Import modules
 import PapersSearchForm from './PapersSearchForm';
 import GenerateTable from "./GenerateTable";
-import {generalHandleCurrentPage, generalHandlePageLimit} from "./Functions";
+import { generalHandleCurrentPage, generalHandlePageLimit } from "./Functions";
 
 // Import styling
 import "../styles/TablePage.css";
@@ -29,7 +29,7 @@ function PapersPage(props) {
     const recommendation = useLocation();
 
     // Using params to get which track of papers should be displayed.
-    let {track} = useParams();
+    let { track } = useParams();
     const trackNames = {
         "papers": "All Papers",
         "interactivity": "Interactivity",
@@ -86,7 +86,7 @@ function PapersPage(props) {
                 setCurrentPage={setCurrentPage}
                 setSearchTerm={setSearchTerm}
                 setRewardStatusSearch={setRewardStatusSearch}
-                placeholder="Search paper by title or abstract"/>
+                placeholder="Search paper by title or abstract" />
 
             <GenerateTable
                 dataToShow={papersToShow}
