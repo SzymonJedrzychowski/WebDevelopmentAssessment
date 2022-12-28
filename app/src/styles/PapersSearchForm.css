@@ -1,27 +1,27 @@
-.searchForm{
+.searchForm {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     gap: 1em;
-    margin: 1em !important;
+    margin: 1em;
 }
 
-select{
+select {
     max-width: fit-content;
 }
 
 @media screen and (max-width: 760px) {
-    .searchForm{
+    .searchForm {
         flex-direction: column;
-        margin: 1em !important;
+        margin: 1em;
     }
 
-    input{
-        margin: 0 !important;
+    input {
+        margin: 0;
     }
 
-    select{
+    select {
         max-width: none;
-        margin: 0 !important;
+        margin: 0;
     }
 }

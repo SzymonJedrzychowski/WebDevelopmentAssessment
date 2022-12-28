@@ -1,41 +1,41 @@
-.dataNavigation{
+.dataNavigation {
     display: flex !important;
-    flex-direction: row !important;
+    flex-direction: row;
     justify-content: space-between;
-    border-radius: 0 0 25px 25px !important;
+    border-radius: 0 0 25px 25px;
 }
 
-.pageLimitSelection{
+.pageLimitSelection {
     display: flex;
     flex-direction: row;
     align-items: center;
 }
 
-.jumpToPage{
+.jumpToPage {
     display: flex;
     flex-direction: row;
     align-items: center;
     margin-right: 1em;
 }
 
-select{
+select {
     min-width: fit-content;
 }
 
-.pageButtons{
-    margin: 0 1em !important;
+.pageButtons {
+    margin: 0 1em;
 }
 
-button{
+button {
     margin: 0 1px 0 1px !important;
 }
 
-.currentPage{
+.currentPage {
     background-color: darkblue !important;
     border: darkblue solid 1px !important;
 }
 
-label{
+label {
     min-width: fit-content;
     margin: 0 1em !important;
 }
@@ -47,25 +47,24 @@ label{
         gap: 10px;
     }
 
-    .jumpToPage{
+    .jumpToPage {
         display: flex;
         justify-content: center;
         margin: 0;
     }
 
-    .pageLimitSelection{
+    .pageLimitSelection {
         display: flex;
         justify-content: center;
     }
 
-    .pageButtons{
+    .pageButtons {
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin: 0 !important;
     }
 
-    label{
+    label {
         margin: 0 1em 0 0 !important;
     }
 }

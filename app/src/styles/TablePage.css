@@ -1,24 +1,31 @@
-.pageContent{
+.pageContent {
     margin: 1em 3em 1em 3em;
 }
 
 .pageContent button {
     margin-left: 0px !important;
 }
+
 .entry:first-child {
     margin-top: 1em;
 }
 
-.entry:nth-child(even) button, .entry:nth-child(even) a, .entry:nth-child(even) div{
-    background-color: lightgray !important;
+.entry:nth-child(even) button,
+.entry:nth-child(even) a,
+.entry:nth-child(even) div {
+    background-color: lightgray;
 }
 
-.entry:first-child button, .entry:first-child a, .entry:first-child div{
+.entry:first-child button,
+.entry:first-child a,
+.entry:first-child div {
     border-top-left-radius: 25px;
     border-top-right-radius: 25px;
 }
 
-.entry:last-child button, .entry:last-child a, .entry:last-child div{
+.entry:last-child button,
+.entry:last-child a,
+.entry:last-child div {
     border-bottom-right-radius: 25px;
     border-bottom-left-radius: 25px;
 }
@@ -31,29 +38,33 @@
     margin: 0.2em;
 }
 
-.noData{
+.noData {
     border-top-left-radius: 25px !important;
     border-top-right-radius: 25px !important;
 }
 
-.admin{
-    display: flex !important;
-    justify-content: space-between !important;
+.noData h2 {
+    margin: 0.2em;
 }
 
-.selectOption{
+.admin {
+    display: flex !important;
+    justify-content: space-between;
+}
+
+.selectOption {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
     min-width: fit-content;
 }
 
-.form-select{
+.form-select {
     width: auto !important;
 }
 
-.admin h2{
-    display:inline-block;
+.admin h2 {
+    display: inline-block;
 }
 
 @media screen and (max-width: 600px) {

@@ -1,45 +1,50 @@
-.loginContent{
+.loginContent {
     display: flex;
     flex-direction: column;
-    width: fit-content;
-    justify-content: center;
     gap: 1em;
+    width: fit-content;
     margin: auto;
+    justify-content: center;
 }
 
 .loginForm h2 {
     text-align: center !important;
 }
 
-.loginForm{
-    display: flex !important;
-    flex-direction: column !important;
+.loginForm {
+    display: flex;
+    flex-direction: column;
     min-width: 452px;
+    padding: 2em;
     background-color: #dedede;
-    padding: 2em !important;
     border: 1px black solid;
     border-radius: 25px;
 }
 
-.loginError{
+.loginError {
     background-color: lightcoral;
-    padding: 1em !important;
+    padding: 1em;
 }
 
 .loginError p {
-    text-align: center !important;
+    text-align: center;
     margin-bottom: 0;
 }
 
-.loggedIn{
+.loggedIn {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    margin: 1em !important;
+    margin: 1em;
+    align-items: baseline;
+}
+
+.loggedIn h2 {
+    margin-bottom: 0 !important;
 }
 
 @media screen and (max-width: 600px) {
-    .loginForm{
+    .loginForm {
         min-width: 80%;
     }
 }
