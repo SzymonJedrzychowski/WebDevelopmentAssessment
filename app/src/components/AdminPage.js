@@ -125,7 +125,7 @@ function AdminPage(props) {
     // Use the filter to get papers that should be shown.
     let papersToShow = props.data.papers.filter(searchPapers);
 
-    // Dictionary used to change null values from api to "false".
+    // Dictionary used to change null values from API to "false".
     const awardDictionary = { "true": "true", null: "false" };
 
     return (

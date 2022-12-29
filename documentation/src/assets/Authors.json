@@ -215,5 +215,11 @@
                 ]
             }
         }
-    ]
+    ],
+    "form": {
+        "parameters": ["author_id", "paper_id", "affiliation"],
+        "url": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors",
+        "requestMethod": "GET",
+        "requestType": "simpleGet"
+    }
 }

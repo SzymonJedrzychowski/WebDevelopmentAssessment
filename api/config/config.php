@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Load the configuration for the api.
+ * Load the configuration for the API.
  * 
  * @author John Rooksby
  * @author Szymon Jedrzychowski

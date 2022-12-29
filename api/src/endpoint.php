@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Endpoint class is responsible for handling all endpoints of the api (as their parent class).
+ * Endpoint class is responsible for handling all endpoints of the API (as their parent class).
  *
  * @author John Rooksby
  * @author Szymon Jedrzychowski

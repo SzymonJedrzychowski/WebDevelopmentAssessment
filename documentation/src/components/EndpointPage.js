@@ -1,8 +1,9 @@
 // Import modules.
 import Paragraph from './Paragraph';
+import Request from './Request';
 
 /**
- * EndpointPage creates pages for every endpoint of the api.
+ * EndpointPage creates pages for every endpoint of the API.
  * 
  * @author Szymon Jedrzychowski
  */
@@ -14,6 +15,7 @@ function EndpointPage(props) {
         <div className="endpoint">
             <h1>{props.documentationData.header}</h1>
             {toShow}
+            <Request formData={props.documentationData.form} />
         </div>
     );
 }

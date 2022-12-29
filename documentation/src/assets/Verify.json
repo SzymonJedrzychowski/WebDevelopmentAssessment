@@ -134,5 +134,11 @@
                 ]
             }
         }
-    ]
+    ],
+    "form": {
+        "parameters": ["token"],
+        "url": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify",
+        "requestMethod": "GET",
+        "requestType": "verify"
+    }
 }

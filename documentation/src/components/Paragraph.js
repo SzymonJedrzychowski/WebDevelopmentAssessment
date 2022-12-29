@@ -8,7 +8,7 @@ import Response from "./Response.js";
 import "../styles/Paragraph.css";
 
 /**
- * Paragraph is responsible for creating and showing different parts of the api documenation.
+ * Paragraph is responsible for creating and showing different parts of the API documenation.
  * 
  * @author Szymon Jedrzychowski
  */

@@ -6,7 +6,7 @@ import Tabs from 'react-bootstrap/Tabs';
 import Paragraph from "./Paragraph";
 
 /**
- * Response is responsible for creating and showing Responses part of the api documentation.
+ * Response is responsible for creating and showing Responses part of the API documentation.
  * 
  * @author Szymon Jedrzychowski
  */

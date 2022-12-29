@@ -43,7 +43,7 @@ function AuthorsPage(props) {
     const handleCurrentPage = (event) => generalHandleCurrentPage(event, setCurrentPage);
 
     // Prevent submission of form (on pressing enter).
-    const preventSubmission = (event) => event.preventDefault()
+    const preventSubmission = (event) => event.preventDefault();
 
     // Filter for searching actors (by first or last name).
     const searchAuthors = (value) =>

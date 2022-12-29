@@ -2,14 +2,14 @@ import ListGroup from 'react-bootstrap/ListGroup';
 import Form from "react-bootstrap/Form";
 
 /**
- * UpdateAward function is responsible for making a call to the api to update data of specific paper.
+ * UpdateAward function is responsible for making a call to the API to update data of specific paper.
  *
  * @author John Rooksby
  * @author Szymon Jedrzychowski
  */
 function UpdateAward(props) {
 
-    // Send call to api to update the entry.
+    // Send call to API to update the entry.
     const handleChange = (event) => {
         const formData = new FormData();
         formData.append('award', event.target.value);
