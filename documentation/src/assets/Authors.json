@@ -192,7 +192,7 @@
         {
             "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
-            "text": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation'"
+            "curl": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation'"
         },
         {
             "componentClass": "exampleResponse",

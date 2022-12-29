@@ -3,6 +3,9 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import { Buffer } from 'buffer';
 
+// Import styling.
+import "../styles/Request.css"
+
 /**
  * Request creates form for interactive API request and the field with response.
  * 
@@ -26,6 +29,7 @@ function Request(props) {
         setVisible(!visible);
     }
 
+    // Send a request to get a data from API.
     const sendData = (event) => {
         let url = props.formData.url;
         let requestData = {
@@ -76,7 +80,10 @@ function Request(props) {
             <Form.Control type="text" aria-label="Default select example" />
         </Form.Group>);
 
-    const response = <pre><p>{JSON.stringify(responseData, null, 2)}</p></pre>;
+    const response = <div className="dataContent exampleResponse">
+        <h4>Response:</h4>
+        <pre><p>{JSON.stringify(responseData, null, 2)}</p></pre>
+    </div>;
 
     return (
         <div className="interactiveRequest">
@@ -88,7 +95,7 @@ function Request(props) {
                 <h3 onClick={showDetails}>Try the endpoint</h3>
             </div>
             {visible &&
-                <Form onSubmit={sendData}>
+                <Form onSubmit={sendData} className="tryForm">
                     {form}
                     {props.formData.parameters.includes("password") &&
                         <Form.Group className="mb-3" controlId="password">

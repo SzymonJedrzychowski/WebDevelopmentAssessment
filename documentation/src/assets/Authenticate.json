@@ -123,7 +123,7 @@
         {
             "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
-            "text": "curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authenticate' --header 'Authorization: Basic '"
+            "curl": ["curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authenticate'", "--header 'Authorization: Basic '"]
         },
         {
             "componentClass": "exampleResponse",

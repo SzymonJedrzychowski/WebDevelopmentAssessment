@@ -147,7 +147,7 @@
         {
             "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
-            "text": "curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/update' --header 'Authorization: Bearer ' --header 'Content-Type: application/x-www-form-urlencoded' --data-urlencode 'award=false' --data-urlencode 'paper_id=64455'"
+            "curl": ["curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/update'", "--header 'Authorization: Bearer '", "--header 'Content-Type: application/x-www-form-urlencoded'", "--data-urlencode 'award=false'", "--data-urlencode 'paper_id=64455'"]
         },
         {
             "componentClass": "exampleResponse",

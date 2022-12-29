@@ -151,7 +151,7 @@
         {
             "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
-            "text": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers?track=wip&author_id=64323'"
+            "curl": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/papers?track=wip&author_id=64323'"
         },
         {
             "componentClass": "exampleResponse",

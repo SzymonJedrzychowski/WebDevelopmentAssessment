@@ -57,3 +57,11 @@ a{
 .responseDescription{
     margin: 0 0 0.5em 0.5em !important;
 }
+
+.exampleRequest p:not(:first-child){
+    margin-top: 0px !important;
+}
+
+pre{
+    margin: 0 !important;
+}

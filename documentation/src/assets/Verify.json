@@ -119,7 +119,7 @@
         {
             "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
-            "text": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify' --header 'Authorization: Bearer '"
+            "curl": ["curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/verify'", "--header 'Authorization: Bearer '"]
         },
         {
             "componentClass": "exampleResponse",

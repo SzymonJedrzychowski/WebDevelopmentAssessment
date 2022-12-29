@@ -26,6 +26,15 @@ function Paragraph(props) {
         setVisible(!visible);
     }
 
+    // Get text to show bsaed on the curl array (only for showing example request).
+    const getText = (text) => {
+        // Using react fragment so that no more html tags are needed, but key requirement is satisfied.
+        if(Array.isArray(text)){
+            return <pre><p>{text.map((value, key)=> <React.Fragment key={key}>{value}<br/></React.Fragment>)}</p></pre>;
+        }
+        return <pre><p>{text}</p></pre>;
+    }
+
     // Function processValue is responsible for creating different parts of the documentation paragraph.
     const processValue = (value) => {
         // If value is an array, recursecily create another Paragraph.
@@ -55,6 +64,7 @@ function Paragraph(props) {
                         {value.type && <p>Type: {value.type}</p>}
                         {value.requirements && <p>Required parameters: {value.requirements}</p>}
                         {value.text && <p>{value.text}</p>}
+                        {value.curl && getText(value.curl)}
                         {value.possibleValues && <p>Possible values: {value.possibleValues}</p>}
                         {value.exampleValue && <p>Example of value: {value.exampleValue}</p>}
                         {value.responseData && <pre><p>{JSON.stringify(value.responseData, null, 2)}</p></pre>}
