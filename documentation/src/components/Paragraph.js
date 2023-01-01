@@ -59,6 +59,7 @@ function Paragraph(props) {
                         <svg onClick={showDetails} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3zM8 12h8" /></svg>}
                     <h3 onClick={showDetails}>{value.title}</h3>
                 </div>
+
                 {visible &&
                     <div className="dataContent">
                         {value.type && <p>Type: {value.type}</p>}
