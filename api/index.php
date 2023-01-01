@@ -38,8 +38,8 @@ if (!in_array($_SERVER['REQUEST_METHOD'], ['GET', 'POST'])) {
                 $endpoint = new Authenticate();
                 break;
             case '/update':
-            	$endpoint = new Update();
-            	break;
+                $endpoint = new Update();
+                break;
             case '/verify':
                 $endpoint = new Verify();
                 break;

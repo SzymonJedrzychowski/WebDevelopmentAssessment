@@ -33,13 +33,17 @@ function DataNavigation(props) {
                 {(currentPage <= 0) && <Button disabled>{"<<"}</Button>}
                 {(currentPage + 1 >= maxPageNumber && currentPage - 2 >= 0) &&
                     <Button onClick={props.handleCurrentPage} value={currentPage - 2}>{currentPage - 1}</Button>}
+
                 {currentPage - 1 >= 0 &&
                     <Button onClick={props.handleCurrentPage} value={currentPage - 1}>{currentPage}</Button>}
                 {(currentPage - 1 < 0 && currentPage + 2 >= maxPageNumber) && <Button disabled>-</Button>}
+
                 <Button className="currentPage">{currentPage + 1}</Button>
+
                 {(currentPage + 1 >= maxPageNumber && currentPage - 2 < 0) && <Button disabled>-</Button>}
                 {currentPage + 1 < maxPageNumber &&
                     <Button onClick={props.handleCurrentPage} value={currentPage + 1}>{currentPage + 2}</Button>}
+
                 {(currentPage - 1 < 0 && currentPage + 2 < maxPageNumber) &&
                     <Button onClick={props.handleCurrentPage} value={currentPage + 2}>{currentPage + 3}</Button>}
                 {(currentPage < maxPageNumber - 1) &&

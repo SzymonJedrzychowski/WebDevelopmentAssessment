@@ -45,11 +45,15 @@ function TablePage(props) {
         )}
 
         {props.loadingData &&
-            <div key="loading"><ListGroup.Item className="noData"><h2>Loading data</h2></ListGroup.Item></div>
+            <div key="loading">
+                <ListGroup.Item className="noData"><h2>Loading data</h2></ListGroup.Item>
+            </div>
         }
 
         {(props.dataToShow.length === 0 && !props.loadingData) &&
-            <div key="noData"><ListGroup.Item className="noData"><h2>No data found</h2></ListGroup.Item></div>
+            <div key="noData">
+                <ListGroup.Item className="noData"><h2>No data found</h2></ListGroup.Item>
+            </div>
         }
 
         {<ListGroup.Item className="dataNavigation">
@@ -57,7 +61,8 @@ function TablePage(props) {
                 handleCurrentPage={props.handleCurrentPage}
                 dataToShow={props.dataToShow}
                 pageLimit={props.pageLimit}
-                handlePageLimit={props.handlePageLimit} />}
+                handlePageLimit={props.handlePageLimit}
+            />}
         </ListGroup.Item>
         }
     </ListGroup>

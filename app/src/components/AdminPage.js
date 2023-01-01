@@ -144,7 +144,8 @@ function AdminPage(props) {
                     setCurrentPage={setCurrentPage}
                     setSearchTerm={setSearchTerm}
                     setRewardStatusSearch={setRewardStatusSearch}
-                    placeholder="Search paper by title" />
+                    placeholder="Search paper by title"
+                />
 
                 <TablePage
                     dataToShow={papersToShow}

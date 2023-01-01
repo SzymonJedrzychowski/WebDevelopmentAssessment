@@ -13,11 +13,11 @@ use FirebaseJWT\Key;
  */
 class Verify extends Endpoint
 {
-
     /**
      * @var array $decoded Array containing data from JWT.
      */
     protected $decoded;
+
     /**
      * @var int $accountId value of account_id column for current user.
      */
@@ -68,24 +68,29 @@ class Verify extends Endpoint
         $allHeaders = getallheaders();
         $authorizationHeader = "";
 
+        // Check if correct authorization method was used.
         if (array_key_exists('Authorization', $allHeaders)) {
             $authorizationHeader = $allHeaders['Authorization'];
         } elseif (array_key_exists('authorization', $allHeaders)) {
             $authorizationHeader = $allHeaders['authorization'];
         }
 
+        // Check if token was included.
         if (substr($authorizationHeader, 0, 7) != 'Bearer ') {
             throw new ClientErrorException("Bearer token required", 401);
         }
 
+        // Remove "Bearer" text from the data.
         $jwt = trim(substr($authorizationHeader, 7));
 
+        // Validate token.
         try {
             $this->setDecoded(JWT::decode($jwt, new Key($key, 'HS256')));
         } catch (Exception $e) {
             throw new ClientErrorException($e->getMessage(), 401);
         }
 
+        // Check if issuer is the same as the host.
         if ($this->getDecoded()->iss != $_SERVER['HTTP_HOST']) {
             throw new ClientErrorException("invalid token issuer", 401);
         }

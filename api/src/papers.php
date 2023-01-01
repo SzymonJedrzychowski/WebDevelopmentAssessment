@@ -21,7 +21,8 @@ class Papers extends Endpoint
         $this->validateRequestMethod("GET");
 
         // Create SQL command to get papers data.
-        $sql = "SELECT paper.paper_id, title, award, abstract, track.name, track.short_name FROM paper JOIN track ON paper.track_id=track.track_id";
+        $sql = "SELECT paper.paper_id, title, award, abstract, track.name, track.short_name 
+                FROM paper JOIN track ON paper.track_id=track.track_id";
         $params = array();
         $where = false;
 
@@ -35,14 +36,14 @@ class Papers extends Endpoint
             $params[':author_id'] = $_GET['author_id'];
         }
         if (filter_has_var(INPUT_GET, 'track')) {
-            if($where){
+            if ($where) {
                 $sql .= " AND track.short_name = :track";
-            }else{
+            } else {
                 $sql .= " WHERE track.short_name = :track";
                 $where = true;
             }
             $params[':track'] = $_GET['track'];
-        } 
+        }
 
         $this->setSQLCommand($sql);
         $this->setSQLParams($params);
@@ -55,6 +56,6 @@ class Papers extends Endpoint
      */
     protected function getAvailableParams()
     {
-        return ['track'=>'string', 'author_id'=>'int'];
+        return ['track' => 'string', 'author_id' => 'int'];
     }
 }

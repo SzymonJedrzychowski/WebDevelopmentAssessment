@@ -19,7 +19,7 @@ function Paragraph(props) {
     // Open all paragraphs when changing page.
     useEffect(() => {
         setVisible(true);
-    }, [props.data])
+    }, [props.data]);
 
     // Handler for variable visible.
     const showDetails = () => {
@@ -50,6 +50,7 @@ function Paragraph(props) {
         }
 
         // If value is not an array, display appropriate data.
+        // SVG for documentation - paragraph display, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
         return (
             <div className={value.componentClass}>
                 <div className="clickable">

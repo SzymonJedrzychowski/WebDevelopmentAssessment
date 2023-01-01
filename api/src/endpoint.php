@@ -6,7 +6,6 @@
  * @author John Rooksby
  * @author Szymon Jedrzychowski
  */
-
 abstract class Endpoint
 {
     /**
@@ -18,13 +17,15 @@ abstract class Endpoint
      * @var array $sqlParams Parameters for the SQL query.
      */
     private $sqlParams;
+
     /**
      * @var array $data Result of database query.
      */
     private $data;
 
     /**
-     * __construct method that can be used by endpoints to connect to the database and get the data for the endpoint.
+     * __construct method that can be used by endpoints to connect to the database
+     * and get the data for the endpoint.
      */
     public function __construct()
     {
@@ -50,51 +51,6 @@ abstract class Endpoint
     {
         $this->setSQLCommand("");
         $this->setSQLParams([]);
-    }
-
-    /**
-     * Validate if request method is allowed for specific endpoint.
-     *
-     * @param string $method Method that is allowed for given endpoint.
-     *
-     * @throws BadRequest If request method is incorrect.
-     */
-    protected function validateRequestMethod($method)
-    {
-        if ($_SERVER['REQUEST_METHOD'] != $method) {
-            throw new BadRequest("Incorrect request method for the endpoint.", 405);
-        }
-    }
-
-    /**
-     * Return parameters that are available for specific endpoint.
-     *
-     * @return array array of available params
-     */
-    protected function getAvailableParams()
-    {
-        return [];
-    }
-
-
-    /**
-     * Check if correct parameters were provided for specific endpoint.
-     *
-     * @param string[] $availableParams Array of available parameters.
-     *
-     * @throws BadRequest If incorrect parameter(s) was provided.
-     */
-    protected function checkAvailableParams($availableParams)
-    {
-        foreach ($_GET as $key => $value) {
-            if (!key_exists($key, $availableParams)) {
-                throw new BadRequest("Invalid parameter " . $key);
-            }else{
-                if($availableParams[$key] == "int" and !is_numeric($value)){
-                    throw new BadRequest("Invalid parameter type " . $key . ". It should be a number.");
-                }
-            }
-        }
     }
 
     /**
@@ -155,5 +111,49 @@ abstract class Endpoint
     public function setData($data)
     {
         $this->data = $data;
+    }
+
+    /**
+     * Validate if request method is allowed for specific endpoint.
+     *
+     * @param string $method Method that is allowed for given endpoint.
+     *
+     * @throws BadRequest If request method is incorrect.
+     */
+    protected function validateRequestMethod($method)
+    {
+        if ($_SERVER['REQUEST_METHOD'] != $method) {
+            throw new BadRequest("Incorrect request method for the endpoint.", 405);
+        }
+    }
+
+    /**
+     * Return parameters that are available for specific endpoint.
+     *
+     * @return array array of available params
+     */
+    protected function getAvailableParams()
+    {
+        return [];
+    }
+
+    /**
+     * Check if correct parameters were provided for specific endpoint.
+     *
+     * @param string[] $availableParams Array of available parameters.
+     *
+     * @throws BadRequest If incorrect parameter(s) was provided.
+     */
+    protected function checkAvailableParams($availableParams)
+    {
+        foreach ($_GET as $key => $value) {
+            if (!key_exists($key, $availableParams)) {
+                throw new BadRequest("Invalid parameter " . $key);
+            } else {
+                if ($availableParams[$key] == "int" and !is_numeric($value)) {
+                    throw new BadRequest("Invalid parameter type " . $key . ". It should be a number.");
+                }
+            }
+        }
     }
 }

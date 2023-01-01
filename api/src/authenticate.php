@@ -5,8 +5,10 @@ use FirebaseJWT\JWT;
 /**
  * Responsible for handling /authenticate endpoint.
  *
- * This class reads and validates received parameters and find if an account in database matches the credentials.
- * If yes, the JWT is returned. Else, an Exception will be thrown.
+ * This class reads and validates received parameters
+ * and find if an account in database matches the credentials.
+ * If yes, the JWT is returned.
+ * Else, an Exception will be thrown.
  *
  * @author John Rooksby
  * @author Szymon Jedrzychowski

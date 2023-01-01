@@ -86,7 +86,8 @@ function PapersPage(props) {
                 setCurrentPage={setCurrentPage}
                 setSearchTerm={setSearchTerm}
                 setRewardStatusSearch={setRewardStatusSearch}
-                placeholder="Search paper by title or abstract" />
+                placeholder="Search paper by title or abstract"
+            />
 
             <TablePage
                 dataToShow={papersToShow}

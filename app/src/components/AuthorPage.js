@@ -104,12 +104,15 @@ function AuthorPage() {
         <div className="pageContent">
             <h1>{author.first_name} {author.middle_initial} {author.last_name}</h1>
 
-            <PapersSearchForm setCurrentPage={setCurrentPage}
+            <PapersSearchForm
+                setCurrentPage={setCurrentPage}
                 setSearchTerm={setSearchTerm}
                 setRewardStatusSearch={setRewardStatusSearch}
-                placeholder="Search for title or abstract" />
+                placeholder="Search for title or abstract"
+            />
 
-            <TablePage dataToShow={papersToShow}
+            <TablePage
+                dataToShow={papersToShow}
                 loadingData={(papersLoading && authorLoading)}
                 currentPage={currentPage}
                 handleCurrentPage={handleCurrentPage}

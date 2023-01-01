@@ -53,13 +53,17 @@ class Update extends Verify
      */
     private function validateUpdateParams()
     {
+        // Check if award parameter was included.
         if (!filter_has_var(INPUT_POST, 'award')) {
             throw new ClientErrorException("award parameter required", 400);
         }
+
+        // Check if paper_id parameter was included.
         if (!filter_has_var(INPUT_POST, 'paper_id')) {
             throw new ClientErrorException("paper_id parameter required", 400);
         }
 
+        // Check if award parameter had correct value.
         $possibleAwards = ["true", "false"];
         if (!in_array(strtolower($_POST['award']), $possibleAwards)) {
             throw new ClientErrorException("invalid award value", 400);

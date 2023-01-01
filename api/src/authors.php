@@ -3,7 +3,8 @@
 /**
  * Responsible for handling /authors endpoint.
  *
- * This class reads and validates received parameters and returns the data of authors from the database.
+ * This class reads and validates received parameters
+ * and returns the data of authors from the database.
  *
  * @author John Rooksby
  * @author Szymon Jedrzychowski
@@ -11,7 +12,7 @@
 class Authors extends Endpoint
 {
     /**
-     * Override parent method to get prepare SQL command and variables to get the authors data from database.
+     * Override parent method to prepare SQL command and variables to get the authors data from database.
      *
      * @throws BadRequest If incorrect request method was used or incorrect parameter was provided.
      */
@@ -28,11 +29,13 @@ class Authors extends Endpoint
         $this->checkAvailableParams($this->getAvailableParams());
 
         // Check for specific params clashes and connections.
-        if (filter_has_var(INPUT_GET, 'affiliation')
+        if (
+            filter_has_var(INPUT_GET, 'affiliation')
             and !filter_has_var(INPUT_GET, 'paper_id')
         ) {
             throw new BadRequest("Parameter affiliation cannot be used without parameter paper_id.");
-        } elseif (filter_has_var(INPUT_GET, 'author_id')
+        } elseif (
+            filter_has_var(INPUT_GET, 'author_id')
             and (filter_has_var(INPUT_GET, 'affiliation')
                 or filter_has_var(INPUT_GET, 'paper_id')
             )
@@ -44,7 +47,8 @@ class Authors extends Endpoint
         if (filter_has_var(INPUT_GET, 'author_id')) {
             $sql .= " WHERE author_id = :author_id";
             $params[':author_id'] = $_GET['author_id'];
-        } elseif (filter_has_var(INPUT_GET, 'paper_id')
+        } elseif (
+            filter_has_var(INPUT_GET, 'paper_id')
             and filter_has_var(INPUT_GET, 'affiliation')
         ) {
             // SELECT DISTINCT is used as it was noticed that some of the affiliations are repeating in the database.
@@ -74,6 +78,10 @@ class Authors extends Endpoint
      */
     protected function getAvailableParams()
     {
-        return ['author_id' => 'int', 'paper_id'=> 'int', 'affiliation'=>'boolean'];
+        return [
+            'author_id' => 'int',
+            'paper_id' => 'int',
+            'affiliation' => 'boolean'
+        ];
     }
 }

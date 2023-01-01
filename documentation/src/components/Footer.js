@@ -11,7 +11,7 @@ function Footer() {
         <footer>
             <div>Northumbria University - Szymon Jedrzychowski - w20020581</div>
         </footer>
-    )
+    );
 }
 
 export default Footer;
