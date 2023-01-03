@@ -1,3 +1,9 @@
 .homePage {
-    margin: 0 1em 0 1em !important;
+    margin: 0 2em 0 2em;
+}
+
+@media screen and (max-width: 700px) {
+    .homePage {
+        margin: 1em;
+    }
 }

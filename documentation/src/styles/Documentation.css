@@ -11,5 +11,25 @@ body {
 }
 
 h1 {
+    margin: 1em 3em 1em 3em !important;
     text-align: center;
+    font-size: calc(1.5rem + .6vw) !important;
+}
+
+h2 {
+    font-size: calc(1rem + .5vw) !important;
+    margin-bottom: 0 !important;
+}
+
+h3 {
+    display: inline;
+    margin-bottom: 0px !important;
+    font-size: calc(1rem + .5vw) !important;
+    margin-left: 0.5rem;
+}
+
+h4 {
+    display: inline;
+    font-size: calc(1rem + .5vw) !important;
+    margin-left: calc(1.5rem + 0.5vw);
 }

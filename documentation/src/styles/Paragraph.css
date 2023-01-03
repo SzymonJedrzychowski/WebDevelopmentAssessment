@@ -10,18 +10,6 @@ button {
     border: none;
 }
 
-h3 {
-    display: inline;
-    margin-bottom: 0px !important;
-    font-size: calc(1rem + .5vw) !important;
-    margin-left: 0.5rem;
-}
-
-h2 {
-    font-size: calc(1rem + .5vw) !important;
-    margin-bottom: 0 !important;
-}
-
 .clickable {
     display: flex;
     flex-direction: row;

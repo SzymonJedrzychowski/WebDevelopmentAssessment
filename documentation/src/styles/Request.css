@@ -26,9 +26,3 @@
 .tryForm button{
     margin-bottom: 1em;
 }
-
-h4 {
-    display: inline;
-    font-size: calc(1rem + .5vw) !important;
-    margin-left: calc(1.5rem + 0.5vw);
-}
