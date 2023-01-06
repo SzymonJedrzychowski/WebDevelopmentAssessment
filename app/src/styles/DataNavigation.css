@@ -26,7 +26,7 @@ select {
     margin: 0 1em;
 }
 
-button {
+.pageButtons button {
     margin: 0 1px 0 1px !important;
 }
 
@@ -38,6 +38,11 @@ button {
 label {
     min-width: fit-content;
     margin: 0 1em !important;
+}
+
+svg {
+    min-height: 1em;
+    pointer-events: none;
 }
 
 @media screen and (max-width: 800px) {

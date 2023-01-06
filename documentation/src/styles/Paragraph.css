@@ -2,10 +2,6 @@ button {
     border-radius: 0px !important;
 }
 
-.list-group {
-    margin-left: 1em;
-}
-
 .list-group-item {
     border: none;
 }
@@ -15,41 +11,55 @@ button {
     flex-direction: row;
     align-items: center;
     margin-bottom: 0.5em;
-    margin-left: 0.5em;
+    margin-left: 0em;
 }
 
 svg {
-    width: calc(1rem + .5vw);
+    width: min(calc(1.5rem + .6vw), 20px) !important;
+}
+
+.dataContent {
+    margin-left: min(calc(2rem + .6vw), calc(0.5rem + 20px)) !important;
 }
 
 .dataContent p {
-    margin-top: 5px;
-    margin-bottom: 0px;
+    margin: 5px 0 0 0;
     min-width: fit-content;
-    margin-left: calc(1.5rem + .5vw);
 }
 
-a{
+.response .dataContent:first-child {
+    margin-left: 0 !important;
+}
+
+a {
     word-break: break-all !important;
 }
 
 .dataContent p:last-child {
     border-bottom: 1px black solid;
-    margin-bottom: 1em !important;
+    margin-bottom: 1em;
 }
 
 .endpoint {
     margin: 1em;
 }
 
-.responseDescription{
-    margin: 0 0 0.5em 0.5em !important;
+.responseStatus {
+    font-weight: bold;
 }
 
-.exampleRequest p:not(:first-child){
+.responseDescription {
+    margin: 0 0 0.5em 0em !important;
+}
+
+.exampleRequest p:not(:first-child) {
     margin-top: 0px !important;
 }
 
-pre{
-    margin: 0 !important;
+pre {
+    margin: 0 0 1em 0 !important;
+}
+
+.noMarginP {
+    margin-bottom: 0px !important;
 }

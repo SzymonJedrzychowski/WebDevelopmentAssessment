@@ -1,28 +1,28 @@
-.tryForm{
+.tryForm {
     margin-top: 5px;
-    margin-left: calc(1.5rem + 0.5vw);
+    margin-left: min(calc(2rem + .6vw), calc(0.5rem + 20px)) !important;
     display: flex;
     flex-direction: column;
 }
 
-.tryForm div{
+.tryForm div {
     display: flex;
     flex-direction: row;
     align-items: baseline;
 }
 
-.tryForm div:first-child{
+.tryForm div:first-child {
     margin-top: 5px;
 }
 
-.tryForm label{
+.tryForm label {
     min-width: 5em;
 }
 
-.interactiveRequest pre{
+.interactiveRequest pre {
     max-height: 50em;
 }
 
-.tryForm button{
+.tryForm button {
     margin-bottom: 1em;
 }

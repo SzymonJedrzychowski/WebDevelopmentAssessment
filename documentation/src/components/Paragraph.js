@@ -30,9 +30,9 @@ function Paragraph(props) {
     const getText = (text) => {
         // Using react fragment so that no more html tags are needed, but key requirement is satisfied.
         if(Array.isArray(text)){
-            return <pre><p>{text.map((value, key)=> <React.Fragment key={key}>{value}<br/></React.Fragment>)}</p></pre>;
+            return <pre><p className="noMarginP">{text.map((value, key)=> <React.Fragment key={key}>{value}<br/></React.Fragment>)}</p></pre>;
         }
-        return <pre><p>{text}</p></pre>;
+        return <pre><p className="noMarginP">{text}</p></pre>;
     }
 
     // Function processValue is responsible for creating different parts of the documentation paragraph.
@@ -50,7 +50,8 @@ function Paragraph(props) {
         }
 
         // If value is not an array, display appropriate data.
-        // SVG for documentation - paragraph display, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
+        // plus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
+        // minus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
         return (
             <div className={value.componentClass}>
                 <div className="clickable">
@@ -58,7 +59,7 @@ function Paragraph(props) {
                         <svg onClick={showDetails} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3zM12 8v8m-4-4h8" /></svg>}
                     {visible &&
                         <svg onClick={showDetails} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3zM8 12h8" /></svg>}
-                    <h3 onClick={showDetails}>{value.title}</h3>
+                    <h2 onClick={showDetails}>{value.title}</h2>
                 </div>
 
                 {visible &&
@@ -69,7 +70,7 @@ function Paragraph(props) {
                         {value.curl && getText(value.curl)}
                         {value.possibleValues && <p>Possible values: {value.possibleValues}</p>}
                         {value.exampleValue && <p>Example of value: {value.exampleValue}</p>}
-                        {value.responseData && <pre><p>{JSON.stringify(value.responseData, null, 2)}</p></pre>}
+                        {value.responseData && <pre><p className="noMarginP">{JSON.stringify(value.responseData, null, 2)}</p></pre>}
                         {Array.isArray(value.data) && <Paragraph data={value.data} />}
                     </div>
                 }

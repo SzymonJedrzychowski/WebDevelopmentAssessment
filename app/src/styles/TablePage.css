@@ -16,18 +16,17 @@
     background-color: lightgray;
 }
 
+.noData,
 .entry:first-child button,
 .entry:first-child a,
 .entry:first-child div {
-    border-top-left-radius: 25px;
-    border-top-right-radius: 25px;
+    border-top-left-radius: 25px !important;
+    border-top-right-radius: 25px !important;
 }
 
-.entry:last-child button,
-.entry:last-child a,
-.entry:last-child div {
-    border-bottom-right-radius: 25px;
-    border-bottom-left-radius: 25px;
+.dataNavigation {
+    border-bottom-right-radius: 25px !important;
+    border-bottom-left-radius: 25px !important;
 }
 
 .entry:first-child {
@@ -36,11 +35,6 @@
 
 .entry h2 {
     margin: 0.2em;
-}
-
-.noData {
-    border-top-left-radius: 25px !important;
-    border-top-right-radius: 25px !important;
 }
 
 .noData h2 {

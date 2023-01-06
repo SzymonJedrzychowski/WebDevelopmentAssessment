@@ -81,10 +81,12 @@ function Request(props) {
         </Form.Group>);
 
     const response = <div className="dataContent exampleResponse">
-        <h4>Response:</h4>
-        <pre><p>{JSON.stringify(responseData, null, 2)}</p></pre>
+        <h3>Response:</h3>
+        <pre><p className="noMarginP">{JSON.stringify(responseData, null, 2)}</p></pre>
     </div>;
 
+    // plus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
+    // minus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
     return (
         <div className="interactiveRequest">
             <div className="clickable">
@@ -92,7 +94,7 @@ function Request(props) {
                     <svg onClick={showDetails} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3zM12 8v8m-4-4h8" /></svg>}
                 {visible &&
                     <svg onClick={showDetails} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#000000" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3h18v18H3zM8 12h8" /></svg>}
-                <h3 onClick={showDetails}>Try the endpoint</h3>
+                <h2 onClick={showDetails}>Try the endpoint</h2>
             </div>
 
             {visible &&

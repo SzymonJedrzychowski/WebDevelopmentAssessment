@@ -37,7 +37,7 @@ function Response(props) {
             <div className={value.componentClass}>
                 <div className="dataContent">
                     {value.responseStatus &&
-                        <h2>Response status: {value.responseStatus}</h2>
+                        <p className="responseStatus">Response status: {value.responseStatus}</p>
                     }
                     {value.responseDescription &&
                         <p className="responseDescription">{value.responseDescription}</p>
