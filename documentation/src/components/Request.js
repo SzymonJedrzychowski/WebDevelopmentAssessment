@@ -18,10 +18,11 @@ function Request(props) {
     // responseData is a JSON response from API.
     const [responseData, setResponseData] = useState();
 
-    // Open all paragraphs when changing page.
+    // Open all paragraphs and reset the form when changing page.
     useEffect(() => {
         setVisible(true);
         setResponseData();
+        document.getElementsByClassName("tryForm")[0].reset();
     }, [props.formData])
 
     // Handler for variable visible.
@@ -36,6 +37,7 @@ function Request(props) {
             method: props.formData.requestMethod
         }
 
+        // Depending on which page of documentation is used, send different data to the API.
         if (props.formData.requestType === "simpleGet") {
             url += "?"
             for (let i = 0; i < event.target.length - 1; i++) {
@@ -72,14 +74,17 @@ function Request(props) {
         event.preventDefault();
     }
 
+    // Parameters with these names should be ommited when generating form entries as they have their own custom entries.
     const excluded = ["password", "affiliation", "award"];
 
+    // Create form with groups for all needed arguments except the excluded group.
     const form = props.formData.parameters.filter((value) => !excluded.includes(value)).map((value, key) =>
         <Form.Group key={key} className="mb-3" controlId={value}>
             <Form.Label>{value}</Form.Label>
             <Form.Control type="text" aria-label="Default select example" />
         </Form.Group>);
 
+    // response variable displays the response from the API.
     const response = <div className="dataContent exampleResponse">
         <h3>Response:</h3>
         <pre><p className="noMarginP">{JSON.stringify(responseData, null, 2)}</p></pre>

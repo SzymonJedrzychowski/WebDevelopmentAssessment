@@ -122,6 +122,11 @@
         },
         {
             "componentClass": "exampleRequest",
+            "title": "Example of request (URL)",
+            "text": "This endpoint does not support URL as it uses Headers. Use cURL method instead."
+        },
+        {
+            "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
             "curl": ["curl --location --request POST 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authenticate'", "--header 'Authorization: Basic '"]
         },

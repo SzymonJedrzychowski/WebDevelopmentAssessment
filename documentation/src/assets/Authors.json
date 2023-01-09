@@ -191,6 +191,11 @@
         },
         {
             "componentClass": "exampleRequest",
+            "title": "Example of request (URL)",
+            "url": "http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation"
+        },
+        {
+            "componentClass": "exampleRequest",
             "title": "Example of request (cURL)",
             "curl": "curl --location --request GET 'http://unn-w20020581.newnumyspace.co.uk/assessment/api/authors?paper_id=64456&affiliation'"
         },

@@ -67,6 +67,7 @@ function Paragraph(props) {
                         {value.type && <p>Type: {value.type}</p>}
                         {value.requirements && <p>Required parameters: {value.requirements}</p>}
                         {value.text && <p>{value.text}</p>}
+                        {value.url && <p><a href={value.url}>{value.url}</a></p>}
                         {value.curl && getText(value.curl)}
                         {value.possibleValues && <p>Possible values: {value.possibleValues}</p>}
                         {value.exampleValue && <p>Example of value: {value.exampleValue}</p>}
