@@ -17,8 +17,8 @@ function DataNavigation(props) {
     // Create array with numbers of all possible pages.
     const jumpSelectionArray = Array.from(Array(maxPageNumber).keys())
     
-    // chevrons-left.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2022)
-    // chevrons-right.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2022)
+    // chevrons-left.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2023)
+    // chevrons-right.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2023)
     return (
         <>
             <Form.Group className="pageLimitSelection">

@@ -17,6 +17,6 @@ Additional README.md files included in /app and /documentation were created by c
 2. Product School, productschool, https://unsplash.com/photos/dJICd7b_LlE (Access date: 20.12.2022)
 3. plus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
 4. minus-square.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 24.12.2022)
-5. chevrons-left.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2022)
-6. chevrons-right.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2022)
+5. chevrons-left.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2023)
+6. chevrons-right.svg, ICONSVG, https://iconsvg.xyz/ (Access date: 6.01.2023)
 7. .htaccess code based on the response of user "BrahimS", 2016, https://stackoverflow.com/a/40591955 (Access date: 6.01.2023)
